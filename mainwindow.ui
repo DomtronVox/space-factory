@@ -7,14 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>699</width>
-    <height>473</height>
+    <height>485</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">background-image: url(:/images/space_background.png);</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QLabel" name="label">
