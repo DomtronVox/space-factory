@@ -1,6 +1,7 @@
 *.pro.user
 
 *.txt~
+*.swp
 
 *.o
 
