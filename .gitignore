@@ -1,0 +1,10 @@
+*.pro.user
+
+
+*.o
+
+
+*.cpp~
+*.h~
+
+build/
