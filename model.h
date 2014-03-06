@@ -1,19 +1,27 @@
 #include <QTimer>
 
+#include "base_enity.h"
+#include "entities.h"
+
 #ifndef MODEL_H
 #define MODEL_H
 
-Class Map;
 
-class Model {
- //singleton design
- //variables
-    int * highscores;
-    int current;
-    Map* map;
-};
+//class that instatiates, sorts, and containes all enities.
+class Map {
+//variables
+    static id = 0;
+    vector<BaseEntity> all_entities;
+    vector<BaseEntity>
 
 //functions
+    bool createEntity(owner, type, pos);
+    bool killEntity(id);
+    void update();
+};
+
+
+//class that loads, adds to, holds, and saves highscores
 class HighScore {
 //variables
     string filename; //should we have this be a file object?
@@ -21,50 +29,24 @@ class HighScore {
     vector<int> scores;
 
 //functions
-    constructor(filename);
-    destructor();
-    save();
+public:
+    HighScore(filename);
+    ~HighScore();
+    bool save();
+    bool load();
+    bool addScore();
 };
 
-class Map {
-//variables
-    static id = 0;
-    vector<PosEntity> entities;
+//holds the various high level model related classes
+class Model {
+ //singleton design?
+ //variables
+    HighScore *highscores;
+    Map* map;
 
-//functions
-    create entity(owner, type, pos);
-    kill entity(id);
-    update();
-};
-
-class Angular {
-//variables
-    int angle;
-
-//functions
-    turnToPoint(x,y);
-    checkAngle();
-};
-
-
-class Health {
-//variables
-    int maxHealth;
-    int curHealth;
-
-//functions
-    hit();
-    die();
-};
-
-
-class Weapon {
-//variables
-    QTimer cooldown;
-    int damage;
-
-//functions
+  public:
 
 };
+
 
 #endif // MODEL_H

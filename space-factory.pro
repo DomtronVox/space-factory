@@ -16,7 +16,13 @@ SOURCES += main.cpp\
         mainwindow.cpp
 
 HEADERS  += mainwindow.h \
-    model.h
+    model.h \
+    entities.h \
+    base_enity.h \
+    angular_part.h \
+    killable_part.h \
+    weapon_part.h \
+    builder_part.h
 
 FORMS    += mainwindow.ui
 
