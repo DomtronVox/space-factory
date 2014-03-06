@@ -14,7 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
+<<<<<<< HEAD
     gamewindow.cpp
+=======
+    unit_tests.cpp
+>>>>>>> f495a75f02772e46e2a9b82ca9e3e61450e9ad07
 
 HEADERS  += mainwindow.h \
     model.h \
