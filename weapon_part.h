@@ -1,6 +1,8 @@
 #ifndef WEAPON_PART_H
 #define WEAPON_PART_H
 
+using namespace std;
+
 class WeaponPart {
 
     int cooldown;

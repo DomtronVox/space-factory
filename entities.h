@@ -9,6 +9,8 @@
 #ifndef ENTITIES_H
 #define ENTITIES_H
 
+using namespace std;
+
 class ShipEntity : public BaseEntity {
 
     AngularPart *m_cAngle;

@@ -1,8 +1,10 @@
 #ifndef ANGULARPART_H
 #define ANGULARPART_H
 
-//allows the entity to rotate
-class AngularPart {
+
+using namespace std;
+
+//allows the entity to rotateclass AngularPart {
 
     double curAngle;
     double targetAngle;
