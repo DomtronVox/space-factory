@@ -13,7 +13,8 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    unit_tests.cpp
 
 HEADERS  += mainwindow.h \
     model.h \
