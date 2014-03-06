@@ -27,9 +27,11 @@ class ShipEntity : public BaseEntity {
 
   public:
     //creates a brand new ship
-    ShipEntity(int x, int y, string image, int health, int damage, int cooldown)
-        :BaseEntity(x,y,image), m_cHealth(health), m_cWeapon(damage, cooldown)
-    {}
+    ShipEntity(int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(x,y,image)
+    {//TODO: move these to .cpp file
+        m_cHealth = new KillablePart(health);
+        m_cWeapon = new WeaponPart(damage, cooldown);
+    }
 
     //reinisilizes a ship loaded from a save file
     ShipEntity(ifstream *file) { load(file); }
@@ -59,9 +61,11 @@ class FactoryEntity : public BaseEntity {
 
   public:
     //creates a brand new factory
-    FactoryEntity(int x, int y, string image, int health)//, string target)
-        :BaseEntity(x,y,image), m_cHealth(health), m_cBulder("tower")
-    {}
+    FactoryEntity(int x, int y, string image, int health) : BaseEntity(x,y,image)
+    {//TODO: move these to .cpp file
+        m_cHealth = new KillablePart(health);
+        m_cBulder = new BuilderPart("tower");
+    }
 
     //reinisilizes a factory loaded from a save file
     FactoryEntity(ifstream *file) { load(file); }
@@ -91,9 +95,11 @@ class TowerEntity : public BaseEntity {
 
   public:
     //Creates a brand new tower
-    TowerEntity(int x, int y, string image, int health, int damage, int cooldown)
-            :BaseEntity(x,y,image), m_cHealth(health), m_cWeapon(damage, cooldown)
-        {}
+    TowerEntity(int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(x,y,image)
+    {//TODO: move these to .cpp file
+        m_cHealth = new KillablePart(health);
+        m_cWeapon = new WeaponPart(damage, cooldown);
+    }
 
     //reinisilizes a tower loaded from a save file
     TowerEntity(ifstream *file){ load(file); }
@@ -120,8 +126,7 @@ class TowerEntity : public BaseEntity {
 class ConstructerComponent : public BaseEntity {
 
   public:
-    ConstructerComponent(int x, int y, string image)
-        : BaseEntity(x,y,image)
+    ConstructerComponent(int x, int y, string image) : BaseEntity(x,y,image)
     {}
 };
 

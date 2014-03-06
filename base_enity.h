@@ -14,6 +14,8 @@ class BaseEntity{
 
   public:
     BaseEntity(int, int, string);
+    BaseEntity(ifstream *file);
+    ~BaseEntity();
 
     virtual void update();
 

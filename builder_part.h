@@ -21,8 +21,8 @@ class BuilderPart{
     {}
 
     //reinisilised builder part
-    BuilderPart(string initTarget, int initCurCountdown)
-        : target(initTarget), curCountdown(initCurCountdown)
+    BuilderPart(string initTarget, int initCurCooldown)
+        : target(initTarget), curCooldown(initCurCooldown)
     {}
 
     //tells the part a tick has passed. if countdown is zero this returns true otherwise it returns false.
