@@ -1,4 +1,5 @@
 #include <string>
+#include <fstream>
 
 #ifndef BASE_ENITY_H
 #define BASE_ENITY_H
@@ -13,8 +14,15 @@ class BaseEntity{
 
   public:
     BaseEntity(int, int, string);
+    BaseEntity(ifstream *file);
+    ~BaseEntity();
 
+    virtual void update();
 
+    //serialize and write the entity data to the file
+    virtual void save(ofstream *file);
+    //initilize the entity from a saved file
+    virtual void load(ifstream *file);
 };
 
 

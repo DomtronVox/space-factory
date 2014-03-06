@@ -2,6 +2,6 @@
 
 void unitTests() {
     Model * motherModel = new Model;
-    motherModel->update();
+    //motherModel->update();
 
 }

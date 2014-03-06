@@ -14,11 +14,8 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-<<<<<<< HEAD
-    gamewindow.cpp
-=======
-    unit_tests.cpp
->>>>>>> f495a75f02772e46e2a9b82ca9e3e61450e9ad07
+        gamewindow.cpp \
+        unit_tests.cpp
 
 HEADERS  += mainwindow.h \
     model.h \
@@ -28,7 +25,9 @@ HEADERS  += mainwindow.h \
     killable_part.h \
     weapon_part.h \
     builder_part.h \
-    gamewindow.h
+    gamewindow.h \
+    movable_part.h
+
 
 FORMS    += mainwindow.ui \
     gamewindow.ui
