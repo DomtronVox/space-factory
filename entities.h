@@ -43,6 +43,9 @@ class ShipEntity : public BaseEntity {
     void hit();
     void die();
 
+    //weapon linker functions
+    void fire();
+
     //serialize and write the entity data to the file
     virtual void save(ofstream *file);
     //initilize the entity from a saved file
@@ -104,10 +107,22 @@ class TowerEntity : public BaseEntity {
     void hit();
     void die();
 
+    //weapon linker functions
+    void fire();
+
     //serialize and write the entity data to the file
     virtual void save(ofstream *file);
     //initilize the entity from a saved file
     virtual void load(ifstream *file);
+};
+
+//class for tower contructor components
+class ConstructerComponent : public BaseEntity {
+
+  public:
+    ConstructerComponent(int x, int y, string image)
+        : BaseEntity(x,y,image)
+    {}
 };
 
 #endif // ENTITIES_H
