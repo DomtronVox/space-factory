@@ -5,7 +5,7 @@
 using namespace std;
 
 //allows the entity to rotateclass AngularPart {
-
+class AngularPart {
     double curAngle;
     double targetAngle;
     int speed; //how many degrees the entity can turn in a tick
@@ -17,7 +17,7 @@ using namespace std;
     AngularPart(int initAngle) : curAngle(initAngle) {}
 
     //changes the angle to point to a point.
-    void turnToPoint(int my_x, my_y, x,y);
+    void turnToPoint(int my_x, int my_y, int x, int y);
 
 
     //tells the part a tick has passed.

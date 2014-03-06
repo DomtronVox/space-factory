@@ -3,7 +3,6 @@
 
 int main(int argc, char *argv[])
 {
-    //unit_tests();
 
     QApplication a(argc, argv);
 
