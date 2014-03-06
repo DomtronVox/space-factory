@@ -1,4 +1,5 @@
 #include <QTimer>
+#include <vector>
 
 #include "base_enity.h"
 #include "entities.h"
@@ -25,8 +26,8 @@ class Map {
 class HighScore {
 //variables
     string filename; //should we have this be a file object?
-    //vector<string> names;
-    //vector<int> scores;
+    vector<string> names;
+    vector<int> scores;
 
 //functions
 public:
@@ -39,6 +40,10 @@ public:
     bool load();
     //adds a score to the scores list. Sorts by score so high scores are near the begining.
     bool addScore(string name, int score);
+    //returns all names
+    vector<string> getNames();
+    //returns all scores
+    vector<int> getScores();
 };
 
 //holds the various high level model related classes
