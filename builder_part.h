@@ -8,7 +8,7 @@ using namespace std;
 class BuilderPart{
 
     //holds the value curCooldown is set to after fire() is called.
-    int maxCooldown = 10; //TODO: couldn't think of a better name.
+    const static int maxCooldown = 10; //TODO: couldn't think of a better name.
     //holds the weapons current cooldown count before it can fire again.
     int curCooldown;
     //what the factory is building now

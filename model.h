@@ -12,7 +12,7 @@ using namespace std;
 //class that instatiates, sorts, and containes all enities.
 class Map {
 //variables
-    int id = 0;
+    int id;
     vector<BaseEntity*> all_entities;
 
     //vector<BaseEntity> all_entities;
