@@ -28,7 +28,7 @@ class HighScore {
 
 class Map {
 //variables
-    static id;
+    static id = 0;
     vector<PosEntity> entities;
 
 //functions
