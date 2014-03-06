@@ -2,11 +2,16 @@
 #define WEAPON_PART_H
 
 class WeaponPart {
-//variables
-    QTimer cooldown;
+
+    int cooldown;
     int damage;
 
-//functions
+  public:
+    //returns int > 0 if the weapon can fire otherwise it returns 0.
+    int fire();
+
+    //tells the part a tick has passed. Cools weapon down.
+    void update();
 
 };
 

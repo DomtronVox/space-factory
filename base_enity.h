@@ -11,7 +11,7 @@ class BaseEntity{
 
   public:
     BaseEntity(int, int, string);
-
+    virtual void update();
 
 };
 

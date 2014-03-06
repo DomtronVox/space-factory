@@ -22,7 +22,8 @@ HEADERS  += mainwindow.h \
     angular_part.h \
     killable_part.h \
     weapon_part.h \
-    builder_part.h
+    builder_part.h \
+    movable_part.h
 
 FORMS    += mainwindow.ui
 
