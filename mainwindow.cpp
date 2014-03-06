@@ -13,12 +13,3 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_pressed()
-{
-
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-    ui->pushButton->setText("It worked");
-}
