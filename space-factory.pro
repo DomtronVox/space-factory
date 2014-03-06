@@ -13,7 +13,8 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    gamewindow.cpp
 
 HEADERS  += mainwindow.h \
     model.h \
@@ -22,9 +23,11 @@ HEADERS  += mainwindow.h \
     angular_part.h \
     killable_part.h \
     weapon_part.h \
-    builder_part.h
+    builder_part.h \
+    gamewindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    gamewindow.ui
 
 RESOURCES += \
     resources.qrc

@@ -28,10 +28,10 @@
      </rect>
     </property>
     <property name="autoFillBackground">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-color: rgb(255, 22, 6);</string>
+     <string notr="true">background-image: url(:/images/space_background.png);</string>
     </property>
     <property name="editable">
      <bool>false</bool>
@@ -66,6 +66,9 @@
       <height>27</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
     <property name="styleSheet">
      <string notr="true"/>
     </property>
@@ -73,17 +76,23 @@
      <string>Help</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btnStartGame">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>510</y>
-      <width>98</width>
-      <height>27</height>
+      <x>400</x>
+      <y>530</y>
+      <width>161</width>
+      <height>51</height>
      </rect>
     </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/images/space_background.png);</string>
+    </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Start Game!</string>
     </property>
    </widget>
   </widget>

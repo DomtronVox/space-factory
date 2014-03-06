@@ -1,0 +1,3 @@
+﻿Network Protocol
+
+In the networked properties, the server will provide a high-scores tables where all the highest high-scores have been recorded.
