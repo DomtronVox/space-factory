@@ -13,8 +13,11 @@ class BaseEntity{
 
   public:
     BaseEntity(int, int, string);
+
     virtual void update();
 
+    //convert the entity to a string so it can be saved
+    string serialise();
 };
 
 

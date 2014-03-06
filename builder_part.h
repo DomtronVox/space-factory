@@ -7,15 +7,29 @@ using namespace std;
 
 class BuilderPart{
 
-    int countdown;
+    //holds the value curCooldown is set to after fire() is called.
+    int maxCooldown = 10; //TODO: couldn't think of a better name.
+    //holds the weapons current cooldown count before it can fire again.
+    int curCooldown;
+    //what the factory is building now
     string target;
 
   public:
-    BuilderPart(string initTarget, int initCountdown) : target(initTarget), countdown(initCountdown) {}
+    //new builder part
+    BuilderPart(string initTarget)
+        : target(initTarget)
+    {}
 
-    //tells the part a tick has passed. Cools weapon down.
-    void update();
+    //reinisilised builder part
+    BuilderPart(string initTarget, int initCurCountdown)
+        : target(initTarget), curCountdown(initCurCountdown)
+    {}
 
+    //tells the part a tick has passed. if countdown is zero this returns true otherwise it returns false.
+    bool update();
+
+    //convert the entity to a string so it can be saved
+    string serialise();
 };
 
 #endif // BUILD_PART_H

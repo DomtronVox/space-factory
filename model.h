@@ -32,9 +32,13 @@ class HighScore {
 public:
     HighScore(string filename);
     ~HighScore();
+
+    //serializes names and scores then writes them to the scores file
     bool save();
+    //parses all data in the scores file and populates names and scores
     bool load();
-    bool addScore();
+    //adds a score to the scores list. Sorts by score so high scores are near the begining.
+    bool addScore(string name, int score);
 };
 
 //holds the various high level model related classes
@@ -46,12 +50,22 @@ class Model {
     // holds the beginning mother ship and the difficulty setting
     Map* map;
 
+    //used by load to parse a savefile
+    //TODO: dicide what should be returned by this function.
+    void parse();
+
   public:
     // updates the game (Model) to reflect changes that occured
     void update();
 
     // initializes the game (Model)
     void initialize();
+
+    //initializes the game from the given file
+    void load(string filename);
+
+    //serialises game objects and saves them to the given file
+    void save(string filename);
 
 };
 

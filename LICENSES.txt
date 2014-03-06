@@ -25,18 +25,3 @@ http://opengameart.org/content/set-faction5-spaceships
 tower.png
 Created by Nathan Woehr using Atmostatic 3D model
 http://opengameart.org/content/mobile-turret
-
-===Art by Tranberry===
-
-repair_component.png
-damage_component.png
-pulled from power-up-icons
-http://opengameart.org/content/power-up-icons
-
-===Art by Rawdanitsu===
-
-laser1.png
-laser2.png
-pulled from lasers-and-beams
-http://opengameart.org/content/lasers-and-beams
-
