@@ -9,8 +9,8 @@ int main(int argc, char *argv[])
 
     MainWindow w;
     w.show();
-    GameWindow g;
-    g.show();
+    //GameWindow g;
+    //g.show();
     
     return a.exec();
 }

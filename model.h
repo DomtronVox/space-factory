@@ -11,8 +11,8 @@
 class Map {
 //variables
     static id = 0;
-    vector<BaseEntity> all_entities;
-    vector<BaseEntity>
+    vector<BaseEntity*> all_entities;
+    vector<BaseEntity*>;
 
 //functions
     bool createEntity(owner, type, pos);
@@ -45,6 +45,11 @@ class Model {
     Map* map;
 
   public:
+
+};
+
+class Multiuser
+{
 
 };
 
