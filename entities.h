@@ -1,4 +1,8 @@
+#include <string>
+#include <fstream>
+
 #include "base_enity.h"
+
 
 //part includes
 #include "angular_part.h"
@@ -28,9 +32,7 @@ class ShipEntity : public BaseEntity {
     {}
 
     //reinisilizes a ship loaded from a save file
-    ShipEntity(int x, int y, string image, int maxHealth, int curHealth, int damage, int maxCooldown, int curCooldown)
-        :BaseEntity(x,y,image), m_cHealth(curHealth, maxHealth), m_cWeapon(damage, maxCooldown, curCooldown)
-    {}
+    ShipEntity(ifstream *file) { load(file); }
 
     ~ShipEntity();
 
@@ -41,8 +43,10 @@ class ShipEntity : public BaseEntity {
     void hit();
     void die();
 
-    //convert the entity to a string so it can be saved
-    string serialise();
+    //serialize and write the entity data to the file
+    virtual void save(ofstream *file);
+    //initilize the entity from a saved file
+    virtual void load(ifstream *file);
 };
 
 class FactoryEntity : public BaseEntity {
@@ -57,9 +61,9 @@ class FactoryEntity : public BaseEntity {
     {}
 
     //reinisilizes a factory loaded from a save file
-    FactoryEntity(int x, int y, string image, int maxHealth, int curHealth, int curCountdown)//, string target)
-        :BaseEntity(x,y,image), m_cHealth(maxHealth,curHealth), m_cBulder("tower", curCountdown)
-    {}
+    FactoryEntity(ifstream *file) { load(file); }
+
+    ~FactoryEntity();
 
     //tells the entity a tick has passed
     void update();
@@ -68,8 +72,10 @@ class FactoryEntity : public BaseEntity {
     void hit();
     void die();
 
-    //convert the entity to a string so it can be saved
-    string serialise();
+    //serialize and write the entity data to the file
+    virtual void save(ofstream *file);
+    //initilize the entity from a saved file
+    virtual void load(ifstream *file);
 };
 
 
@@ -87,9 +93,9 @@ class TowerEntity : public BaseEntity {
         {}
 
     //reinisilizes a tower loaded from a save file
-    TowerEntity(int x, int y, string image, int maxHealth, int curHealth, int damage, int maxCooldown, curCooldown)
-            :BaseEntity(x,y,image), m_cHealth(maxHealth,curHealth), m_cWeapon(damage, maxCooldown, curCooldown)
-        {}
+    TowerEntity(ifstream *file){ load(file); }
+
+    ~TowerEntity();
 
     //tells the entity a tick has passed
     void update();
@@ -98,8 +104,10 @@ class TowerEntity : public BaseEntity {
     void hit();
     void die();
 
-    //convert the entity to a string so it can be saved
-    string serialise();
+    //serialize and write the entity data to the file
+    virtual void save(ofstream *file);
+    //initilize the entity from a saved file
+    virtual void load(ifstream *file);
 };
 
 #endif // ENTITIES_H
