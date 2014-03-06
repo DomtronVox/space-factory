@@ -12,7 +12,7 @@ using namespace std;
 class Map {
 //variables
     int id;
-    vector<BaseEntity> all_entities;
+    //vector<BaseEntity> all_entities;
 
 //functions
     bool createEntity(string owner, string type, string pos);
@@ -25,8 +25,8 @@ class Map {
 class HighScore {
 //variables
     string filename; //should we have this be a file object?
-    vector<string> names;
-    vector<int> scores;
+    //vector<string> names;
+    //vector<int> scores;
 
 //functions
 public:
