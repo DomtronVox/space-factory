@@ -26,7 +26,8 @@ HEADERS  += mainwindow.h \
     weapon_part.h \
     builder_part.h \
     gamewindow.h \
-    movable_part.h
+    movable_part.h \
+    objectlabel.h
 
 
 FORMS    += mainwindow.ui \

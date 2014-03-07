@@ -3,6 +3,9 @@
 
 #include <QWidget>
 
+#include "model.h"
+#include "objectlabel.h"
+
 namespace Ui {
 class GameWindow;
 }
@@ -18,5 +21,7 @@ public:
 private:
     Ui::GameWindow *ui;
 };
+
+
 
 #endif // GAMEWINDOW_H
