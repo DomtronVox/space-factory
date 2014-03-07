@@ -34,7 +34,7 @@ class ShipEntity : public BaseEntity {
     }
 
     //reinisilizes a ship loaded from a save file
-    ShipEntity(ifstream *file) { load(file); }
+    ShipEntity(ifstream *file); //{ load(file); }
 
     ~ShipEntity();
 
@@ -68,7 +68,7 @@ class FactoryEntity : public BaseEntity {
     }
 
     //reinisilizes a factory loaded from a save file
-    FactoryEntity(ifstream *file) { load(file); }
+    FactoryEntity(ifstream *file);// { load(file); }
 
     ~FactoryEntity();
 
@@ -102,7 +102,7 @@ class TowerEntity : public BaseEntity {
     }
 
     //reinisilizes a tower loaded from a save file
-    TowerEntity(ifstream *file){ load(file); }
+    TowerEntity(ifstream *file); //{ load(file); }
 
     ~TowerEntity();
 

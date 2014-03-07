@@ -18,9 +18,13 @@ class Map {
     //vector<BaseEntity> all_entities;
 
 //functions
+public:
     bool createEntity(string owner, string type, string pos);
     bool killEntity(int id);
     void update();
+    Map* getMap() { return this; }
+
+    int getId() { return id; }
 };
 
 
@@ -58,7 +62,7 @@ class Model {
     Map* map;
 
     //used by load to parse a savefile
-    //TODO: dicide what should be returned by this function.
+    //TODO: decide what should be returned by this function.
     void parse();
 
   public:
@@ -69,10 +73,13 @@ class Model {
     void initialize();
 
     //initializes the game from the given file
-    void load(string filename);
+    Map* load(string filename);
 
     //serialises game objects and saves them to the given file
     void save(string filename);
+
+    // returns a pointer to the map associated with this Model
+    Map* getMap();
 
 };
 
