@@ -17,7 +17,7 @@ class AngularPart {
     void checkAngle();
 
   public:
-    AngularPart(int initAngle) : curAngle(initAngle) {}
+    AngularPart(int initAngle) : curAngle(initAngle)p {}
 
     //changes the angle to point to a point.
     void turnToPoint(int my_x, int my_y, int x, int y);

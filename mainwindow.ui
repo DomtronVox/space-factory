@@ -18,82 +18,96 @@
     <string notr="true">background: url(:/images/space_background.png)
 </string>
    </property>
-   <widget class="QComboBox" name="cmbDifficultylvl">
+   <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>320</y>
-      <width>101</width>
-      <height>21</height>
+      <x>10</x>
+      <y>10</y>
+      <width>561</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="autoFillBackground">
-     <bool>true</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-image: url(:/images/space_background.png);</string>
-    </property>
-    <property name="editable">
      <bool>false</bool>
     </property>
-    <item>
-     <property name="text">
-      <string>Difficulty</string>
+    <widget class="QPushButton" name="btnHelp">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>0</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
      </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Easy</string>
+     <property name="autoFillBackground">
+      <bool>false</bool>
      </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Medium</string>
+     <property name="styleSheet">
+      <string notr="true">qlineargradient (spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(255, 255, 255, 255))</string>
      </property>
-    </item>
-    <item>
      <property name="text">
-      <string>Hard</string>
+      <string>Help</string>
      </property>
-    </item>
-   </widget>
-   <widget class="QPushButton" name="btnHelp">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>570</y>
-      <width>98</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="autoFillBackground">
-     <bool>true</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string>Help</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnStartGame">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>530</y>
-      <width>161</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="autoFillBackground">
-     <bool>true</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-image: url(:/images/space_background.png);</string>
-    </property>
-    <property name="text">
-     <string>Start Game!</string>
-    </property>
+    </widget>
+    <widget class="QPushButton" name="btnStartGame">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>0</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/images/space_background.png);
+color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(255, 255, 255, 255));</string>
+     </property>
+     <property name="text">
+      <string>Start Game!</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cmbDifficultylvl">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>0</y>
+       <width>93</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(:/images/space_background.png);</string>
+     </property>
+     <property name="editable">
+      <bool>false</bool>
+     </property>
+     <item>
+      <property name="text">
+       <string>Difficulty</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Easy</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Medium</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Hard</string>
+      </property>
+     </item>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -102,7 +116,7 @@
      <x>0</x>
      <y>0</y>
      <width>937</width>
-     <height>25</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

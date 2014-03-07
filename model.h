@@ -22,7 +22,7 @@ public:
     bool createEntity(string owner, string type, string pos);
     bool killEntity(int id);
     void update();
-    Map* getMap() { return this; }
+    //Map* getMap() { return this; }
 
     int getId() { return id; }
 };
