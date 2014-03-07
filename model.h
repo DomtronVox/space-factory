@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 //class that loads, adds to, holds, and saves highscores
 class HighScore {
 //variables
