@@ -28,7 +28,7 @@ public:
 //holds the various high level model related classes
 class Model {
  //singleton design?
-    vector<HighScore> highscores;
+    vector<HighScore> *highscores;
 
     // keep track of entities on the game field
     static int id;
