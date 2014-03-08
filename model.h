@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 
+#include "highscores.h"
 #include "base_enity.h"
 #include "entities.h"
 
@@ -11,28 +12,6 @@
 
 using namespace std;
 
-//holds data for a single score
-struct Score{
-    string name;
-    int score;
-};
-
-//class that holds instance variable of names and scores
-class HighScore {
-
-private:
-    fstream scores_file;
-    vector<Score> all_scores;
-
-public:
-    // Constructor
-    HighScore(string filename);
-
-    ~HighScore();
-
-    //adds a Score struct to the score vector.
-    void addScore(string name, int score);
-};
 
 
 //holds the various high level model related classes

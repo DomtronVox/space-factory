@@ -5,8 +5,6 @@
 
 int main(int argc, char *argv[])
 {
-    //unitTest();
-
     QApplication a(argc, argv);
 
     //GameWindow g;

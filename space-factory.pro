@@ -15,7 +15,7 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
         gamewindow.cpp \
-        unit_tests.cpp
+    highscores.cpp
 
 HEADERS  += mainwindow.h \
     model.h \
@@ -27,7 +27,8 @@ HEADERS  += mainwindow.h \
     builder_part.h \
     gamewindow.h \
     movable_part.h \
-    objectlabel.h
+    objectlabel.h \
+    highscores.h
 
 
 FORMS    += mainwindow.ui \

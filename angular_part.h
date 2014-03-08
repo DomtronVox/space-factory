@@ -2,7 +2,7 @@
 #define ANGULARPART_H
 
 /*
- save this for the bonuse level
+ save this for the bonus level
 
 
 using namespace std;

@@ -1,12 +1,32 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "gamewindow.h"
+#include "highscores.h"
+#include "model.h"
+#include <cassert>
+
+void unitTests() {
+    Model * motherModel = new Model;
+    string selectedSavedGame;
+    //assert(motherModel->load(selectedSavedGame)->getMap()->getId() == 0);
+
+    HighScore scores;
+    scores.addScore("Robert", 10);
+    scores.addScore("Phillip", 30);
+    scores.addScore("Michael", 20);
+    scores.sortScores();
+    Score* first = scores.getScores().at(0);
+    assert(first->getName() == "Phillip");
+}
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    unitTests();
 
     //set the help and score screens to be invisible
     ui->brwHelp->hide();
