@@ -9,40 +9,26 @@
 
 using namespace std;
 
-//class that loads, adds to, holds, and saves highscores
+//class that holds instance variable of names and scores
 class HighScore {
-//variables
-    string filename; //should we have this be a file object?
-    vector<string> names;
-    vector<int> scores;
 
-//functions
+private:
+    string name;
+    int score;
+
 public:
-    HighScore(string filename);
-    ~HighScore();
+    // Constructor
+    HighScore(string initName, int initScore):
+        score(initScore), name(initName) { }
 
-    //serializes names and scores then writes them to the scores file
-    bool save();
-    //parses all data in the scores file and populates names and scores
-    bool load();
-    //adds a score to the scores list. Sorts by score so high scores are near the begining.
-    bool addScore(string name, int score);
-    //returns all names
-    vector<string> getNames();
-    //returns all scores
-    vector<int> getScores();
-    //returns a vector of text each of which describes one score. Returns char * so
-    //    it can be converted to whatever type the view classes need.
-    vector<char *> getFormatedScores();
+    ~HighScore();
 };
 
 
 //holds the various high level model related classes
 class Model {
  //singleton design?
-
-    //links to the highscores instance
-    HighScore *highscores;
+    vector<HighScore> highscores;
 
     // keep track of entities on the game field
     static int id;
