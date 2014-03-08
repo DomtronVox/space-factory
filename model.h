@@ -9,26 +9,33 @@
 
 using namespace std;
 
+//holds data for a single score
+struct Score{
+    string name;
+    int score;
+};
+
 //class that holds instance variable of names and scores
 class HighScore {
 
 private:
-    string name;
-    int score;
+    vector<Score> all_scores;
 
 public:
     // Constructor
-    HighScore(string initName, int initScore):
-        score(initScore), name(initName) { }
+    HighScore(string filename);
 
     ~HighScore();
+
+    //adds a Score struct to the score vector.
+    void addScore(string name, int score);
 };
 
 
 //holds the various high level model related classes
 class Model {
  //singleton design?
-    vector<HighScore> *highscores;
+    HighScore *highscores;
 
     // keep track of entities on the game field
     static int id;
