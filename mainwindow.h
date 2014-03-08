@@ -16,6 +16,13 @@ public:
     ~MainWindow();
 
 
+private slots:
+    void on_btnHelp_toggled(bool checked);
+
+    void on_btnScores_toggled(bool checked);
+
+    void on_btnExit_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

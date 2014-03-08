@@ -31,6 +31,9 @@ public:
     vector<string> getNames();
     //returns all scores
     vector<int> getScores();
+    //returns a vector of text each of which describes one score. Returns char * so
+    //    it can be converted to whatever type the view classes need.
+    vector<char *> getFormatedScores();
 };
 
 
