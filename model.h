@@ -1,8 +1,10 @@
 #include <QTimer>
 #include <vector>
+#include <fstream>
 
 #include "base_enity.h"
 #include "entities.h"
+
 
 #ifndef MODEL_H
 #define MODEL_H
@@ -19,6 +21,7 @@ struct Score{
 class HighScore {
 
 private:
+    fstream scores_file;
     vector<Score> all_scores;
 
 public:
