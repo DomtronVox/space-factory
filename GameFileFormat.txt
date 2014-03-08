@@ -1,0 +1,24 @@
+//
+// GameFileFormat.txt
+//
+
+
+// This file provides the format for a saved game file
+
+// When the load() sees "MAP_TITLE" it should create a model with the background indicated by MAP_TITLE
+MAP_TITLE: "title goes here"
+
+// When load() sees "SHIP_ENTITY" it should create a SHIP_ENTITY into the Model it is loading.
+SHIP_ENITITY: loc="x,y of ship's location here", health="curHealth/maxHealth"
+
+// When load() sees TIME it should initialize the time variable to this.
+// 13.54 signifies that the game has been going for 13.54 minutes.
+// We need this variable so that we know how many ships should be coming. As you get towards the end of the level we should
+// have more ships coming at a time. This will keep track of that.
+TIME: 13.54
+
+// When load() sees FACTORY it should create the mother ship at the specified x and y with specified health
+FACTORY: loc="x,y of factory here", health="curHealth of factory/maxHealth of factory"
+
+// When load() sees TOWER it should create a tower with the specifications
+TOWER: loc="x,y of tower here", health="curHealth/maxHealth", cmptX="whatever component indicated by X should be added to tower"
