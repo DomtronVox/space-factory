@@ -10,33 +10,31 @@
 using namespace std;
 
 void unitTests() {
-    string selectedSavedGame;
-    //assert(Model::instance()->motherModel->load(selectedSavedGame)->getMap()->getId() == 0);
 
     HighScore scores;
     scores.addScore("Robert", 10);
     scores.addScore("Phillip", 30);
     scores.addScore("Michael", 20);
-    Score* first = scores.getScores().at(0);
+    Score* s = scores.getScores().at(0);
 
-    assert(first->getName() == "Phillip");
+    assert(s->getName() == "Phillip");
     scores.addScore("Rebecca", 5);
-    Score* last = scores.getScores().back();
-    assert(last->getName() == "Rebecca");
-    for(int i = 0; i < scores.getScores().size(); i++)
-    {
-        Score* s = scores.getScores().at(i);
-        cout << s->getName() << endl;
-    }
+    s = scores.getScores().back();
+    assert(s->getName() == "Rebecca");
+    scores.save();
 
     HighScore loadScores;
     loadScores.load();
-    for(int i = 0; i < loadScores.getScores().size(); i++)
-    {
-        Score* s = loadScores.getScores().at(i);
-        cout << s->getName() << endl;
-    }
+    loadScores.addScore("Rhonda", 65);
+    s = loadScores.getScores().at(0);
 
+    assert(s->getName() == "Rhonda");
+    assert(s->getScore() == 65);
+    loadScores.save();
+    //loadScores.load();
+    //Score* loadScore = loadScores.getScores().at(7);
+    //assert(loadScore->getName() == "Rebecca");
+    //cout << loadScore->getName();
 
     //model test for starting a new game. TODO: rework this to use asserts
     Model::instance()->singleGameStart();

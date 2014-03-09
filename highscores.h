@@ -7,6 +7,8 @@
 
 #include <vector>
 #include <fstream>
+#include <QString>
+#include <sstream>
 
 using namespace std;
 
@@ -16,6 +18,8 @@ class Score{
     int score;
 public:
     Score(string initName, int initScore) : name(initName), score(initScore) { }
+
+    string toString();
 
     // getter methods
     string getName() { return name; }
@@ -38,7 +42,7 @@ public:
     bool load();
 
     // saves the HighScores in a txt file
-    void save();
+    bool save();
 
     //adds a Score struct to the score vector.
     bool addScore(string initName, int initScore);
