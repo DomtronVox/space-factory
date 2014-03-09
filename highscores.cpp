@@ -83,6 +83,7 @@ bool HighScore::addScore(string initName, int initScore)
 
 
 
+
 string Score::toString()
 {
     string result;

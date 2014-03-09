@@ -31,10 +31,6 @@ void unitTests() {
     assert(s->getName() == "Rhonda");
     assert(s->getScore() == 65);
     loadScores.save();
-    //loadScores.load();
-    //Score* loadScore = loadScores.getScores().at(7);
-    //assert(loadScore->getName() == "Rebecca");
-    //cout << loadScore->getName();
 
     //model test for starting a new game. TODO: rework this to use asserts
     Model::instance()->singleGameStart();
@@ -60,10 +56,22 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
+
+    //populate highscores list
+    HighScore scores;
+    scores.load();
+    for(int i = 0; i < scores.getScores().size(); ++i )
+    {
+        Score *score = scores.getScores().at(i);
+        QString QName = QString::fromStdString(score->getName());
+        QString QScore = QString::number(score->getScore());
+        ui->lstScores->addItem(QName + " -- " + QScore);
+
+    }
+
     //set the help and score screens to be invisible
     ui->brwHelp->hide();
     ui->boxHighScores->hide();
-    ui->lstScores->addItem("Names  --  Scores");
 
     //TODO: uncomment the section below and modify once model has been implemented as a singlton class
     //vector<chr *> lines = Model::instance().getHighScores()->getFormatedScores();
