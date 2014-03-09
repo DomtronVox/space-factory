@@ -17,10 +17,7 @@ void unitTests() {
     scores.addScore("Phillip", 30);
     scores.addScore("Michael", 20);
     Score* first = scores.getScores().at(0);
-<<<<<<< HEAD
-    //assert(first->getName() == "Phillip");
 
-=======
     assert(first->getName() == "Phillip");
     scores.addScore("Rebecca", 5);
     Score* last = scores.getScores().back();
@@ -31,11 +28,19 @@ void unitTests() {
         cout << s->getName() << endl;
     }
 
+    HighScore loadScores;
+    loadScores.load();
+    for(int i = 0; i < loadScores.getScores().size(); i++)
+    {
+        Score* s = loadScores.getScores().at(i);
+        cout << s->getName() << endl;
+    }
+
+
     //model test for starting a new game. TODO: rework this to use asserts
     Model::instance()->singleGameStart();
     Model::instance()->printState();
     Model::instance()->reset();
->>>>>>> f182c129ad4ab5da5be5b420eda42ef14f0f6b61
 }
 
 

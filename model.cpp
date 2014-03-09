@@ -20,7 +20,7 @@ Model::Model() {
 Model::~Model()
 {
     killAllEntities();
-    delete current_score;
+    //delete current_score;
 }
 
 //empty entity list
@@ -40,7 +40,7 @@ void Model::printState(){
 void Model::singleGameStart(){
 
     //reset score
-    current_score = new Score("", 0);
+    //current_score = new Score("", 0);
 
     //create the players factory
     FactoryEntity *entity = new FactoryEntity(Model::newId(), 0, 0, "factory", 100);

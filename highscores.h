@@ -26,21 +26,16 @@ public:
 class HighScore {
 
 private:
-    fstream scores_file;
     vector<Score*> all_scores;
 
 public:
     // Constructor
-
     HighScore() {}
-    HighScore(string filename) {}
-
-    void sortScores();
 
     ~HighScore() {}
 
     // loads HighScores from a file and populates all_scores
-    void load();
+    bool load();
 
     // saves the HighScores in a txt file
     void save();
