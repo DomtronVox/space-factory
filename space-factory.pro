@@ -24,7 +24,9 @@ SOURCES += main.cpp\
     model.cpp \
     entities.cpp \
     builder_part.cpp \
+    objectlabel.cpp \
     game_window.cpp
+
 
 HEADERS  += mainwindow.h \
     model.h \

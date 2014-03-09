@@ -6,7 +6,7 @@
 
 
 //tells the part a tick has passed. if countdown is zero this returns true otherwise it returns false.
-bool BuilderPart::tick(int x, int y){
+void BuilderPart::tick(int x, int y){
     curCooldown--;
     if (curCooldown <= 0){
         curCooldown = maxCooldown;

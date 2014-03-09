@@ -11,14 +11,14 @@ class BaseEntity{
 
 protected:
     int id, x, y;
-    string image;
+    char* image;
 
 public:
-    BaseEntity(int initId, int initX, int initY, string initImage)
+    BaseEntity(int initId, int initX, int initY, char* initImage)
         : id(initId), x(initX), y(initY), image(initImage)
     {}
     BaseEntity(ifstream *file);
-    virtual ~BaseEntity() {}
+    virtual ~BaseEntity() {  }
 
     //returns a string that describes the entity
     virtual string stringify(){
@@ -28,6 +28,7 @@ public:
     int getX() { return x; }
     int getY() { return y; }
     int getId(){ return id; }
+    char* getImage() { return image; }
 
     virtual void update() {}
 

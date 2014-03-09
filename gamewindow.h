@@ -2,6 +2,7 @@
 #define GAMEWINDOW_H
 
 #include <QWidget>
+#include <QDir>
 
 
 #include "model.h"
@@ -14,6 +15,11 @@ class GameWindow;
 class GameWindow : public QWidget
 {
     Q_OBJECT
+
+    QTimer *timer;
+    QDir image_dir;
+
+    void timerHit();
     
 public:
     explicit GameWindow(QWidget *parent = 0);

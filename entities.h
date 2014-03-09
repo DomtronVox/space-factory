@@ -26,11 +26,7 @@ class ShipEntity : public BaseEntity {
 
 public:
     //creates a brand new ship
-    ShipEntity(int id, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,x,y,image)
-    {//TODO: move these to .cpp file
-        m_cHealth = new KillablePart(health);
-        m_cWeapon = new WeaponPart(damage, cooldown);
-    }
+    ShipEntity(int id, int x, int y, char* image, int health, int damage, int cooldown);
 
     //reinisilizes a ship loaded from a save file
     ShipEntity(ifstream *file); //{ load(file); }
@@ -65,19 +61,12 @@ class FactoryEntity : public BaseEntity {
 
 public:
     //creates a brand new factory
-    FactoryEntity(int id, int x, int y, string image, int health) : BaseEntity(id,x,y,image)
-    {//TODO: move these to .cpp file
-        m_cHealth = new KillablePart(health);
-        m_cBulder = new BuilderPart("tower");
-    }
+    FactoryEntity(int id, int x, int y, char* image, int health);
 
     //reinisilizes a factory loaded from a save file
     FactoryEntity(ifstream *file);// { load(file); }
 
-    ~FactoryEntity() {
-        delete m_cBulder;
-        delete m_cHealth;
-    }
+    ~FactoryEntity();
 
     //returns a string that describes the entity
     string stringify(){
@@ -107,19 +96,12 @@ class TowerEntity : public BaseEntity {
 
 public:
     //Creates a brand new tower
-    TowerEntity(int id, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,x,y,image)
-    {//TODO: move these to .cpp file
-        m_cHealth = new KillablePart(health);
-        m_cWeapon = new WeaponPart(damage, cooldown);
-    }
+    TowerEntity(int id, int x, int y, char* image, int health, int damage, int cooldown);
 
     //reinisilizes a tower loaded from a save file
     TowerEntity(ifstream *file); //{ load(file); }
 
-    ~TowerEntity() {
-        delete m_cHealth;
-        delete m_cWeapon;
-    }
+    ~TowerEntity();
 
     //returns a string that describes the entity
     string stringify(){
@@ -145,11 +127,13 @@ public:
 //class for tower contructor components
 class ComponentEntity : public BaseEntity {
 
-    string type;
+    char* type;
 
 public:
-    ComponentEntity(int id, int x, int y, string image, string initType) : BaseEntity(id,x,y,image), type(initType)
+    ComponentEntity(int id, int x, int y, char* image, char* initType) : BaseEntity(id,x,y,image), type(initType)
     {}
+
+    ~ComponentEntity() {  }
 
     //returns a string that describes the entity
     string stringify(){
