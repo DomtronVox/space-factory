@@ -10,13 +10,15 @@ void unitTests() {
     string selectedSavedGame;
     //assert(motherModel->load(selectedSavedGame)->getMap()->getId() == 0);
 
+
     HighScore scores;
     scores.addScore("Robert", 10);
     scores.addScore("Phillip", 30);
     scores.addScore("Michael", 20);
-    scores.sortScores();
     Score* first = scores.getScores().at(0);
-    assert(first->getName() == "Phillip");
+    assert(first->getName() == "Robert");
+    scores.sortScores();
+
 }
 
 
@@ -24,9 +26,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
 
     unitTests();
+
+    ui->setupUi(this);
 
     //set the help and score screens to be invisible
     ui->brwHelp->hide();

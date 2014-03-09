@@ -11,6 +11,7 @@ void HighScore::sortScores()
         if(score->getScore() < nextScore->getScore())
         {
             all_scores.insert(all_scores.begin() + i, nextScore);
+            delete nextScore;
         }
     }
 }
