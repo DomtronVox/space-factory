@@ -4,6 +4,8 @@
 #include <game_window.h>
 #include <QMainWindow>
 
+void unitTests();
+
 namespace Ui {
 class MainWindow;
 }
