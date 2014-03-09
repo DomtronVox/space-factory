@@ -11,10 +11,10 @@ class BaseEntity{
 
 protected:
     int id, x, y;
-    char* image;
+    string image;
 
 public:
-    BaseEntity(int initId, int initX, int initY, char* initImage)
+    BaseEntity(int initId, int initX, int initY, string initImage)
         : id(initId), x(initX), y(initY), image(initImage)
     {}
     BaseEntity(ifstream *file);
@@ -28,7 +28,7 @@ public:
     int getX() { return x; }
     int getY() { return y; }
     int getId(){ return id; }
-    char* getImage() { return image; }
+    string getImage() { return image; }
 
     virtual void update() {}
 

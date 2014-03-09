@@ -31,7 +31,7 @@ void unitTests() {
     assert(s->getScore() == 65);
     loadScores.save();
     remove ("highscores.txt");
-
+    /*
     //model test for starting a new game. TODO: rework this to use asserts
     Model::instance()->singleGameStart();
     assert(Model::instance()->getById(0) != NULL);
@@ -43,7 +43,7 @@ void unitTests() {
     Model::instance()->update();
     assert(Model::instance()->getById(1)!=NULL);
 
-    Model::instance()->reset();
+    Model::instance()->reset();*/
 }
 
 
@@ -76,11 +76,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //set the help and score screens to be invisible
     ui->brwHelp->hide();
     ui->boxHighScores->hide();
-
-    //TODO: uncomment the section below and modify once model has been implemented as a singlton class
-    //vector<chr *> lines = Model::instance().getHighScores()->getFormatedScores();
-    //for (string line : lines)
-    //    ui->lstScores->addItem(line);
 }
 
 MainWindow::~MainWindow()
@@ -90,7 +85,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::openGameWindow()
 {
-    GmWdw = new Game_Window();
+    GmWdw = new GameWindow();
 
     GmWdw->show();
 }

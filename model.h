@@ -83,7 +83,7 @@ public:
     bool createTower(int x, int y);
 
     //function to create a component
-    void createComponent(char *type, int x, int y);
+    void createComponent(string type, int x, int y);
 
     //function to kill entities
     bool killEntity(int id);

@@ -10,7 +10,7 @@
 
 
 //ship functions
-ShipEntity::ShipEntity(int id, int x, int y, char* image, int health, int damage, int cooldown) : BaseEntity(id,x,y,image)
+ShipEntity::ShipEntity(int id, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,x,y,image)
 {
     m_cHealth = new KillablePart(health);
     m_cWeapon = new WeaponPart(damage, cooldown);
@@ -28,7 +28,7 @@ void ShipEntity::update()
 }
 
 //factory functions
-FactoryEntity::FactoryEntity(int id, int x, int y, char* image, int health) : BaseEntity(id,x,y,image)
+FactoryEntity::FactoryEntity(int id, int x, int y, string image, int health) : BaseEntity(id,x,y,image)
 {
     m_cHealth = new KillablePart(health);
     m_cBulder = new BuilderPart("tower");
@@ -46,7 +46,7 @@ void FactoryEntity::update()
 }
 
 //tower functions
-TowerEntity::TowerEntity(int id, int x, int y, char* image, int health, int damage, int cooldown) : BaseEntity(id,x,y,image)
+TowerEntity::TowerEntity(int id, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,x,y,image)
 {
     m_cHealth = new KillablePart(health);
     m_cWeapon = new WeaponPart(damage, cooldown);
