@@ -11,7 +11,7 @@
 using namespace std;
 
 //holds data for a single score
-struct Score{
+class Score{
     string name;
     int score;
 public:
@@ -31,8 +31,9 @@ private:
 
 public:
     // Constructor
-    HighScore();
-    HighScore(string filename);
+
+    HighScore() {}
+    HighScore(string filename) {}
 
     void sortScores();
 
