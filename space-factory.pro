@@ -8,14 +8,19 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+CONFIG   += c++11
+QMAKE_CXXFLAGS += -stdlib=libc++
+
 TARGET = space-factory
 TEMPLATE = app
+
 
 
 SOURCES += main.cpp\
         mainwindow.cpp \
         gamewindow.cpp \
-    highscores.cpp
+    highscores.cpp \
+    model.cpp
 
 HEADERS  += mainwindow.h \
     model.h \
@@ -36,3 +41,4 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += \
     resources.qrc
+

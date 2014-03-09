@@ -24,9 +24,9 @@ class ShipEntity : public BaseEntity {
     //MovablePart *m_cMove //TODO: finish movablepart
 
 
-  public:
+public:
     //creates a brand new ship
-    ShipEntity(int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(x,y,image)
+    ShipEntity(int id, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,x,y,image)
     {//TODO: move these to .cpp file
         m_cHealth = new KillablePart(health);
         m_cWeapon = new WeaponPart(damage, cooldown);
@@ -37,8 +37,13 @@ class ShipEntity : public BaseEntity {
 
     ~ShipEntity();
 
+    //returns a string that describes the entity
+    string stringify(){
+        return "ShipEntity:"+to_string(id)+","+to_string(x)+","+to_string(y)+","+image;
+    }
+
     //tells the entity a tick has passed
-    void update();
+    void update() {}
 
     //killable linker functions
     void hit();
@@ -48,9 +53,9 @@ class ShipEntity : public BaseEntity {
     void fire();
 
     //serialize and write the entity data to the file
-    virtual void save(ofstream *file);
+    void save(ofstream *file) {}
     //initilize the entity from a saved file
-    virtual void load(ifstream *file);
+    void load(ifstream *file) {}
 };
 
 class FactoryEntity : public BaseEntity {
@@ -58,9 +63,9 @@ class FactoryEntity : public BaseEntity {
     KillablePart *m_cHealth;
     BuilderPart *m_cBulder;
 
-  public:
+public:
     //creates a brand new factory
-    FactoryEntity(int x, int y, string image, int health) : BaseEntity(x,y,image)
+    FactoryEntity(int id, int x, int y, string image, int health) : BaseEntity(id,x,y,image)
     {//TODO: move these to .cpp file
         m_cHealth = new KillablePart(health);
         m_cBulder = new BuilderPart("tower");
@@ -69,19 +74,27 @@ class FactoryEntity : public BaseEntity {
     //reinisilizes a factory loaded from a save file
     FactoryEntity(ifstream *file);// { load(file); }
 
-    ~FactoryEntity();
+    ~FactoryEntity() {
+        delete m_cBulder;
+        delete m_cHealth;
+    }
+
+    //returns a string that describes the entity
+    string stringify(){
+        return "FactoryEntity:"+to_string(id)+","+to_string(x)+","+to_string(y)+","+image;
+    }
 
     //tells the entity a tick has passed
-    void update();
+    void update() {}
 
     //killable linker functions
     void hit();
     void die();
 
     //serialize and write the entity data to the file
-    virtual void save(ofstream *file);
+    void save(ofstream *file) {}
     //initilize the entity from a saved file
-    virtual void load(ifstream *file);
+    void load(ifstream *file) {}
 };
 
 
@@ -92,9 +105,9 @@ class TowerEntity : public BaseEntity {
     KillablePart *m_cHealth;
     WeaponPart *m_cWeapon;
 
-  public:
+public:
     //Creates a brand new tower
-    TowerEntity(int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(x,y,image)
+    TowerEntity(int id, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,x,y,image)
     {//TODO: move these to .cpp file
         m_cHealth = new KillablePart(health);
         m_cWeapon = new WeaponPart(damage, cooldown);
@@ -103,10 +116,18 @@ class TowerEntity : public BaseEntity {
     //reinisilizes a tower loaded from a save file
     TowerEntity(ifstream *file); //{ load(file); }
 
-    ~TowerEntity();
+    ~TowerEntity() {
+        delete m_cHealth;
+        delete m_cWeapon;
+    }
+
+    //returns a string that describes the entity
+    string stringify(){
+        return "TowerEntity:"+to_string(id)+","+to_string(x)+","+to_string(y)+","+image;
+    }
 
     //tells the entity a tick has passed
-    void update();
+    void update() {}
 
     //killable linker functions
     void hit();
@@ -116,16 +137,16 @@ class TowerEntity : public BaseEntity {
     void fire();
 
     //serialize and write the entity data to the file
-    virtual void save(ofstream *file);
+    void save(ofstream *file) {}
     //initilize the entity from a saved file
-    virtual void load(ifstream *file);
+    void load(ifstream *file) {}
 };
 
 //class for tower contructor components
 class ConstructerComponent : public BaseEntity {
 
-  public:
-    ConstructerComponent(int x, int y, string image) : BaseEntity(x,y,image)
+public:
+    ConstructerComponent(int id, int x, int y, string image) : BaseEntity(id,x,y,image)
     {}
 };
 

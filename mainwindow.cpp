@@ -4,19 +4,38 @@
 #include "highscores.h"
 #include "model.h"
 #include <cassert>
+#include <iostream>
+
+using namespace std;
 
 void unitTests() {
-    Model * motherModel = new Model;
     string selectedSavedGame;
-    //assert(motherModel->load(selectedSavedGame)->getMap()->getId() == 0);
+    //assert(Model::instance()->motherModel->load(selectedSavedGame)->getMap()->getId() == 0);
 
     HighScore scores;
     scores.addScore("Robert", 10);
     scores.addScore("Phillip", 30);
     scores.addScore("Michael", 20);
     Score* first = scores.getScores().at(0);
+<<<<<<< HEAD
     //assert(first->getName() == "Phillip");
 
+=======
+    assert(first->getName() == "Phillip");
+    scores.addScore("Rebecca", 5);
+    Score* last = scores.getScores().back();
+    assert(last->getName() == "Rebecca");
+    for(int i = 0; i < scores.getScores().size(); i++)
+    {
+        Score* s = scores.getScores().at(i);
+        cout << s->getName() << endl;
+    }
+
+    //model test for starting a new game. TODO: rework this to use asserts
+    Model::instance()->singleGameStart();
+    Model::instance()->printState();
+    Model::instance()->reset();
+>>>>>>> f182c129ad4ab5da5be5b420eda42ef14f0f6b61
 }
 
 
