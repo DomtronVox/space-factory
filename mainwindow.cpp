@@ -3,7 +3,6 @@
 #include "gamewindow.h"
 #include "highscores.h"
 #include "model.h"
-
 #include <cassert>
 #include <iostream>
 
@@ -31,6 +30,7 @@ void unitTests() {
     assert(s->getName() == "Rhonda");
     assert(s->getScore() == 65);
     loadScores.save();
+    remove ("highscores.txt");
 
     //model test for starting a new game. TODO: rework this to use asserts
     Model::instance()->singleGameStart();
@@ -52,6 +52,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
 
+    // WARNING: calling unitTests deletes saved highscores
     unitTests();
 
     ui->setupUi(this);
@@ -69,6 +70,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     }
 
+    //connect(ui->btnNewGame, SIGNAL(click()), this, SLOT(openGameWindow()));
     //set the help and score screens to be invisible
     ui->brwHelp->hide();
     ui->boxHighScores->hide();
@@ -84,7 +86,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::openGameWindow()
+{
+    GmWdw = new GameWindow();
 
+    GmWdw->show();
+}
 
 
 //toggle between showing the help window and not showing it
@@ -152,4 +159,9 @@ void MainWindow::on_btnScores_toggled(bool checked)
 void MainWindow::on_btnExit_clicked()
 {
     QApplication::quit();
+}
+
+void MainWindow::on_btnNewGame_clicked()
+{
+    openGameWindow();
 }

@@ -1,5 +1,4 @@
 #include "highscores.h"
-#include <fstream>
 #include <iostream>
 #include <QFile>
 #include <QTextStream>
