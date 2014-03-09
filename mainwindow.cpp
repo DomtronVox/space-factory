@@ -3,6 +3,7 @@
 #include "gamewindow.h"
 #include "highscores.h"
 #include "model.h"
+
 #include <cassert>
 #include <iostream>
 
@@ -39,7 +40,15 @@ void unitTests() {
 
     //model test for starting a new game. TODO: rework this to use asserts
     Model::instance()->singleGameStart();
-    Model::instance()->printState();
+    assert(Model::instance()->getById(0) != NULL);
+
+    //update 5 times so the factory has finished building it's first component
+    Model::instance()->update(); Model::instance()->update();
+    Model::instance()->update();
+    assert(Model::instance()->getById(1)==NULL);
+    Model::instance()->update();
+    assert(Model::instance()->getById(1)!=NULL);
+
     Model::instance()->reset();
 }
 

@@ -43,7 +43,7 @@ public:
     }
 
     //tells the entity a tick has passed
-    void update() {}
+    void update();
 
     //killable linker functions
     void hit();
@@ -85,7 +85,7 @@ public:
     }
 
     //tells the entity a tick has passed
-    void update() {}
+    void update();
 
     //killable linker functions
     void hit();
@@ -127,7 +127,7 @@ public:
     }
 
     //tells the entity a tick has passed
-    void update() {}
+    void update();
 
     //killable linker functions
     void hit();
@@ -143,11 +143,18 @@ public:
 };
 
 //class for tower contructor components
-class ConstructerComponent : public BaseEntity {
+class ComponentEntity : public BaseEntity {
+
+    string type;
 
 public:
-    ConstructerComponent(int id, int x, int y, string image) : BaseEntity(id,x,y,image)
+    ComponentEntity(int id, int x, int y, string image, string initType) : BaseEntity(id,x,y,image), type(initType)
     {}
+
+    //returns a string that describes the entity
+    string stringify(){
+        return "ComponentEntity:"+to_string(id)+","+to_string(x)+","+to_string(y)+","+image+","+type;
+    }
 };
 
 #endif // ENTITIES_H

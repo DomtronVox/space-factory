@@ -30,11 +30,21 @@ void Model::killAllEntities(){
     }
 }
 
+//runs through all the entities and prints them as a string.
 void Model::printState(){
     for (BaseEntity *e : all_entities){
         cout << e->stringify() << endl;
     }
 }
+
+//tells model a tick has passed and that it should update all entities
+void Model::update(){
+
+    for (BaseEntity *e : all_entities){
+        e->update();
+    }
+}
+
 
 //Sets up model for a singleplayer game
 void Model::singleGameStart(){
@@ -53,4 +63,23 @@ void Model::singleGameStart(){
 void Model::reset(){
     killAllEntities(); //kill everything
     Model::id = 0; //reset id counter
+}
+
+//returns an entity with the given id
+BaseEntity * Model::getById(int id){
+    BaseEntity *found_entity = NULL;
+
+    for (BaseEntity *e : all_entities){
+        if (id == e->getId()){
+            found_entity = e;
+            break;
+        }
+    }
+    return found_entity;
+}
+
+//creates a component entity
+void Model::createComponent(string type, int x, int y){
+    BaseEntity *e = new ComponentEntity(newId(),x,y,type,type);
+    all_entities.push_back(e);
 }
