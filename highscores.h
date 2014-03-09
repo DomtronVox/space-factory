@@ -32,11 +32,11 @@ private:
 public:
     // Constructor
     HighScore();
-    //HighScore(string filename);
+    HighScore(string filename);
 
     void sortScores();
 
-    ~HighScore();
+    ~HighScore() {}
 
     // loads HighScores from a file and populates all_scores
     void load();

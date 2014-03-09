@@ -10,13 +10,14 @@ void unitTests() {
     string selectedSavedGame;
     //assert(motherModel->load(selectedSavedGame)->getMap()->getId() == 0);
 
-    HighScore scores;
+    /*HighScore scores;
     scores.addScore("Robert", 10);
     scores.addScore("Phillip", 30);
     scores.addScore("Michael", 20);
     scores.sortScores();
     Score* first = scores.getScores().at(0);
     assert(first->getName() == "Phillip");
+    */
 }
 
 
