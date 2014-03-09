@@ -31,8 +31,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //set the help and score screens to be invisible
     ui->brwHelp->hide();
-    ui->lstScores->hide();
-    ui->lstScores->addItem("High Score");
+    ui->boxHighScores->hide();
+    ui->lstScores->addItem("Names  --  Scores");
 
     //TODO: uncomment the section below and modify once model has been implemented as a singlton class
     //vector<chr *> lines = Model::instance().getHighScores()->getFormatedScores();
@@ -83,7 +83,7 @@ void MainWindow::on_btnScores_toggled(bool checked)
 {
     if (checked) {
         //show score list
-        ui->lstScores->show();
+        ui->boxHighScores->show();
 
         //hide other menu elements
         ui->btnLoadGame->hide();
@@ -96,7 +96,7 @@ void MainWindow::on_btnScores_toggled(bool checked)
 
     } else {
         //hide score list
-        ui->lstScores->hide();
+        ui->boxHighScores->hide();
 
         //hide other menu elements
         ui->btnLoadGame->show();
