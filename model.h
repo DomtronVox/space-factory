@@ -12,14 +12,14 @@
 
 using namespace std;
 
-
-
 //holds the various high level model related classes
 class Model {
     Model();
     ~Model();
 
+    //score tracking
     HighScore *highscores;
+    Score *current_score= new Score("", 0); //the players current score
 
     // keep track of entities on the game field
     static int id;
@@ -29,12 +29,23 @@ class Model {
     //TODO: decide what should be returned by this function.
     void parse();
 
+    //empty entity list
+    void killAllEntities();
+
 protected:
     static Model sInstance;
 
 public:
+    //returns a new id to be used by an entity
+    static int newId(){
+        return Model::id++;
+    }
+
     //returns the only instance of world
     static Model* instance() { return &Model::sInstance; }
+
+    //utility function
+    void printState();
 
     // updates the game (Model) to reflect changes that occured
     void update();
@@ -48,9 +59,25 @@ public:
     //serialises game objects and saves them to the given file
     void save(string filename);
 
-    //functions to create and kill entities
-    bool createEntity(string owner, string type, string pos);
+    //Sets up model for a singleplayer game
+    void singleGameStart();
+    //sets up model for a multyplayer game
+    //void multyGameStart();
+    //resets whatever game state model has at the moment
+    void reset();
+
+    //function to randomize the creation of an attacker entity
+    bool generateAttacker();
+
+    //function to build a tower
+    bool createTower(int x, int y);
+
+    //function to create a component
+    bool createComponent(string type);
+
+    //function to kill entities
     bool killEntity(int id);
+
 
 };
 

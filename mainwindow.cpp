@@ -16,8 +16,10 @@ void unitTests() {
     scores.addScore("Michael", 20);
     Score* first = scores.getScores().at(0);
 
-
-
+    //model test for starting a new game. TODO: rework this to use asserts
+    Model::instance()->singleGameStart();
+    Model::instance()->printState();
+    Model::instance()->reset();
 }
 
 
