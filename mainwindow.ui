@@ -281,7 +281,7 @@ margin:-1px;
     <item>
      <widget class="QTextBrowser" name="brwHelp">
       <property name="styleSheet">
-       <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0, 81, 0, 255), stop:0.152632 rgba(28, 17, 145, 255), stop:0.642105 rgba(112, 65, 255, 255), stop:0.7 rgba(234, 52, 52, 255), stop:0.763158 rgba(126, 31, 88, 255), stop:0.894737 rgba(0, 0, 0, 220));</string>
+       <string notr="true">background-color: rgba(16, 16, 16, 200);</string>
       </property>
       <property name="html">
        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -330,10 +330,58 @@ margin:-1px;
      </widget>
     </item>
     <item>
-     <widget class="QListWidget" name="lstScores">
-      <property name="styleSheet">
-       <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(0, 81, 0, 255), stop:0.152632 rgba(28, 17, 145, 255), stop:0.642105 rgba(112, 65, 255, 255), stop:0.7 rgba(234, 52, 52, 255), stop:0.763158 rgba(126, 31, 88, 255), stop:0.894737 rgba(0, 0, 0, 220));</string>
+     <widget class="QGroupBox" name="boxHighScores">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
       </property>
+      <property name="styleSheet">
+       <string notr="true">border:0px;</string>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <layout class="QVBoxLayout" name="layHighScores">
+       <item alignment="Qt::AlignHCenter">
+        <widget class="QLabel" name="lblHighScores">
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>High Scores</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="lstScores">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(16, 16, 16, 200);
+color: rgb(255, 255, 255);
+font: 12pt &quot;Arial&quot;;
+text-align:center;</string>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::NoSelection</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
     <item alignment="Qt::AlignHCenter">
