@@ -2,19 +2,6 @@
 
 using namespace std;
 
-void HighScore::sortScores()
-{
-    for(int i = 0; i < all_scores.size(); ++i)
-    {
-        Score* score = all_scores.at(i);
-        Score* nextScore = all_scores.at(i+1);
-        if(score->getScore() < nextScore->getScore())
-        {
-            all_scores.insert(all_scores.begin() + i, nextScore);
-            delete nextScore;
-        }
-    }
-}
 
 void HighScore::addScore(string name, int score)
 {

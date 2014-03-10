@@ -17,7 +17,6 @@ void unitTests() {
     scores.addScore("Michael", 20);
     Score* first = scores.getScores().at(0);
     assert(first->getName() == "Robert");
-    scores.sortScores();
 
 }
 
