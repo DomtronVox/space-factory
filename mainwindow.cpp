@@ -6,9 +6,8 @@
 #include <cassert>
 
 void unitTests() {
-    Model * motherModel = new Model;
     string selectedSavedGame;
-    //assert(motherModel->load(selectedSavedGame)->getMap()->getId() == 0);
+    //assert(Model::instance()->motherModel->load(selectedSavedGame)->getMap()->getId() == 0);
 
 
     HighScore scores;
@@ -16,7 +15,7 @@ void unitTests() {
     scores.addScore("Phillip", 30);
     scores.addScore("Michael", 20);
     Score* first = scores.getScores().at(0);
-    assert(first->getName() == "Phillip");
+
 
 
 }

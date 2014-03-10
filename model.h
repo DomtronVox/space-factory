@@ -16,7 +16,9 @@ using namespace std;
 
 //holds the various high level model related classes
 class Model {
- //singleton design?
+    Model();
+    ~Model();
+
     HighScore *highscores;
 
     // keep track of entities on the game field
@@ -27,7 +29,13 @@ class Model {
     //TODO: decide what should be returned by this function.
     void parse();
 
-  public:
+protected:
+    static Model sInstance;
+
+public:
+    //returns the only instance of world
+    static Model* instance() { return &Model::sInstance; }
+
     // updates the game (Model) to reflect changes that occured
     void update();
 
