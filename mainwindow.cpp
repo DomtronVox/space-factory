@@ -9,9 +9,8 @@
 using namespace std;
 
 void unitTests() {
-    Model * motherModel = new Model;
     string selectedSavedGame;
-    //assert(motherModel->load(selectedSavedGame)->getMap()->getId() == 0);
+    //assert(Model::instance()->motherModel->load(selectedSavedGame)->getMap()->getId() == 0);
 
 
     HighScore scores;
@@ -29,6 +28,10 @@ void unitTests() {
         cout << s->getName() << endl;
     }
 
+    //model test for starting a new game. TODO: rework this to use asserts
+    Model::instance()->singleGameStart();
+    Model::instance()->printState();
+    Model::instance()->reset();
 }
 
 

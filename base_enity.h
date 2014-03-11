@@ -9,20 +9,28 @@ using namespace std;
 //Basic game entity holds position and entity image
 class BaseEntity{
 
-    int x, y;
+protected:
+    int id, x, y;
     string image;
 
-  public:
-    BaseEntity(int, int, string);
+public:
+    BaseEntity(int initId, int initX, int initY, string initImage)
+        : id(initId), x(initX), y(initY), image(initImage)
+    {}
     BaseEntity(ifstream *file);
-    ~BaseEntity();
+    virtual ~BaseEntity() {}
 
-    virtual void update();
+    //returns a string that describes the entity
+    virtual string stringify(){
+        return "BaseEntity:"+to_string(id)+","+to_string(x)+","+to_string(y)+","+image;
+    }
+
+    virtual void update() {}
 
     //serialize and write the entity data to the file
-    virtual void save(ofstream *file);
+    virtual void save(ofstream *file) {}
     //initilize the entity from a saved file
-    virtual void load(ifstream *file);
+    virtual void load(ifstream *file) {}
 };
 
 
