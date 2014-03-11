@@ -5,6 +5,9 @@
 #include "model.h"
 
 #include <cassert>
+#include <iostream>
+
+using namespace std;
 
 void unitTests() {
     string selectedSavedGame;
@@ -16,6 +19,15 @@ void unitTests() {
     scores.addScore("Phillip", 30);
     scores.addScore("Michael", 20);
     Score* first = scores.getScores().at(0);
+    assert(first->getName() == "Phillip");
+    scores.addScore("Rebecca", 5);
+    Score* last = scores.getScores().back();
+    assert(last->getName() == "Rebecca");
+    for(int i = 0; i < scores.getScores().size(); i++)
+    {
+        Score* s = scores.getScores().at(i);
+        cout << s->getName() << endl;
+    }
 
     //model test for starting a new game. TODO: rework this to use asserts
     Model::instance()->singleGameStart();

@@ -45,7 +45,7 @@ public:
     void save();
 
     //adds a Score struct to the score vector.
-    void addScore(string name, int score);
+    bool addScore(string initName, int initScore);
 
     // returns the vector containing all the scores
     vector<Score*> getScores() { return all_scores; }
