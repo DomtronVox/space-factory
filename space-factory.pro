@@ -17,7 +17,9 @@ SOURCES += main.cpp\
         mainwindow.cpp \
         gamewindow.cpp \
     highscores.cpp \
-    model.cpp
+    model.cpp \
+    entities.cpp \
+    builder_part.cpp
 
 HEADERS  += mainwindow.h \
     model.h \

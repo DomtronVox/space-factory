@@ -25,6 +25,10 @@ public:
         return "BaseEntity:"+to_string(id)+","+to_string(x)+","+to_string(y)+","+image;
     }
 
+    int getX() { return x; }
+    int getY() { return y; }
+    int getId(){ return id; }
+
     virtual void update() {}
 
     //serialize and write the entity data to the file

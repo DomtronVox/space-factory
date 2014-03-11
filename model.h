@@ -50,9 +50,6 @@ public:
     // updates the game (Model) to reflect changes that occured
     void update();
 
-    // initializes the Model
-    void initialize();
-
     //initializes the game from the given file
     void load(string filename);
 
@@ -62,9 +59,11 @@ public:
     //Sets up model for a singleplayer game
     void singleGameStart();
     //sets up model for a multyplayer game
-    //void multyGameStart();
+    ////void multyGameStart();
     //resets whatever game state model has at the moment
     void reset();
+
+    BaseEntity * getById(int id);
 
     //function to randomize the creation of an attacker entity
     bool generateAttacker();
@@ -73,7 +72,7 @@ public:
     bool createTower(int x, int y);
 
     //function to create a component
-    bool createComponent(string type);
+    void createComponent(string type, int x, int y);
 
     //function to kill entities
     bool killEntity(int id);
