@@ -10,16 +10,54 @@
 
 
 //ship functions
-void ShipEntity::update(){
+ShipEntity::ShipEntity(int id, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,x,y,image)
+{
+    m_cHealth = new KillablePart(health);
+    m_cWeapon = new WeaponPart(damage, cooldown);
+}
+
+ShipEntity::~ShipEntity()
+{
+    delete m_cHealth;
+    delete m_cWeapon;
+}
+
+void ShipEntity::update()
+{
 
 }
 
 //factory functions
-void FactoryEntity::update(){
+FactoryEntity::FactoryEntity(int id, int x, int y, string image, int health) : BaseEntity(id,x,y,image)
+{
+    m_cHealth = new KillablePart(health);
+    m_cBulder = new BuilderPart("tower");
+}
+
+FactoryEntity::~FactoryEntity()
+{
+    delete m_cBulder;
+    delete m_cHealth;
+}
+
+void FactoryEntity::update()
+{
     m_cBulder->tick(x,y);
 }
 
 //tower functions
+TowerEntity::TowerEntity(int id, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,x,y,image)
+{
+    m_cHealth = new KillablePart(health);
+    m_cWeapon = new WeaponPart(damage, cooldown);
+}
+
+TowerEntity::~TowerEntity()
+{
+    delete m_cHealth;
+    delete m_cWeapon;
+}
+
 void TowerEntity::update(){
 
 }

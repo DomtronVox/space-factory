@@ -25,6 +25,9 @@ class Model {
     static int id;
     vector<BaseEntity*> all_entities;
 
+    //timer to create enemy ships
+    int newShipTimer;
+
     //used by load to parse a savefile
     //TODO: decide what should be returned by this function.
     void parse();
@@ -66,7 +69,7 @@ public:
     BaseEntity * getById(int id);
 
     //function to randomize the creation of an attacker entity
-    bool generateAttacker();
+    void generateAttacker();
 
     //function to build a tower
     bool createTower(int x, int y);

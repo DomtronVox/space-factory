@@ -43,6 +43,13 @@ void Model::update(){
     for (BaseEntity *e : all_entities){
         e->update();
     }
+
+    //handle creating new ships
+    newShipTimer--;
+    if (newShipTimer <= 0) {
+        generateAttacker();
+        newShipTimer = random() % 30 + 40;
+    }
 }
 
 
@@ -55,6 +62,8 @@ void Model::singleGameStart(){
     //create the players factory
     FactoryEntity *entity = new FactoryEntity(Model::newId(), 0, 0, "factory", 100);
     all_entities.push_back(entity);
+
+    newShipTimer = random() % 30 + 40;
 }
 
 //void Model::multiGameStart(){}
@@ -78,8 +87,21 @@ BaseEntity * Model::getById(int id){
     return found_entity;
 }
 
+//function to randomize the creation of an attacker entity
+void Model::generateAttacker(){
+
+    //generates a random position outside the game window
+    int x = random() % 40 + 2500;
+    int y = random() % 40 + 2500;
+
+    ShipEntity *ship = new ShipEntity(newId(), x,y, "ship", 10, 2, 20);
+    all_entities.push_back(ship);
+}
+
 //creates a component entity
 void Model::createComponent(string type, int x, int y){
     BaseEntity *e = new ComponentEntity(newId(),x,y,type,type);
     all_entities.push_back(e);
 }
+
+
