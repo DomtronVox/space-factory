@@ -116,8 +116,8 @@ void Model::generateAttacker()
 }
 
 //creates a component entity
-void Model::createComponent(string type, int x, int y){
-    BaseEntity *e = new ComponentEntity(newId(),x,y,type,type);
+void Model::createComponent(string image, string type, int x, int y){
+    BaseEntity *e = new ComponentEntity(newId(),x,y,image,type);
     addEntity(e);
 }
 

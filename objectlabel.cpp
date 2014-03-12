@@ -4,6 +4,7 @@ ObjectLabel::ObjectLabel(QWidget *parent, GameWindow *window, BaseEntity *data, 
     : QLabel(parent), win(window), data(data)
 {
     //set the ObjectLabels graphic
+    setScaledContents(true);
     setPixmap(image.pixmap(image.actualSize(win->size()/6)));
     this->setGeometry(x(), y(), image.actualSize(win->size()).width()/4, image.actualSize(win->size()).height()/4);
 
