@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <game_window.h>
 #include <QMainWindow>
 
 namespace Ui {
@@ -15,6 +16,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void openGameWindow();
+
+private:
+    Game_Window *GmWdw;
 
 private slots:
     void on_btnHelp_toggled(bool checked);

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Space Factory!</string>
   </property>
   <property name="windowOpacity">
    <double>1.000000000000000</double>
@@ -23,14 +23,14 @@
    <widget class="QLabel" name="motherFactory">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>140</y>
+      <x>250</x>
+      <y>160</y>
       <width>301</width>
       <height>291</height>
      </rect>
     </property>
     <property name="autoFillBackground">
-     <bool>true</bool>
+     <bool>false</bool>
     </property>
     <property name="styleSheet">
      <string notr="true"/>
@@ -86,8 +86,8 @@
    <widget class="QLabel" name="spaceShip3">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>220</y>
+      <x>610</x>
+      <y>240</y>
       <width>141</width>
       <height>91</height>
      </rect>
