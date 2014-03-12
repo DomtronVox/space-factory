@@ -18,13 +18,18 @@ class ObjectLabel : public QLabel
 {
 
     GameWindow *win;
+
+protected:
     BaseEntity *data;
 
-    void convertToScreenCoords();
+    QPoint convertToScreenCoords(QPoint pos);
+
 
   public:
     ObjectLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image);
     ~ObjectLabel();
+
+    void mouseReleaseEvent(QMouseEvent *ev) {};
 
 };
 
@@ -32,16 +37,16 @@ class ObjectLabel : public QLabel
 class DraggableLabel : public ObjectLabel
 {
 
-    bool mouseDragging;
+    bool mouseDragging = false;
     QPoint offset;
 
   public:
     DraggableLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image);
 
     //mouse events
-    void mouseMoveEvent(QMouseEvent *ev) {};
-    void mousePressEvent(QMouseEvent *ev) {};
-    void mouseReleaseEvent(QMouseEvent *ev) {};
+    void mouseMoveEvent(QMouseEvent *ev);
+    void mousePressEvent(QMouseEvent *ev);
+    void mouseReleaseEvent(QMouseEvent *ev);
 
 };
 

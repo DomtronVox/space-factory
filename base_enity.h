@@ -30,6 +30,9 @@ public:
     int getId(){ return id; }
     string getImage() { return image; }
 
+    //moves the object to the given position
+    void move(int newx, int newy) { x=newx; y=newy; }
+
     virtual void update() {}
 
     //serialize and write the entity data to the file
