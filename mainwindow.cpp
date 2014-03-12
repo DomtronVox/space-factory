@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "gamewindow.h"
+#include "game_window.h"
 #include "highscores.h"
 #include "model.h"
 
@@ -58,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
 
-    unitTests();
+    //unitTests();
 
     ui->setupUi(this);
 
@@ -146,4 +146,11 @@ void MainWindow::on_btnScores_toggled(bool checked)
 void MainWindow::on_btnExit_clicked()
 {
     QApplication::quit();
+}
+
+void MainWindow::on_btnNewGame_clicked()
+{
+    Game_Window *gameWindow = new Game_Window;
+    gameWindow->show();
+    this->hide();
 }

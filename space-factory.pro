@@ -20,11 +20,11 @@ QMAKE_CXXFLAGS += -std=c++0x
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-        gamewindow.cpp \
     highscores.cpp \
     model.cpp \
     entities.cpp \
-    builder_part.cpp
+    builder_part.cpp \
+    game_window.cpp
 
 HEADERS  += mainwindow.h \
     model.h \
@@ -34,14 +34,14 @@ HEADERS  += mainwindow.h \
     killable_part.h \
     weapon_part.h \
     builder_part.h \
-    gamewindow.h \
     movable_part.h \
     objectlabel.h \
-    highscores.h
+    highscores.h \
+    game_window.h
 
 
 FORMS    += mainwindow.ui \
-    gamewindow.ui
+    game_window.ui
 
 RESOURCES += \
     resources.qrc
