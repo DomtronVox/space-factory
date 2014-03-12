@@ -10,9 +10,8 @@ int Model::id = 0;
 
 //loads highscores and prepairs to hold a game state
 Model::Model() {
-    //create a high score object and populate it
-    //highscores = new HighScore("scores.txt");
-    //highscores.load();
+    HighScore highscores;
+    highscores.load();
 
 }
 
