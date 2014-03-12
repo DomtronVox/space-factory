@@ -20,7 +20,7 @@ public slots:
     void openGameWindow();
 
 private:
-    Game_Window *GmWdw;
+    GameWindow *GmWdw;
 
 private slots:
     void on_btnHelp_toggled(bool checked);

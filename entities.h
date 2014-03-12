@@ -26,7 +26,7 @@ class ShipEntity : public BaseEntity {
 
 public:
     //creates a brand new ship
-    ShipEntity(int id, int x, int y, char* image, int health, int damage, int cooldown);
+    ShipEntity(int id, int x, int y, string image, int health, int damage, int cooldown);
 
     //reinisilizes a ship loaded from a save file
     ShipEntity(ifstream *file); //{ load(file); }
@@ -61,7 +61,7 @@ class FactoryEntity : public BaseEntity {
 
 public:
     //creates a brand new factory
-    FactoryEntity(int id, int x, int y, char* image, int health);
+    FactoryEntity(int id, int x, int y, string image, int health);
 
     //reinisilizes a factory loaded from a save file
     FactoryEntity(ifstream *file);// { load(file); }
@@ -96,7 +96,7 @@ class TowerEntity : public BaseEntity {
 
 public:
     //Creates a brand new tower
-    TowerEntity(int id, int x, int y, char* image, int health, int damage, int cooldown);
+    TowerEntity(int id, int x, int y, string image, int health, int damage, int cooldown);
 
     //reinisilizes a tower loaded from a save file
     TowerEntity(ifstream *file); //{ load(file); }
@@ -127,10 +127,10 @@ public:
 //class for tower contructor components
 class ComponentEntity : public BaseEntity {
 
-    char* type;
+    string type;
 
 public:
-    ComponentEntity(int id, int x, int y, char* image, char* initType) : BaseEntity(id,x,y,image), type(initType)
+    ComponentEntity(int id, int x, int y, string image, string initType) : BaseEntity(id,x,y,image), type(initType)
     {}
 
     ~ComponentEntity() {  }
@@ -139,6 +139,14 @@ public:
     string stringify(){
         return "ComponentEntity:"+to_string(id)+","+to_string(x)+","+to_string(y)+","+image+","+type;
     }
+
+    //tells the entity a tick has passed
+    void update() {};
+
+    //serialize and write the entity data to the file
+    void save(ofstream *file) {}
+    //initilize the entity from a saved file
+    void load(ifstream *file) {}
 };
 
 #endif // ENTITIES_H

@@ -61,7 +61,7 @@ void Model::singleGameStart(){
 
     //create the players factory
     FactoryEntity *entity = new FactoryEntity(Model::newId(), 0, 0, "factory", 100);
-    all_entities.push_back(entity);
+    addEntity(entity);
 
     newShipTimer = random() % 30 + 40;
 }
@@ -117,7 +117,7 @@ void Model::generateAttacker()
 }
 
 //creates a component entity
-void Model::createComponent(char* type, int x, int y){
+void Model::createComponent(string type, int x, int y){
     BaseEntity *e = new ComponentEntity(newId(),x,y,type,type);
     addEntity(e);
 }

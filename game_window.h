@@ -2,21 +2,34 @@
 #define GAME_WINDOW_H
 
 #include <QMainWindow>
+#include <QDir>
+
+#include "base_enity.h"
+#include "objectlabel.h"
+
 
 namespace Ui {
-class Game_Window;
+class GameWindow;
 }
 
-class Game_Window : public QMainWindow
+class GameWindow : public QMainWindow
 {
     Q_OBJECT
     
 public:
-    explicit Game_Window(QWidget *parent = 0);
-    ~Game_Window();
+    explicit GameWindow(QWidget *parent = 0);
+    ~GameWindow();
+
     
 private:
-    Ui::Game_Window *ui;
+    Ui::GameWindow *ui;
+
+    QTimer *timer;
+    QDir image_dir;
+
+
+    void timerHit();
+    void createObjectLabel(BaseEntity *entity);
 };
 
 #endif // GAME_WINDOW_H

@@ -7,9 +7,6 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-
-    Game_Window g;
-
     MainWindow w;
 
     w.show();
