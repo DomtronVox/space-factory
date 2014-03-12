@@ -36,8 +36,7 @@ class DraggableLabel : public ObjectLabel
     QPoint offset;
 
   public:
-    DraggableLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image)
-        : ObjectLabel(parent, window, data, image) {}
+    DraggableLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image);
 
     //mouse events
     void mouseMoveEvent(QMouseEvent *ev) {};

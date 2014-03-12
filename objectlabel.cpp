@@ -24,3 +24,12 @@ void ObjectLabel::convertToScreenCoords(){
                 (data->getY() + (win->size().height()/2)) - (this->pixmap()->height()/2),
                 width(), height());
 }
+
+
+DraggableLabel::DraggableLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image)
+    : ObjectLabel(parent, window, data, image)
+{
+    //make sure dragable labels are on top so they are allways visible
+    this->raise();
+}
+
