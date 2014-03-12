@@ -4,7 +4,8 @@ ObjectLabel::ObjectLabel(QWidget *parent, GameWindow *window, BaseEntity *data, 
     : QLabel(parent), win(window), data(data)
 {
     //set the ObjectLabels graphic
-    setPixmap(image.pixmap(size()));
+    setPixmap(image.pixmap(image.actualSize(win->size()/6)));
+    this->setGeometry(x(), y(), image.actualSize(win->size()).width()/4, image.actualSize(win->size()).height()/4);
 
     convertToScreenCoords();
 }
@@ -19,7 +20,7 @@ ObjectLabel::~ObjectLabel()
 void ObjectLabel::convertToScreenCoords(){
     //convert and set coordinates
     this->setGeometry(
-                data->getX() + (win->size().width()/2),
-                data->getY() + (win->size().height()/2),
+                (data->getX() + (win->size().width()/2)) - (this->pixmap()->width()/2),
+                (data->getY() + (win->size().height()/2)) - (this->pixmap()->height()/2),
                 width(), height());
 }
