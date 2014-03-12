@@ -11,6 +11,7 @@
 #include "base_enity.h"
 #include "entities.h"
 
+class ObjectLabel;
 
 GameWindow::GameWindow(QWidget *parent) :
     QMainWindow(parent),

@@ -5,6 +5,8 @@
 #include <QMouseEvent>
 #include <QIcon>
 
+#include "game_window.h"
+
 #include "base_enity.h"
 #include "entities.h"
 
@@ -17,6 +19,8 @@ class ObjectLabel : public QLabel
 
     GameWindow *win;
     BaseEntity *data;
+
+    void convertToScreenCoords();
 
   public:
     ObjectLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image);
