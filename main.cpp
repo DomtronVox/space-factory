@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "gamewindow.h"
+#include "game_window.h"
 #include <QApplication>
 
 
@@ -7,8 +7,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    //GameWindow g;
-    //g.show();
+
+    Game_Window g;
 
     MainWindow w;
 

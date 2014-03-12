@@ -10,6 +10,7 @@
 #include "base_enity.h"
 #include "entities.h"
 
+
 GameWindow::GameWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GameWindow)
@@ -23,6 +24,7 @@ GameWindow::GameWindow(QWidget *parent) :
 
     image_dir = QDir(":/images/");
 
+    //g.show();
 }
 
 GameWindow::~GameWindow()
@@ -55,3 +57,4 @@ void GameWindow::timerHit()
     }
     Model::instance()->update();
 }
+

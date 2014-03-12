@@ -19,7 +19,7 @@ class Model {
 
     //score tracking
     HighScore *highscores;
-    Score *current_score= new Score("", 0); //the players current score
+    //Score *current_score = new Score(" ", 0); //the players current score
 
     // keep track of entities on the game field
     static int id;

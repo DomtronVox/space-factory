@@ -1,33 +1,36 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "gamewindow.h"
+#include "game_window.h"
 #include "highscores.h"
 #include "model.h"
-
 #include <cassert>
 #include <iostream>
 
 using namespace std;
 
 void unitTests() {
-    string selectedSavedGame;
-    //assert(Model::instance()->motherModel->load(selectedSavedGame)->getMap()->getId() == 0);
-
 
     HighScore scores;
     scores.addScore("Robert", 10);
     scores.addScore("Phillip", 30);
     scores.addScore("Michael", 20);
-    Score* first = scores.getScores().at(0);
-    assert(first->getName() == "Phillip");
+    Score* s = scores.getScores().at(0);
+
+    assert(s->getName() == "Phillip");
     scores.addScore("Rebecca", 5);
-    Score* last = scores.getScores().back();
-    assert(last->getName() == "Rebecca");
-    for(int i = 0; i < scores.getScores().size(); i++)
-    {
-        Score* s = scores.getScores().at(i);
-        cout << s->getName() << endl;
-    }
+    s = scores.getScores().back();
+    assert(s->getName() == "Rebecca");
+    scores.save();
+
+    HighScore loadScores;
+    loadScores.load();
+    loadScores.addScore("Rhonda", 65);
+    s = loadScores.getScores().at(0);
+
+    assert(s->getName() == "Rhonda");
+    assert(s->getScore() == 65);
+    loadScores.save();
+    remove ("highscores.txt");
 
     //model test for starting a new game. TODO: rework this to use asserts
     Model::instance()->singleGameStart();
@@ -49,14 +52,30 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
 
+
+    // WARNING: calling unitTests deletes saved highscores
     unitTests();
+
 
     ui->setupUi(this);
 
+
+    //populate highscores list
+    HighScore scores;
+    scores.load();
+    for(int i = 0; i < scores.getScores().size(); ++i )
+    {
+        Score *score = scores.getScores().at(i);
+        QString QName = QString::fromStdString(score->getName());
+        QString QScore = QString::number(score->getScore());
+        ui->lstScores->addItem(QName + " -- " + QScore);
+
+    }
+
+    //connect(ui->btnNewGame, SIGNAL(click()), this, SLOT(openGameWindow()));
     //set the help and score screens to be invisible
     ui->brwHelp->hide();
     ui->boxHighScores->hide();
-    ui->lstScores->addItem("Names  --  Scores");
 
     //TODO: uncomment the section below and modify once model has been implemented as a singlton class
     //vector<chr *> lines = Model::instance().getHighScores()->getFormatedScores();
@@ -69,7 +88,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::openGameWindow()
+{
+    GmWdw = new Game_Window();
 
+    GmWdw->show();
+}
 
 
 //toggle between showing the help window and not showing it
@@ -137,4 +161,10 @@ void MainWindow::on_btnScores_toggled(bool checked)
 void MainWindow::on_btnExit_clicked()
 {
     QApplication::quit();
+}
+
+void MainWindow::on_btnNewGame_clicked()
+{
+    openGameWindow();
+    this->hide();
 }

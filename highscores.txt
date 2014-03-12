@@ -1,0 +1,4 @@
+stephen:500
+john:450
+tim:2300
+karen:5900

@@ -16,5 +16,6 @@
         <file>images/tower.png</file>
         <file>images/spacestation.png</file>
         <file>images/image_missing.png</file>
+        <file>highscores.txt</file>
     </qresource>
 </RCC>

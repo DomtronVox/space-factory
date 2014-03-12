@@ -7,6 +7,8 @@
 
 #include <vector>
 #include <fstream>
+#include <QString>
+#include <sstream>
 
 using namespace std;
 
@@ -17,6 +19,8 @@ class Score{
 public:
     Score(string initName, int initScore) : name(initName), score(initScore) { }
 
+    string toString();
+
     // getter methods
     string getName() { return name; }
     int getScore() { return score; }
@@ -26,23 +30,19 @@ public:
 class HighScore {
 
 private:
-    fstream scores_file;
     vector<Score*> all_scores;
 
 public:
     // Constructor
     HighScore() {}
-    HighScore(string filename) {}
-
-    void sortScores();
 
     ~HighScore() {}
 
     // loads HighScores from a file and populates all_scores
-    void load();
+    bool load();
 
     // saves the HighScores in a txt file
-    void save();
+    bool save();
 
     //adds a Score struct to the score vector.
     bool addScore(string initName, int initScore);
