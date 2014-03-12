@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     highscores.cpp \
     model.cpp \
     entities.cpp \
-    builder_part.cpp
+    builder_part.cpp \
+    objectlabel.cpp
 
 HEADERS  += mainwindow.h \
     model.h \

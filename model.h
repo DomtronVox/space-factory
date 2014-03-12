@@ -24,6 +24,7 @@ class Model {
     // keep track of entities on the game field
     static int id;
     vector<BaseEntity*> all_entities;
+    vector<BaseEntity*> recently_created;
 
     //timer to create enemy ships
     int newShipTimer;
@@ -66,7 +67,14 @@ public:
     //resets whatever game state model has at the moment
     void reset();
 
+    //returns an entity with the given <id> or NULL
     BaseEntity * getById(int id);
+
+    //returns a vector of BaseEntities that have been created recently
+    vector<BaseEntity*> getRecentlyCreated();
+
+    //finilizes entity creation by adding it to the all_entities vector and doing other important things
+    void addEntity(BaseEntity * entity);
 
     //function to randomize the creation of an attacker entity
     void generateAttacker();
@@ -75,7 +83,7 @@ public:
     bool createTower(int x, int y);
 
     //function to create a component
-    void createComponent(string type, int x, int y);
+    void createComponent(char *type, int x, int y);
 
     //function to kill entities
     bool killEntity(int id);

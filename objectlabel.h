@@ -3,6 +3,7 @@
 
 #include <QLabel>
 #include <QMouseEvent>
+#include <QIcon>
 
 #include "base_enity.h"
 #include "entities.h"
@@ -18,7 +19,7 @@ class ObjectLabel : public QLabel
     BaseEntity *data;
 
   public:
-    ObjectLabel(GameWindow *window, BaseEntity *data, QIcon image);
+    ObjectLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image);
     ~ObjectLabel();
 
 };
@@ -31,11 +32,13 @@ class DraggableLabel : public ObjectLabel
     QPoint offset;
 
   public:
+    DraggableLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image)
+        : ObjectLabel(parent, window, data, image) {}
 
     //mouse events
-    void mouseMoveEvent(QMouseEvent *ev);
-    void mousePressEvent(QMouseEvent *ev);
-    void mouseReleaseEvent(QMouseEvent *ev);
+    void mouseMoveEvent(QMouseEvent *ev) {};
+    void mousePressEvent(QMouseEvent *ev) {};
+    void mouseReleaseEvent(QMouseEvent *ev) {};
 
 };
 
