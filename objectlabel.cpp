@@ -36,6 +36,8 @@ QPoint ObjectLabel::convertToScreenCoords(QPoint pos){
 DraggableLabel::DraggableLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image)
     : ObjectLabel(parent, window, data, image)
 {
+    mouseDragging = false;
+
     //make sure dragable labels are on top so they are allways visible
     this->raise();
 }

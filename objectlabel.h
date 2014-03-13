@@ -37,7 +37,7 @@ protected:
 class DraggableLabel : public ObjectLabel
 {
 
-    bool mouseDragging = false;
+    bool mouseDragging;
     QPoint offset;
 
   public:
