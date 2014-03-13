@@ -43,7 +43,7 @@ HEADERS  += mainwindow.h \
 
 
 FORMS    += mainwindow.ui \
-    game_window.ui
+    gamewindow.ui
 
 RESOURCES += \
     resources.qrc
