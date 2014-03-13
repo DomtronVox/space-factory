@@ -50,7 +50,11 @@ DraggableLabel::DraggableLabel(QWidget *parent, GameWindow *window, BaseEntity *
 void DraggableLabel::mouseMoveEvent(QMouseEvent *ev)
 {
     //move the label to the new location
-    if (mouseDragging) move(mapToParent(ev->pos() - this->offset));
+    if (mouseDragging) {
+        //move the model entity to the new position
+        QPoint pos = convertToScreenCoords(ev->pos() - this->offset);
+        data->move(pos.x(), pos.y());
+    }
 }
 
 //starts dragging the label
@@ -65,8 +69,5 @@ void DraggableLabel::mouseReleaseEvent(QMouseEvent *ev)
 {
     if (mouseDragging){
         mouseDragging = false;
-        //create move command and run it
-        QPoint pos = convertToScreenCoords(ev->pos() - this->offset);
-        data->move(pos.x(), pos.y());
     }
 }

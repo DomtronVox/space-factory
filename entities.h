@@ -4,6 +4,7 @@
 #include "base_enity.h"
 
 //part includes
+#include "movable_part.h"
 #include "angular_part.h"
 #include "killable_part.h"
 #include "weapon_part.h"
@@ -20,8 +21,7 @@ class ShipEntity : public BaseEntity {
 
     KillablePart *m_cHealth;
     WeaponPart *m_cWeapon;
-
-    //MovablePart *m_cMove //TODO: finish movablepart
+    MovablePart *m_cMoveable;
 
 
 public:

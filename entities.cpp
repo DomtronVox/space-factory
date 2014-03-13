@@ -3,6 +3,7 @@
 #include "entities.h"
 
 //part includes
+#include "movable_part.h"
 #include "angular_part.h"
 #include "killable_part.h"
 #include "weapon_part.h"
@@ -14,17 +15,19 @@ ShipEntity::ShipEntity(int id, int x, int y, string image, int health, int damag
 {
     m_cHealth = new KillablePart(health);
     m_cWeapon = new WeaponPart(damage, cooldown);
+    m_cMoveable = new MovablePart(10, 0, 0);
 }
 
 ShipEntity::~ShipEntity()
 {
     delete m_cHealth;
     delete m_cWeapon;
+    delete m_cMoveable;
 }
 
 void ShipEntity::update()
 {
-
+    m_cMoveable->tick(this);
 }
 
 //factory functions

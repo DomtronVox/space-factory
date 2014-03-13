@@ -72,10 +72,10 @@ void GameWindow::createObjectLabel(BaseEntity *entity){
     //see if the entity is a component sense they need a special form of the object label.
     ComponentEntity *draggable = dynamic_cast<ComponentEntity*>(entity);
     if(draggable == NULL){
-        ObjectLabel *label = new ObjectLabel(this, this, entity, image);
+        ObjectLabel *label = new ObjectLabel(centralWidget(), this, entity, image);
         label->show();
     } else {
-        DraggableLabel *label = new DraggableLabel(this, this, entity, image);
+        DraggableLabel *label = new DraggableLabel(centralWidget(), this, entity, image);
         label->show();
     }
 
