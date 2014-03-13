@@ -8,11 +8,7 @@ ObjectLabel::ObjectLabel(QWidget *parent, GameWindow *window, BaseEntity *data, 
     setPixmap(image.pixmap(image.actualSize(win->size()/6)));
     this->setGeometry(x(), y(), image.actualSize(win->size()).width()/4, image.actualSize(win->size()).height()/4);
 
-    QRect location = QRect(pos(), size());
-    //center label on models position
-    location.moveCenter(convertToScreenCoords(QPoint(data->getX(), data->getY())));
-    //set location
-    setGeometry(location);
+    updateData();
 
     //setup mouse tracking so we can handle click events on objects.
     setMouseTracking(true);
@@ -32,6 +28,14 @@ QPoint ObjectLabel::convertToScreenCoords(QPoint pos){
     );
 }
 
+
+void ObjectLabel::updateData(){
+    QRect location = QRect(pos(), size());
+    //center label on models position
+    location.moveCenter(convertToScreenCoords(QPoint(data->getX(), data->getY())));
+    //set location
+    setGeometry(location);
+}
 
 DraggableLabel::DraggableLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image)
     : ObjectLabel(parent, window, data, image)

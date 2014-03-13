@@ -49,6 +49,11 @@ void GameWindow::timerHit()
 
     //debugg
     Model::instance()->printState();
+
+    for (QObject *obj: ui->centralwidget->children()){
+        ObjectLabel *lbl = dynamic_cast<ObjectLabel*>(obj);
+        if (lbl != NULL) lbl->updateData();
+    }
 }
 
 

@@ -29,6 +29,8 @@ protected:
     ObjectLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image);
     ~ObjectLabel();
 
+    void updateData();
+
     void mouseReleaseEvent(QMouseEvent *ev) {};
 
 };
