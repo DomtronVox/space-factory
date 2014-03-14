@@ -31,19 +31,24 @@ void unitTests() {
     assert(s->getScore() == 65);
     loadScores.save();
     remove ("highscores.txt");
-    /*
+
     //model test for starting a new game. TODO: rework this to use asserts
     Model::instance()->singleGameStart();
     assert(Model::instance()->getById(0) != NULL);
 
+    assert(Model::instance()->load());
+
+    /*
     //update 5 times so the factory has finished building it's first component
-    Model::instance()->update(); Model::instance()->update();
-    Model::instance()->update();
+    for(int i = 0; i < 4; i++) {
+        Model::instance()->update();
+    }
     assert(Model::instance()->getById(1)==NULL);
     Model::instance()->update();
     assert(Model::instance()->getById(1)!=NULL);
 
-    Model::instance()->reset();*/
+    Model::instance()->reset();
+    */
 }
 
 
@@ -51,14 +56,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-
-
-    // WARNING: calling unitTests deletes saved highscores
-    unitTests();
-
-
     ui->setupUi(this);
 
+    //unitTests();
 
     //populate highscores list
     HighScore scores;

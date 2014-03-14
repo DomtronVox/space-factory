@@ -1,5 +1,6 @@
 #include <iostream>
-
+#include <QFile>
+#include <QTextStream>
 #include "model.h"
 #include "base_enity.h"
 #include "entities.h"
@@ -51,6 +52,100 @@ void Model::update(){
     }
 }
 
+bool Model::load()
+{
+    QFile sFile ("savedGame.txt");
+    if(sFile.open(QIODevice::ReadOnly))
+    {
+        string line;
+        QTextStream in(&sFile);
+        while(!in.atEnd())
+        {
+            line = in.readLine().toStdString();
+            unsigned pos = line.find(":");
+            string name = line.substr(0, pos);
+            line.erase(0, pos + 1);
+            string Eid = line.substr(0, pos = line.find(","));
+            line.erase(0,pos + 1);
+            string x = line.substr(0, pos = line.find(","));
+            line.erase(0,pos + 1);
+            string y = line.substr(0, pos = line.find(","));
+            line.erase(0,pos + 1);
+            string image = line.substr(0, pos = line.find(","));
+            line.erase(0,pos + 1);
+
+            cout << name << " " << x << " " << y << endl;
+            if(name == "FACTORY-ENTITY")
+            {
+                string health = line.substr(0, pos = line.find(","));
+                line.erase(0, pos + 1);
+                string damage = line.substr(0, pos = line.find(","));
+                FactoryEntity* ent = new FactoryEntity(stoi(Eid), stoi(x), stoi(y), image, stoi(health), stoi(damage));
+                Model::instance()->addEntity(ent);
+                cout << "loaded FACTORY" << endl;
+            }
+            else if (name == "SHIP-ENTITY")
+                {
+                string health = line.substr(0, pos = line.find(","));
+                line.erase(0, pos + 1);
+                string damage = line.substr(0, pos = line.find(","));
+                line.erase(0, pos + 1);
+                string cooldown = line.substr(0, pos = line.find(","));
+                line.erase(0, pos + 1);
+                ShipEntity* ent = new ShipEntity(stoi(Eid), stoi(x), stoi(y), image, stoi(health), stoi(damage), stoi(cooldown));
+                Model::instance()->addEntity(ent);
+                cout << "loaded SHIP-ENTITY" << endl;
+
+                }
+            else if( name == "COMPONENT-ENTITY")
+                {
+                string type = line.substr(0, pos = line.find(","));
+                line.erase(0, pos + 1);
+                string damage = line.substr(0, pos = line.find(","));
+                line.erase(0, pos + 1);
+                ComponentEntity* ent = new ComponentEntity(stoi(Eid), stoi(x), stoi(y), image, type);
+                Model::instance()->addEntity(ent);
+                cout << "loaded COMPONENT-ENTITY" << endl;
+                }
+            else {
+                cout << "unable to load line" << endl;
+            }
+        }
+        sFile.close();
+        return true;
+    }
+    else
+    {
+        cout << "Unable to open file cotaining saved game, i.e. savedGame.txt" << endl;
+        sFile.close();
+        return false;
+    }
+}
+
+
+bool Model::save()
+{
+    if(remove("savedGame.txt") == 0)
+        cout << "savedGame.txt succesfully removed" << endl;
+    QFile sFile ("savedGame.txt");
+
+    if(sFile.open(QIODevice::ReadWrite | QIODevice::Text)) {
+
+        for(int i = 0; i < all_entities.size(); ++i)
+        {
+            BaseEntity* entity = all_entities.at(i);
+            QString data(QString::fromStdString(entity->stringify()));
+            QTextStream out(&sFile);
+            out << data << endl;
+        }
+        sFile.close();
+        return true;
+
+    }
+    sFile.close();
+    return false;
+}
+
 
 //Sets up model for a singleplayer game
 void Model::singleGameStart(){
@@ -59,7 +154,7 @@ void Model::singleGameStart(){
     //current_score = new Score("", 0);
 
     //create the players factory
-    FactoryEntity *entity = new FactoryEntity(Model::newId(), 0, 0, "factory", 100);
+    FactoryEntity *entity = new FactoryEntity(Model::newId(), 0, 0, "factory", 100, 0);
     addEntity(entity);
 
     newShipTimer = random() % 30 + 40;

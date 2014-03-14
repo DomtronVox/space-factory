@@ -26,7 +26,9 @@ SOURCES += main.cpp\
     builder_part.cpp \
     objectlabel.cpp \
     game_window.cpp \
-    movable_part.cpp
+    #movable_part.cpp
+    movable_part.cpp \
+    base_entity.cpp
 
 
 HEADERS  += mainwindow.h \

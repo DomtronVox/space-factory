@@ -55,10 +55,10 @@ public:
     void update();
 
     //initializes the game from the given file
-    void load(string filename);
+    bool load();
 
     //serialises game objects and saves them to the given file
-    void save(string filename);
+    bool save();
 
     //Sets up model for a singleplayer game
     void singleGameStart();

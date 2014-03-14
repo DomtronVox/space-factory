@@ -1,6 +1,7 @@
 #include <QTimer>
 #include <QDir>
 #include <QIcon>
+#include <QMessageBox>
 
 #include "game_window.h"
 #include "ui_gamewindow.h"
@@ -18,6 +19,12 @@ GameWindow::GameWindow(QWidget *parent) :
     ui(new Ui::GameWindow)
 {
     ui->setupUi(this);
+
+    ui->gameMenu->addItem("-------");
+    ui->gameMenu->addItem("Save Game");
+    ui->gameMenu->addItem("Load Game");
+    ui->gameMenu->addItem("Quit Game");
+    ui->gameMenu->addItem("Pause Game");
 
     //setup the game timer and connect it to the model update
     timer = new QTimer(this);
@@ -53,6 +60,19 @@ void GameWindow::timerHit()
     for (QObject *obj: ui->centralwidget->children()){
         ObjectLabel *lbl = dynamic_cast<ObjectLabel*>(obj);
         if (lbl != NULL) lbl->updateData();
+    }
+
+    // If Save Game is selected
+    if(ui->gameMenu->currentIndex() == 1)
+    {
+        if(Model::instance()->save()){
+            QMessageBox::information(this, "Save Game", "Your game has been saved.");
+        }
+        else {
+            QMessageBox::critical(this, "Save Game", "Unable to save your game.");
+
+        }
+        ui->gameMenu->setCurrentIndex(0);
     }
 }
 

@@ -18,7 +18,7 @@ using namespace std;
 class ShipEntity : public BaseEntity {
 
     //AngularPart *m_cAngle;
-
+    int health, damage, cooldown;
     KillablePart *m_cHealth;
     WeaponPart *m_cWeapon;
     MovablePart *m_cMoveable;
@@ -35,7 +35,7 @@ public:
 
     //returns a string that describes the entity
     string stringify(){
-        return "ShipEntity:"+to_string(id)+","+to_string(x)+","+to_string(y)+","+image;
+        return "SHIP-ENTITY:"+to_string(id)+","+to_string(x)+","+to_string(y)+","+image + "," + to_string(health) + "," + to_string(damage) + "," + to_string(cooldown);
     }
 
     //tells the entity a tick has passed
@@ -56,12 +56,13 @@ public:
 
 class FactoryEntity : public BaseEntity {
 
+    int health, damage;
     KillablePart *m_cHealth;
     BuilderPart *m_cBulder;
 
 public:
     //creates a brand new factory
-    FactoryEntity(int id, int x, int y, string image, int health);
+    FactoryEntity(int id, int x, int y, string image, int health, int damage);
 
     //reinisilizes a factory loaded from a save file
     FactoryEntity(ifstream *file);// { load(file); }
@@ -70,7 +71,7 @@ public:
 
     //returns a string that describes the entity
     string stringify(){
-        return "FactoryEntity:"+to_string(id)+","+to_string(x)+","+to_string(y)+","+image;
+        return "FACTORY-ENTITY:" + BaseEntity::stringify() + "," + to_string(health) + "," + to_string(damage);
     }
 
     //tells the entity a tick has passed
@@ -91,6 +92,7 @@ class TowerEntity : public BaseEntity {
 
     //AngularPart *m_cAngle;
 
+    int health, damage, cooldown;
     KillablePart *m_cHealth;
     WeaponPart *m_cWeapon;
 
@@ -105,7 +107,7 @@ public:
 
     //returns a string that describes the entity
     string stringify(){
-        return "TowerEntity:"+to_string(id)+","+to_string(x)+","+to_string(y)+","+image;
+        return "TOWER-ENTITY:" + BaseEntity::stringify() + "," + to_string(health) + "," + to_string(damage) + "," + to_string(cooldown);
     }
 
     //tells the entity a tick has passed
@@ -137,7 +139,8 @@ public:
 
     //returns a string that describes the entity
     string stringify(){
-        return "ComponentEntity:"+to_string(id)+","+to_string(x)+","+to_string(y)+","+image+","+type;
+        return "COMPONENT-ENTITY:" + BaseEntity::stringify() + "," + type;
+        //return "COMPONENT-ENTITY:"+to_string(id)+","+to_string(x)+","+to_string(y)+","+image+","+type;
     }
 
     //tells the entity a tick has passed
