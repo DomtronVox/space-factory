@@ -23,6 +23,7 @@ protected:
     BaseEntity *data;
 
     QPoint convertToScreenCoords(QPoint pos);
+    QPoint convertToModelCoords(QPoint pos);
 
 
   public:

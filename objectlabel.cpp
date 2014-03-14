@@ -19,12 +19,21 @@ ObjectLabel::~ObjectLabel()
     delete win;
 }
 
-//converts the position given by the data model entity to a screen position.
-//  I.e. the center of the screen should be (0,0)
+//converts the given position to a screen position.
+//  I.e. given (0,0) should return the point at the center of the screen
 QPoint ObjectLabel::convertToScreenCoords(QPoint pos){
     return QPoint( //convert given coordinates
-      (pos.x() + (win->size().width()/2)),
-      (pos.y() + (win->size().height()/2))
+      ( pos.x() + (win->size().width()/2)),
+      (-pos.y() + (win->size().height()/2))
+    );
+}
+
+//converts the given position a model position.
+//  I.e. given the center of the screen the return should be (0,0)
+QPoint ObjectLabel::convertToModelCoords(QPoint pos){
+    return QPoint( //convert given coordinates
+      ( pos.x() - (win->size().width()/2)),
+      -(pos.y() - (win->size().height()/2))
     );
 }
 
@@ -52,8 +61,8 @@ void DraggableLabel::mouseMoveEvent(QMouseEvent *ev)
     //move the label to the new location
     if (mouseDragging) {
         //move the model entity to the new position
-        QPoint pos = convertToScreenCoords(ev->pos() - this->offset);
-        data->move(pos.x(), pos.y());
+        QPoint new_pos = convertToModelCoords( pos() + (ev->pos() - this->offset) );
+        data->move(new_pos.x(), new_pos.y());
     }
 }
 
