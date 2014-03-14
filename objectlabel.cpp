@@ -76,7 +76,7 @@ void DraggableLabel::mousePressEvent(QMouseEvent *ev)
 //stops dragging the label
 void DraggableLabel::mouseReleaseEvent(QMouseEvent *ev)
 {
-    if (mouseDragging){
+   // if (mouseDragging){
         mouseDragging = false;
-    }
+    //}
 }

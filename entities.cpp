@@ -18,7 +18,7 @@ ShipEntity::ShipEntity(int id, int x, int y, string image, int health, int damag
     ShipEntity::cooldown = cooldown;
     m_cHealth = new KillablePart(health);
     m_cWeapon = new WeaponPart(damage, cooldown);
-    m_cMoveable = new MovablePart(10, 0, 0);
+    m_cMoveable = new MovablePart(10, 0, 0, id);
 }
 
 ShipEntity::~ShipEntity()

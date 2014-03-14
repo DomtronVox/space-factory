@@ -10,13 +10,13 @@
 #include "base_enity.h"
 #include "entities.h"
 
-//forward declares gamewindow since it will include ObjectLable.h
+//forward declares gamewindow since it will include ObjectLabel.h
 class GameWindow;
 
 //this is the visual portion of entities. It should support mouse clicking
 class ObjectLabel : public QLabel
 {
-
+    int id;
     GameWindow *win;
 
 protected:
@@ -29,6 +29,9 @@ protected:
   public:
     ObjectLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image);
     ~ObjectLabel();
+
+    // deletes the label associated with <id>
+    void deleteLbl(int id);
 
     void updateData();
 

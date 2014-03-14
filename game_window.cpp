@@ -2,6 +2,7 @@
 #include <QDir>
 #include <QIcon>
 #include <QMessageBox>
+#include <QDebug>
 
 #include "game_window.h"
 #include "ui_gamewindow.h"
@@ -22,9 +23,8 @@ GameWindow::GameWindow(QWidget *parent) :
 
     ui->gameMenu->addItem("-------");
     ui->gameMenu->addItem("Save Game");
-    ui->gameMenu->addItem("Load Game");
-    ui->gameMenu->addItem("Quit Game");
     ui->gameMenu->addItem("Pause Game");
+    ui->gameMenu->addItem("Quit Game");
 
     //setup the game timer and connect it to the model update
     timer = new QTimer(this);
@@ -54,7 +54,7 @@ void GameWindow::timerHit()
     }
     Model::instance()->update();
 
-    //debugg
+    //debug
     Model::instance()->printState();
 
     for (QObject *obj: ui->centralwidget->children()){
@@ -68,11 +68,22 @@ void GameWindow::timerHit()
         if(Model::instance()->save()){
             QMessageBox::information(this, "Save Game", "Your game has been saved.");
         }
-        else {
+        else
             QMessageBox::critical(this, "Save Game", "Unable to save your game.");
 
-        }
         ui->gameMenu->setCurrentIndex(0);
+}
+    // If Pause Game is selected
+    if(ui->gameMenu->currentIndex() == 2)
+    {
+        QMessageBox::information(this, "Pause Game", "Game is paused. Press ok to continue game.");
+        ui->gameMenu->setCurrentIndex(0);
+    }
+    // Quit Game
+    if(ui->gameMenu->currentIndex() == 3)
+    {
+        Model::instance()->save();
+        QApplication::quit();
     }
 }
 
@@ -98,5 +109,4 @@ void GameWindow::createObjectLabel(BaseEntity *entity){
         DraggableLabel *label = new DraggableLabel(centralWidget(), this, entity, image);
         label->show();
     }
-
 }

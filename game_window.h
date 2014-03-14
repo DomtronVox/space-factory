@@ -29,7 +29,11 @@ private:
 
 
     void timerHit();
+
     void createObjectLabel(BaseEntity *entity);
+
+    // deletes an object label from the screen with the <id> number
+    void deleteOjbectLabel(int id);
 };
 
 #endif // GAME_WINDOW_H

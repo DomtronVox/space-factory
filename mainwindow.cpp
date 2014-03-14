@@ -163,3 +163,10 @@ void MainWindow::on_btnNewGame_clicked()
     openGameWindow();
     this->hide();
 }
+
+void MainWindow::on_btnLoadGame_clicked()
+{
+    openGameWindow();
+    this->hide();
+    Model::instance()->load();
+}

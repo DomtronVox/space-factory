@@ -27,6 +27,7 @@ Model::~Model()
 void Model::killAllEntities(){
     for (unsigned int i=0; i < all_entities.size(); i++){
         delete all_entities.at(i);
+        all_entities.clear();
     }
 }
 
@@ -57,6 +58,7 @@ bool Model::load()
     QFile sFile ("savedGame.txt");
     if(sFile.open(QIODevice::ReadOnly))
     {
+        Model::instance()->reset();
         string line;
         QTextStream in(&sFile);
         while(!in.atEnd())
@@ -111,17 +113,19 @@ bool Model::load()
                 cout << "unable to load line" << endl;
             }
         }
+        Model::id = all_entities.size();
         sFile.close();
         return true;
     }
     else
     {
+        //TO-DO: make program create a QMessageBox if no saved game file exists
+        //informing the user of that fact and that he is starting a new game.
         cout << "Unable to open file cotaining saved game, i.e. savedGame.txt" << endl;
         sFile.close();
         return false;
     }
 }
-
 
 bool Model::save()
 {
@@ -165,6 +169,7 @@ void Model::singleGameStart(){
 //resets whatever game state model has at the moment
 void Model::reset()
 {
+    cout << "all entities cleared" << endl;
     killAllEntities(); //kill everything
     Model::id = 0; //reset id counter
     //current_score = new Score("", 0);
