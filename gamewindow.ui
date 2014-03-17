@@ -38,27 +38,6 @@
      <string notr="true">background-color: rgb(99, 99, 99);</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lblPaused">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>170</y>
-      <width>201</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>Game Paused</string>
-    </property>
-   </widget>
   </widget>
  </widget>
  <resources/>
