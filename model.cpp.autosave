@@ -46,9 +46,6 @@ void Model::update(){
         BaseEntity *e = all_entities.at(i);
         e->update();
     }
-    /*for (BaseEntity *e : all_entities){
-        e->update();
-    }*/
 
     //handle creating new ships
     newShipTimer--;
