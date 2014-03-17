@@ -47,9 +47,6 @@ void Model::update(){
         BaseEntity *e = all_entities.at(i);
         e->update();
     }
-    /*for (BaseEntity *e : all_entities){
-        e->update();
-    }*/
 
     //handle creating new ships
     newShipTimer--;
@@ -195,6 +192,36 @@ BaseEntity * Model::getById(int id)
     return found_entity;
 }
 
+
+//returns a vector of BaseEntities that lie in a circle
+vector<BaseEntity*> Model::getInArea(int x, int y, int r){
+    //entities inside the area
+    vector<BaseEntity*> inside;
+
+    for (unsigned int i = 0; i < all_entities.size(); ++i) {
+
+        BaseEntity *e = all_entities.at(i);
+
+        //make sure the entity is not a component
+        ComponentEntity* comp = dynamic_cast<ComponentEntity*> (e);
+        if (comp == NULL)
+
+            //it's inside the circle if (x-center_x)^2 + (y - center_y)^2 < r^2
+            if ( pow(e->getX() - x, 2) + pow(e->getY() - y, 2) <= pow(r, 2) )
+                inside.push_back(e);
+    }
+
+    return inside;
+}
+
+
+//returns true if the given area is free of any entities. This ignores component entities.
+bool Model::isAreaEmpty(int x, int y, int r){
+    if (getInArea(x, y, r).size() == 0)  return true;
+    else                                 return false;
+}
+
+
 //returns a vector of BaseEntities that have been created recently
 vector<BaseEntity*> Model::getRecentlyCreated()
 {
@@ -221,11 +248,16 @@ void Model::generateAttacker()
     addEntity(ship);
 }
 
-//create a new tower
-void Model::createTower(int x, int y){
+//create a new tower at the given pos
+bool Model::createTower(int x, int y){
 
-   TowerEntity *tower = new TowerEntity(newId(), x,y, "tower", 100, 10, 50);
-   addEntity(tower);
+   if ( isAreaEmpty(x,y, 35) ){ //TODO: Tower radius. another hardcoded value
+       TowerEntity *tower = new TowerEntity(newId(), x,y, "tower", 100, 10, 50);
+       addEntity(tower);
+       return true;
+   } else{
+       return false;
+   }
 
 }
 

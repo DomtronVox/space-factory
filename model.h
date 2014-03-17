@@ -73,6 +73,12 @@ public:
     //returns a vector of BaseEntities that have been created recently
     vector<BaseEntity*> getRecentlyCreated();
 
+    //returns a vector of BaseEntities that lie in a certain area
+    vector<BaseEntity*> getInArea(int x, int y, int r);
+
+    //returns true if the given area is free of any entities. This ignores component entities.
+    bool isAreaEmpty(int x, int y, int r);
+
     //finilizes entity creation by adding it to the all_entities vector and doing other important things
     void addEntity(BaseEntity * entity);
 
@@ -80,7 +86,7 @@ public:
     void generateAttacker();
 
     //function to build a tower
-    void createTower(int x, int y);
+    bool createTower(int x, int y);
 
     //function to create a component
     void createComponent(string image, string type, int x, int y);

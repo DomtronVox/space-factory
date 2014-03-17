@@ -77,6 +77,5 @@ void TowerEntity::update(){
 //runs primary action of the entity
 void ComponentEntity::primaryAction(int x, int y) {
 
-    Model::instance()->createTower(x,y);
-    Model::instance()->killEntity(id);
+    if(Model::instance()->createTower(x,y)) Model::instance()->killEntity(id);
 }
