@@ -27,8 +27,9 @@ Model::~Model()
 void Model::killAllEntities(){
     for (unsigned int i=0; i < all_entities.size(); i++){
         delete all_entities.at(i);
-        all_entities.clear();
     }
+
+    all_entities.clear();
 }
 
 //runs through all the entities and prints them as a string.
@@ -208,12 +209,21 @@ void Model::addEntity(BaseEntity * entity)
 void Model::generateAttacker()
 {
     //generates a random position outside the game window
-    int x = random() % 40 + 2500;
-    int y = random() % 40 + 2500;
+    int x = random() % 40 + 2000;
+    int y = random() % 40 + 2000;
 
-    ShipEntity *ship = new ShipEntity(newId(), x,y, "ship", 10, 2, 20);
+    ShipEntity *ship = new ShipEntity(newId(), x,y, "ship", 10, 2, 50);
     addEntity(ship);
 }
+
+//create a new tower
+void Model::createTower(int x, int y){
+
+   TowerEntity *tower = new TowerEntity(newId(), x,y, "tower", 100, 10, 50);
+   addEntity(tower);
+
+}
+
 
 //creates a component entity
 void Model::createComponent(string image, string type, int x, int y){
@@ -221,4 +231,13 @@ void Model::createComponent(string image, string type, int x, int y){
     addEntity(e);
 }
 
-
+//kill a single entity by id
+void Model::killEntity(int id){
+    vector<BaseEntity*>::iterator i;
+    for (i = all_entities.begin(); i < all_entities.end(); i++){
+        if (id == (*i)->getId()) {
+            delete *i;
+            all_entities.erase(i);
+        }
+    }
+}

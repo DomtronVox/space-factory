@@ -80,13 +80,13 @@ public:
     void generateAttacker();
 
     //function to build a tower
-    bool createTower(int x, int y);
+    void createTower(int x, int y);
 
     //function to create a component
     void createComponent(string image, string type, int x, int y);
 
     //function to kill entities
-    bool killEntity(int id);
+    void killEntity(int id);
 
 
 };

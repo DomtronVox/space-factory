@@ -44,6 +44,10 @@ public:
     virtual void save(ofstream *file) {}
     //initilize the entity from a saved file
     virtual void load(ifstream *file) {}
+
+    //runs primary action of the entity
+    //TODO: When implementing multiplayer we should add owner the this prototype
+    virtual void primaryAction(int x, int y) {};
 };
 
 

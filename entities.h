@@ -52,6 +52,9 @@ public:
     void save(ofstream *file) {}
     //initilize the entity from a saved file
     void load(ifstream *file) {}
+
+    //runs primary action of the entity
+    void primaryAction(int x, int y) {}
 };
 
 class FactoryEntity : public BaseEntity {
@@ -85,6 +88,10 @@ public:
     void save(ofstream *file) {}
     //initilize the entity from a saved file
     void load(ifstream *file) {}
+
+    //runs primary action of the entity
+    //TODO: implement this to change component build target
+    void primaryAction(int x, int y) {}
 };
 
 
@@ -124,6 +131,9 @@ public:
     void save(ofstream *file) {}
     //initilize the entity from a saved file
     void load(ifstream *file) {}
+
+    //runs primary action of the entity
+    void primaryAction(int x, int y) {}
 };
 
 //class for tower contructor components
@@ -150,6 +160,9 @@ public:
     void save(ofstream *file) {}
     //initilize the entity from a saved file
     void load(ifstream *file) {}
+
+    //runs primary action of the entity
+    void primaryAction(int x, int y);
 };
 
 #endif // ENTITIES_H

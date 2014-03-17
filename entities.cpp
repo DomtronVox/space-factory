@@ -9,6 +9,9 @@
 #include "weapon_part.h"
 #include "builder_part.h"
 
+//TODO: change code that needs model and remove this include
+#include "model.h"
+
 
 //ship functions
 ShipEntity::ShipEntity(int id, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,x,y,image)
@@ -69,4 +72,11 @@ TowerEntity::~TowerEntity()
 
 void TowerEntity::update(){
 
+}
+
+//runs primary action of the entity
+void ComponentEntity::primaryAction(int x, int y) {
+
+    Model::instance()->createTower(x,y);
+    Model::instance()->killEntity(id);
 }
