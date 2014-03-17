@@ -1,4 +1,4 @@
-#include "base_enity.h"
+#include "base_entity.h"
 #include "movable_part.h"
 
 void MovablePart::tick(BaseEntity *master){

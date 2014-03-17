@@ -34,7 +34,6 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     model.h \
     entities.h \
-    base_enity.h \
     angular_part.h \
     killable_part.h \
     weapon_part.h \
@@ -42,7 +41,8 @@ HEADERS  += mainwindow.h \
     movable_part.h \
     objectlabel.h \
     highscores.h \
-    game_window.h
+    game_window.h \
+    base_entity.h
 
 
 FORMS    += mainwindow.ui \

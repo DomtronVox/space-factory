@@ -1,6 +1,6 @@
 #include <string>
 
-#include "base_enity.h"
+#include "base_entity.h"
 
 #ifndef MOVABLE_PART_H
 #define MOVABLE_PART_H
