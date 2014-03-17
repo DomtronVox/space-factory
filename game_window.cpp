@@ -21,7 +21,7 @@ GameWindow::GameWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->gameMenu->addItem("-------");
+    ui->gameMenu->addItem("Game Menu");
     ui->gameMenu->addItem("Save Game");
     ui->gameMenu->addItem("Pause Game");
     ui->gameMenu->addItem("Quit Game");

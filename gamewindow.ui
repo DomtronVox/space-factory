@@ -18,7 +18,9 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(0, 0, 0);</string>
+    <string notr="true">#centralwidget{    
+	background-color: rgb(30, 30, 30);
+}</string>
    </property>
    <widget class="QComboBox" name="gameMenu">
     <property name="geometry">
@@ -33,7 +35,28 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(0, 0, 0)</string>
+     <string notr="true">background-color: rgb(99, 99, 99);</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblPaused">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>170</y>
+      <width>201</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Game Paused</string>
     </property>
    </widget>
   </widget>
