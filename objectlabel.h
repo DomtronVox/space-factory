@@ -16,10 +16,10 @@ class GameWindow;
 //this is the visual portion of entities. It should support mouse clicking
 class ObjectLabel : public QLabel
 {
-    int id;
     GameWindow *win;
 
 protected:
+    int data_id;
     BaseEntity *data;
 
     QPoint convertToScreenCoords(QPoint pos);
@@ -28,7 +28,6 @@ protected:
 
   public:
     ObjectLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image);
-    ~ObjectLabel();
 
     // deletes the label associated with <id>
     void deleteLbl(int id);

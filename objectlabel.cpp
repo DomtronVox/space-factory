@@ -1,7 +1,9 @@
 #include "objectlabel.h"
 
+#include "model.h"
+
 ObjectLabel::ObjectLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image)
-    : QLabel(parent), win(window), data(data)
+    : QLabel(parent), win(window), data(data), data_id(data->getId())
 {
     //set the ObjectLabels graphic
     setScaledContents(true);
@@ -12,11 +14,6 @@ ObjectLabel::ObjectLabel(QWidget *parent, GameWindow *window, BaseEntity *data, 
 
     //setup mouse tracking so we can handle click events on objects.
     setMouseTracking(true);
-}
-
-ObjectLabel::~ObjectLabel()
-{
-    delete win;
 }
 
 //converts the given position to a screen position.
@@ -39,7 +36,7 @@ QPoint ObjectLabel::convertToModelCoords(QPoint pos){
 
 
 void ObjectLabel::updateData(){
-    if (data == NULL) {
+    if (Model::instance()->getById(data_id) == NULL) {
         deleteLater();
     } else {
         QRect location = QRect(pos(), size());
