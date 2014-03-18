@@ -2,7 +2,7 @@
 #include <QFile>
 #include <QTextStream>
 #include "model.h"
-#include "base_enity.h"
+#include "base_entity.h"
 #include "entities.h"
 #include "highscores.h"
 
@@ -13,6 +13,8 @@ int Model::id = 0;
 Model::Model() {
     HighScore highscores;
     highscores.load();
+    file = new QFile("SavedGame.txt");
+    cout << "file created" << endl;
 
 }
 
@@ -58,66 +60,40 @@ void Model::update(){
 
 bool Model::load()
 {
-    QFile sFile ("savedGame.txt");
-    if(sFile.open(QIODevice::ReadOnly))
+    if(file->open(QIODevice::ReadOnly))
     {
+
         Model::instance()->reset();
         string line;
-        QTextStream in(&sFile);
+        QTextStream in(file);
         while(!in.atEnd())
         {
             line = in.readLine().toStdString();
             unsigned pos = line.find(":");
             string name = line.substr(0, pos);
             line.erase(0, pos + 1);
-            string Eid = line.substr(0, pos = line.find(","));
-            line.erase(0,pos + 1);
-            string x = line.substr(0, pos = line.find(","));
-            line.erase(0,pos + 1);
-            string y = line.substr(0, pos = line.find(","));
-            line.erase(0,pos + 1);
-            string image = line.substr(0, pos = line.find(","));
-            line.erase(0,pos + 1);
 
-            cout << name << " " << x << " " << y << endl;
-            if(name == "FACTORY-ENTITY")
-            {
-                string health = line.substr(0, pos = line.find(","));
-                line.erase(0, pos + 1);
-                string damage = line.substr(0, pos = line.find(","));
-                FactoryEntity* ent = new FactoryEntity(stoi(Eid), "player", stoi(x), stoi(y), image, stoi(health), stoi(damage));
-                Model::instance()->addEntity(ent);
-                cout << "loaded FACTORY" << endl;
+            if(name == "FACTORY-ENTITY") {
+                cout << "Reading Factory Entity " << endl;
+                FactoryEntity * fEnt;
+                fEnt->load(line);
             }
-            else if (name == "SHIP-ENTITY")
-                {
-                string health = line.substr(0, pos = line.find(","));
-                line.erase(0, pos + 1);
-                string damage = line.substr(0, pos = line.find(","));
-                line.erase(0, pos + 1);
-                string cooldown = line.substr(0, pos = line.find(","));
-                line.erase(0, pos + 1);
-                ShipEntity* ent = new ShipEntity(stoi(Eid), "AI", stoi(x), stoi(y), image, stoi(health), stoi(damage), stoi(cooldown));
-                Model::instance()->addEntity(ent);
-                cout << "loaded SHIP-ENTITY" << endl;
+            else if(name == "COMPONENT-ENTITY"){
+                ComponentEntity *cEnt = new ComponentEntity;
+                cEnt->load(line);
+            }
+            else if(name == "SHIP-ENTITY"){
+                ShipEntity *sEnt  = new ShipEntity;
+                sEnt->load(line);
+            }
+            else if(name == "TOWER-ENTITY"){
+                TowerEntity *tEnt  = new TowerEntity;
+                tEnt->load(line);
 
-                }
-            else if( name == "COMPONENT-ENTITY")
-                {
-                string type = line.substr(0, pos = line.find(","));
-                line.erase(0, pos + 1);
-                string damage = line.substr(0, pos = line.find(","));
-                line.erase(0, pos + 1);
-                ComponentEntity* ent = new ComponentEntity(stoi(Eid), "player", stoi(x), stoi(y), image, type);
-                Model::instance()->addEntity(ent);
-                cout << "loaded COMPONENT-ENTITY" << endl;
-                }
-            else {
-                cout << "unable to load line" << endl;
             }
         }
         Model::id = all_entities.size();
-        sFile.close();
+        file->close();
         return true;
     }
     else
@@ -125,31 +101,23 @@ bool Model::load()
         //TO-DO: make program create a QMessageBox if no saved game file exists
         //informing the user of that fact and that he is starting a new game.
         cout << "Unable to open file cotaining saved game, i.e. savedGame.txt" << endl;
-        sFile.close();
+        file->close();
         return false;
     }
 }
 
 bool Model::save()
 {
-    if(remove("savedGame.txt") == 0)
-        cout << "savedGame.txt succesfully removed" << endl;
-    QFile sFile ("savedGame.txt");
-
-    if(sFile.open(QIODevice::ReadWrite | QIODevice::Text)) {
-
-        for(int i = 0; i < all_entities.size(); ++i)
-        {
-            BaseEntity* entity = all_entities.at(i);
-            QString data(QString::fromStdString(entity->stringify()));
-            QTextStream out(&sFile);
-            out << data << endl;
+    file->resize(0);
+    if(file->open(QIODevice::ReadWrite | QIODevice::Text)){
+        for(int i = 0; i < all_entities.size(); ++i){
+            BaseEntity* ent = all_entities.at(i);
+            ent->save(file);
+            cout << "entity " << ent->getId() << " saved" << endl;
         }
-        sFile.close();
+        file->close();
         return true;
-
     }
-    sFile.close();
     return false;
 }
 

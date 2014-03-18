@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QDir>
 
-#include "base_enity.h"
+#include "base_entity.h"
 #include "objectlabel.h"
 
 

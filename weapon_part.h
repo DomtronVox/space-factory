@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "base_enity.h"
+#include "base_entity.h"
 #include "killable_part.h"
 
 using namespace std;

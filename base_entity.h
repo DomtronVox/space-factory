@@ -1,5 +1,5 @@
 #include <string>
-#include <fstream>
+#include <QFile>
 
 
 #ifndef BASE_ENITY_H
@@ -23,12 +23,17 @@ public:
         : id(initId), owner(owner), x(initX), y(initY), image(initImage)
     {}
 
-    BaseEntity(ifstream *file);
+
+
+
+
+    BaseEntity(QFile *file);
+    BaseEntity() {}
     virtual ~BaseEntity() {  }
 
     //returns a string that describes the entity
     virtual string stringify(){
-        return to_string(id)+","+to_string(x)+","+to_string(y)+","+image;
+        return to_string(id)+","+owner+","+to_string(x)+","+to_string(y)+","+image;
     }
 
     int getX() { return x; }
@@ -43,9 +48,9 @@ public:
     virtual void update() {}
 
     //serialize and write the entity data to the file
-    virtual void save(ofstream *file) {}
+    void save(QFile *file);
     //initilize the entity from a saved file
-    virtual void load(ifstream *file) {}
+    string load(string line);
 
     //runs primary action of the entity
     //TODO: When implementing multiplayer we should add owner the this prototype

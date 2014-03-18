@@ -1,17 +1,16 @@
+#ifndef ENTITIES_H
+#define ENTITIES_H
 #include <string>
 #include <fstream>
-
-#include "base_enity.h"
-
+#include <QFile>
+#include "base_entity.h"
+#include <iostream>
 //part includes
 #include "movable_part.h"
 #include "angular_part.h"
 #include "killable_part.h"
 #include "weapon_part.h"
 #include "builder_part.h"
-
-#ifndef ENTITIES_H
-#define ENTITIES_H
 
 using namespace std;
 
@@ -28,14 +27,15 @@ public:
     //creates a brand new ship
     ShipEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown);
 
+    ShipEntity();
     //reinisilizes a ship loaded from a save file
-    ShipEntity(ifstream *file); //{ load(file); }
+    ShipEntity(QFile *file); //{ load(file); }
 
     ~ShipEntity();
 
     //returns a string that describes the entity
     string stringify(){
-        return "SHIP-ENTITY:"+to_string(id)+","+to_string(x)+","+to_string(y)+","+image + "," + to_string(health) + "," + to_string(damage) + "," + to_string(cooldown);
+        return "SHIP-ENTITY:" + BaseEntity::stringify() + "," + to_string(health) + "," + to_string(damage) + "," + to_string(cooldown);
     }
 
     //tells the entity a tick has passed
@@ -45,9 +45,9 @@ public:
     void hit(int damage) { m_cHealth->hit(damage); }
 
     //serialize and write the entity data to the file
-    void save(ofstream *file) {}
+    void save(QFile *file);
     //initilize the entity from a saved file
-    void load(ifstream *file) {}
+    void load(string line);
 };
 
 class FactoryEntity : public BaseEntity {
@@ -60,8 +60,9 @@ public:
     //creates a brand new factory
     FactoryEntity(int id, string owner, int x, int y, string image, int health, int damage);
 
+    FactoryEntity();
     //reinisilizes a factory loaded from a save file
-    FactoryEntity(ifstream *file);// { load(file); }
+    FactoryEntity(QFile *file);// { load(file); }
 
     ~FactoryEntity();
 
@@ -77,9 +78,9 @@ public:
     void hit(int damage) { m_cHealth->hit(damage); }
 
     //serialize and write the entity data to the file
-    void save(ofstream *file) {}
+    void save(QFile *file);
     //initilize the entity from a saved file
-    void load(ifstream *file) {}
+    void load(string line);
 
     //runs primary action of the entity
     //TODO: implement this to change component build target
@@ -99,8 +100,9 @@ public:
     //Creates a brand new tower
     TowerEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown);
 
+    TowerEntity();
     //reinisilizes a tower loaded from a save file
-    TowerEntity(ifstream *file); //{ load(file); }
+    TowerEntity(QFile *file);
 
     ~TowerEntity();
 
@@ -119,9 +121,9 @@ public:
     void fire();
 
     //serialize and write the entity data to the file
-    void save(ofstream *file) {}
+    void save(QFile *file);
     //initilize the entity from a saved file
-    void load(ifstream *file) {}
+    void load(string line);
 };
 
 //class for tower contructor components
@@ -133,21 +135,23 @@ public:
     ComponentEntity(int id, string owner, int x, int y, string image, string initType) : BaseEntity(id,owner,x,y,image), type(initType)
     {}
 
+
+    ComponentEntity();
+
     ~ComponentEntity() {  }
 
     //returns a string that describes the entity
     string stringify(){
         return "COMPONENT-ENTITY:" + BaseEntity::stringify() + "," + type;
-        //return "COMPONENT-ENTITY:"+to_string(id)+","+to_string(x)+","+to_string(y)+","+image+","+type;
     }
 
     //tells the entity a tick has passed
-    void update() {};
+    void update() {}
 
     //serialize and write the entity data to the file
-    void save(ofstream *file) {}
+    void save(QFile *file) {}
     //initilize the entity from a saved file
-    void load(ifstream *file) {}
+    void load(string line);
 
     //runs primary action of the entity
     void primaryAction(int x, int y);

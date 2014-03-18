@@ -7,7 +7,7 @@
 
 #include "game_window.h"
 
-#include "base_enity.h"
+#include "base_entity.h"
 #include "entities.h"
 
 //forward declares gamewindow since it will include ObjectLabel.h

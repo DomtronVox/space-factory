@@ -1,14 +1,15 @@
+#ifndef MODEL_H
+#define MODEL_H
+
 #include <QTimer>
+#include <QFile>
 #include <vector>
 #include <fstream>
 
 #include "highscores.h"
-#include "base_enity.h"
+#include "base_entity.h"
 #include "entities.h"
 
-
-#ifndef MODEL_H
-#define MODEL_H
 
 using namespace std;
 
@@ -20,6 +21,9 @@ class Model {
     //score tracking
     HighScore *highscores;
     //Score *current_score = new Score(" ", 0); //the players current score
+
+    // file to save a load game from
+    QFile *file;
 
     // keep track of entities on the game field
     static int id;

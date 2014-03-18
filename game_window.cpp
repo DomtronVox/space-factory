@@ -10,7 +10,7 @@
 #include "objectlabel.h"
 
 #include "model.h"
-#include "base_enity.h"
+#include "base_entity.h"
 #include "entities.h"
 
 class ObjectLabel;
