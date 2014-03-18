@@ -19,8 +19,14 @@ class MovablePart {
 
     MovablePart(int initSpeed, int initx_target, int inity_target, int initid)
         : speed(initSpeed), x_target(initx_target), y_target(inity_target),
-          moving(false), id(initid)
+          moving(true), id(initid)
     {}
+
+    //returns weather the part is moving
+    bool getMoving(){ return moving; }
+
+    //toggles weather the part is moving or not.
+    void toggleMoving();
 
     //changes movment target
     void moveTo(int x, int y);

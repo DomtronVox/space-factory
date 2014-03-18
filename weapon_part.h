@@ -1,6 +1,11 @@
 #ifndef WEAPON_PART_H
 #define WEAPON_PART_H
 
+#include <string>
+
+#include "base_enity.h"
+#include "killable_part.h"
+
 using namespace std;
 
 class WeaponPart {
@@ -11,23 +16,27 @@ class WeaponPart {
     int curCooldown;
     //amount of damage returned by fire()
     int damage;
+    //distance the weapon can reach with it's fire
+    int range;
+
+    BaseEntity *target = NULL;
+
 
   public:
     //new weapon part
-    WeaponPart(int damage, int cooldown)
-        :maxCooldown(cooldown), curCooldown(cooldown)
+    WeaponPart(int damage, int range, int cooldown)
+        :damage(damage), range(range), maxCooldown(cooldown), curCooldown(cooldown)
     {}
 
     //reinisilizes weapon part
-    WeaponPart(int damage, int maxCooldown, int curCooldown)
-        :maxCooldown(maxCooldown), curCooldown(curCooldown)
+    WeaponPart(int damage, int range, int maxCooldown, int curCooldown)
+        :damage(damage), range(range), maxCooldown(maxCooldown), curCooldown(curCooldown)
     {}
 
-    //returns int > 0 if the weapon can fire otherwise it returns 0.
-    int fire();
+    bool hasTarget();
 
     //tells the part a tick has passed. Cools weapon down.
-    void update();
+    void tick(string owner, int x, int y);
 
     //convert the entity to a string so it can be saved
     string serialise();

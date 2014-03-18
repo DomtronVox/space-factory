@@ -14,13 +14,13 @@
 
 
 //ship functions
-ShipEntity::ShipEntity(int id, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,x,y,image)
+ShipEntity::ShipEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,owner,x,y,image)
 {
     ShipEntity::health = health;
     ShipEntity::damage = damage;
     ShipEntity::cooldown = cooldown;
-    m_cHealth = new KillablePart(health);
-    m_cWeapon = new WeaponPart(damage, cooldown);
+    m_cHealth = new KillablePart(id, health);
+    m_cWeapon = new WeaponPart(damage, 40, cooldown);
     m_cMoveable = new MovablePart(10, 0, 0, id);
 }
 
@@ -34,14 +34,19 @@ ShipEntity::~ShipEntity()
 void ShipEntity::update()
 {
     m_cMoveable->tick(this);
+    m_cWeapon->tick(getOwner(), getX(), getY());
+
+    //the moving bool should be oppisite the hasTarget bool so the entity is either moving or attacking.
+    if( m_cMoveable->getMoving() == m_cWeapon->hasTarget() )
+        m_cMoveable->toggleMoving();
 }
 
 //factory functions
-FactoryEntity::FactoryEntity(int id, int x, int y, string image, int health, int damage) : BaseEntity(id,x,y,image)
+FactoryEntity::FactoryEntity(int id, string owner, int x, int y, string image, int health, int damage) : BaseEntity(id,owner,x,y,image)
 {
     FactoryEntity::health = health;
     FactoryEntity::damage = damage;
-    m_cHealth = new KillablePart(health);
+    m_cHealth = new KillablePart(id, health);
     m_cBulder = new BuilderPart("tower");
 
 }
@@ -58,10 +63,10 @@ void FactoryEntity::update()
 }
 
 //tower functions
-TowerEntity::TowerEntity(int id, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,x,y,image)
+TowerEntity::TowerEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,owner,x,y,image)
 {
-    m_cHealth = new KillablePart(health);
-    m_cWeapon = new WeaponPart(damage, cooldown);
+    m_cHealth = new KillablePart(id, health);
+    m_cWeapon = new WeaponPart(damage, 40, cooldown);
 }
 
 TowerEntity::~TowerEntity()
@@ -72,10 +77,13 @@ TowerEntity::~TowerEntity()
 
 void TowerEntity::update(){
 
+    m_cWeapon->tick(getOwner(), getX(), getY());
+
 }
 
 //runs primary action of the entity
 void ComponentEntity::primaryAction(int x, int y) {
 
-    if(Model::instance()->createTower(x,y)) Model::instance()->killEntity(id);
+    if(Model::instance()->createTower(x,y))
+        Model::instance()->killEntity(id);
 }

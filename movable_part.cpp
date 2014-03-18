@@ -1,7 +1,16 @@
 #include "base_enity.h"
 #include "movable_part.h"
 
+void MovablePart::toggleMoving(){
+    if (moving) moving = false;
+    else        moving = true;
+}
+
+
 void MovablePart::tick(BaseEntity *master){
+
+    //if moving variable is false don't move
+    if (!moving) return;
 
     //get direction of target with relation to current position
     int x_dir = 0;

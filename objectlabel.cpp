@@ -39,11 +39,15 @@ QPoint ObjectLabel::convertToModelCoords(QPoint pos){
 
 
 void ObjectLabel::updateData(){
-    QRect location = QRect(pos(), size());
-    //center label on models position
-    location.moveCenter(convertToScreenCoords(QPoint(data->getX(), data->getY())));
-    //set location
-    setGeometry(location);
+    if (data == NULL) {
+        deleteLater();
+    } else {
+        QRect location = QRect(pos(), size());
+        //center label on models position
+        location.moveCenter(convertToScreenCoords(QPoint(data->getX(), data->getY())));
+        //set location
+        setGeometry(location);
+    }
 }
 
 DraggableLabel::DraggableLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image)

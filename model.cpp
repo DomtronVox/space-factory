@@ -42,7 +42,7 @@ void Model::printState(){
 //tells model a tick has passed and that it should update all entities
 void Model::update(){
 
-    for (int i = 0; i < all_entities.size(); ++i)
+    for (unsigned int i = 0; i < all_entities.size(); ++i)
     {
         BaseEntity *e = all_entities.at(i);
         e->update();
@@ -85,7 +85,7 @@ bool Model::load()
                 string health = line.substr(0, pos = line.find(","));
                 line.erase(0, pos + 1);
                 string damage = line.substr(0, pos = line.find(","));
-                FactoryEntity* ent = new FactoryEntity(stoi(Eid), stoi(x), stoi(y), image, stoi(health), stoi(damage));
+                FactoryEntity* ent = new FactoryEntity(stoi(Eid), "player", stoi(x), stoi(y), image, stoi(health), stoi(damage));
                 Model::instance()->addEntity(ent);
                 cout << "loaded FACTORY" << endl;
             }
@@ -97,7 +97,7 @@ bool Model::load()
                 line.erase(0, pos + 1);
                 string cooldown = line.substr(0, pos = line.find(","));
                 line.erase(0, pos + 1);
-                ShipEntity* ent = new ShipEntity(stoi(Eid), stoi(x), stoi(y), image, stoi(health), stoi(damage), stoi(cooldown));
+                ShipEntity* ent = new ShipEntity(stoi(Eid), "AI", stoi(x), stoi(y), image, stoi(health), stoi(damage), stoi(cooldown));
                 Model::instance()->addEntity(ent);
                 cout << "loaded SHIP-ENTITY" << endl;
 
@@ -108,7 +108,7 @@ bool Model::load()
                 line.erase(0, pos + 1);
                 string damage = line.substr(0, pos = line.find(","));
                 line.erase(0, pos + 1);
-                ComponentEntity* ent = new ComponentEntity(stoi(Eid), stoi(x), stoi(y), image, type);
+                ComponentEntity* ent = new ComponentEntity(stoi(Eid), "player", stoi(x), stoi(y), image, type);
                 Model::instance()->addEntity(ent);
                 cout << "loaded COMPONENT-ENTITY" << endl;
                 }
@@ -161,7 +161,7 @@ void Model::singleGameStart(){
     //current_score = new Score("", 0);
 
     //create the players factory
-    FactoryEntity *entity = new FactoryEntity(Model::newId(), 0, 0, "factory", 100, 0);
+    FactoryEntity *entity = new FactoryEntity(newId(), "player", 0, 0, "factory", 100, 0);
     addEntity(entity);
 
     newShipTimer = rand() % 30 + 40;
@@ -244,15 +244,15 @@ void Model::generateAttacker()
     int x = rand() % 40 + 2000;
     int y = rand() % 40 + 2000;
 
-    ShipEntity *ship = new ShipEntity(newId(), x,y, "ship", 10, 2, 50);
+    ShipEntity *ship = new ShipEntity(newId(), "AI", x,y, "ship", 10, 2, 50);
     addEntity(ship);
 }
 
 //create a new tower at the given pos
 bool Model::createTower(int x, int y){
 
-   if ( isAreaEmpty(x,y, 35) ){ //TODO: Tower radius. another hardcoded value
-       TowerEntity *tower = new TowerEntity(newId(), x,y, "tower", 100, 10, 50);
+   if ( isAreaEmpty(x,y, 35) ){ //TODO: Tower radius. another hardcoded value that needs centralising/removal.
+       TowerEntity *tower = new TowerEntity(newId(), "player", x,y, "tower", 100, 10, 50);
        addEntity(tower);
        return true;
    } else{
@@ -264,7 +264,7 @@ bool Model::createTower(int x, int y){
 
 //creates a component entity
 void Model::createComponent(string image, string type, int x, int y){
-    BaseEntity *e = new ComponentEntity(newId(),x,y,image,type);
+    BaseEntity *e = new ComponentEntity(newId(), "player", x,y,image,type);
     addEntity(e);
 }
 

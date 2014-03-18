@@ -26,7 +26,7 @@ class ShipEntity : public BaseEntity {
 
 public:
     //creates a brand new ship
-    ShipEntity(int id, int x, int y, string image, int health, int damage, int cooldown);
+    ShipEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown);
 
     //reinisilizes a ship loaded from a save file
     ShipEntity(ifstream *file); //{ load(file); }
@@ -42,19 +42,12 @@ public:
     void update();
 
     //killable linker functions
-    void hit();
-    void die();
-
-    //weapon linker functions
-    void fire();
+    void hit(int damage) { m_cHealth->hit(damage); }
 
     //serialize and write the entity data to the file
     void save(ofstream *file) {}
     //initilize the entity from a saved file
     void load(ifstream *file) {}
-
-    //runs primary action of the entity
-    void primaryAction(int x, int y) {}
 };
 
 class FactoryEntity : public BaseEntity {
@@ -65,7 +58,7 @@ class FactoryEntity : public BaseEntity {
 
 public:
     //creates a brand new factory
-    FactoryEntity(int id, int x, int y, string image, int health, int damage);
+    FactoryEntity(int id, string owner, int x, int y, string image, int health, int damage);
 
     //reinisilizes a factory loaded from a save file
     FactoryEntity(ifstream *file);// { load(file); }
@@ -81,8 +74,7 @@ public:
     void update();
 
     //killable linker functions
-    void hit();
-    void die();
+    void hit(int damage) { m_cHealth->hit(damage); }
 
     //serialize and write the entity data to the file
     void save(ofstream *file) {}
@@ -105,7 +97,7 @@ class TowerEntity : public BaseEntity {
 
 public:
     //Creates a brand new tower
-    TowerEntity(int id, int x, int y, string image, int health, int damage, int cooldown);
+    TowerEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown);
 
     //reinisilizes a tower loaded from a save file
     TowerEntity(ifstream *file); //{ load(file); }
@@ -121,8 +113,7 @@ public:
     void update();
 
     //killable linker functions
-    void hit();
-    void die();
+    void hit(int damage) { m_cHealth->hit(damage); }
 
     //weapon linker functions
     void fire();
@@ -131,9 +122,6 @@ public:
     void save(ofstream *file) {}
     //initilize the entity from a saved file
     void load(ifstream *file) {}
-
-    //runs primary action of the entity
-    void primaryAction(int x, int y) {}
 };
 
 //class for tower contructor components
@@ -142,7 +130,7 @@ class ComponentEntity : public BaseEntity {
     string type;
 
 public:
-    ComponentEntity(int id, int x, int y, string image, string initType) : BaseEntity(id,x,y,image), type(initType)
+    ComponentEntity(int id, string owner, int x, int y, string image, string initType) : BaseEntity(id,owner,x,y,image), type(initType)
     {}
 
     ~ComponentEntity() {  }
