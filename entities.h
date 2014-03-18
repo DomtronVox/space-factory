@@ -51,7 +51,7 @@ public:
     //serialize and write the entity data to the file
     void save(QFile *file);
     //initilize the entity from a saved file
-    void load(string line);
+    void load(string &line);
 
     //runs primary action of the entity
     void primaryAction(int x, int y) {}
@@ -88,7 +88,7 @@ public:
     //serialize and write the entity data to the file
     void save(QFile *file);
     //initilize the entity from a saved file
-    void load(string line);
+    void load(string &line);
 
     //runs primary action of the entity
     //TODO: implement this to change component build target
@@ -132,7 +132,7 @@ public:
     //serialize and write the entity data to the file
     void save(QFile *file);
     //initilize the entity from a saved file
-    void load(string line);
+    void load(string &line);
 
     //runs primary action of the entity
     void primaryAction(int x, int y) {}
@@ -163,7 +163,7 @@ public:
     //serialize and write the entity data to the file
     void save(QFile *file) {}
     //initilize the entity from a saved file
-    void load(string line);
+    void load(string &line);
 
     //runs primary action of the entity
     void primaryAction(int x, int y);

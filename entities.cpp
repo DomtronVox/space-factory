@@ -46,19 +46,17 @@ void ShipEntity::save(QFile *file)
 
 }
 
-void ShipEntity::load(string line)
+void ShipEntity::load(string &line)
 {
      int pos;
-     BaseEntity *bEnt = new BaseEntity;
-     bEnt->load(line);
-     string health = line.substr(0, pos = line.find(","));
+     BaseEntity::load(line);
+     ShipEntity::health = stoi(line.substr(0, pos = line.find(",")));
      line.erase(0, pos + 1);
-     string damage = line.substr(0, pos = line.find(","));
+     ShipEntity::damage = stoi(line.substr(0, pos = line.find(",")));
      line.erase(0, pos + 1);
-     string cooldown = line.substr(0, pos = line.find(","));
+     ShipEntity::cooldown = stoi(line.substr(0, pos = line.find(",")));
      line.erase(0, pos + 1);
-     ShipEntity* ent = new ShipEntity(bEnt->getId(), bEnt->getX(), bEnt->getY(), bEnt->getImage(), stoi(health), stoi(damage), stoi(cooldown));
-     Model::instance()->addEntity(ent);
+     Model::instance()->addEntity(this);
      cout << "loaded SHIP-ENTITY" << endl;
 
 }
@@ -94,16 +92,14 @@ void FactoryEntity::save(QFile *file)
 
 }
 
-void FactoryEntity::load(string line)
+void FactoryEntity::load(string &line)
 {
     int pos;
-    BaseEntity *bEnt = new BaseEntity;
-    line = bEnt->load(line);
-    string health = line.substr(0, pos = line.find(","));
+    BaseEntity::load(line);
+    FactoryEntity::health = stoi(line.substr(0, pos = line.find(",")));
     line.erase(0, pos + 1);
-    string damage = line.substr(0, pos = line.find(","));
-    FactoryEntity* ent = new FactoryEntity(bEnt->getId(), bEnt->getX(), bEnt->getY(), bEnt->getImage(), stoi(health), stoi(damage));
-    Model::instance()->addEntity(ent);
+    FactoryEntity::damage = stoi(line.substr(0, pos = line.find(",")));
+    Model::instance()->addEntity(this);
     cout << "FactEnt added" << endl;
 }
 
@@ -111,6 +107,9 @@ void FactoryEntity::load(string line)
 TowerEntity::TowerEntity(int id, int x, int y, string image, int health, int damage, int cooldown)
     : BaseEntity(id,x,y,image)
 {
+    TowerEntity::health = health;
+    TowerEntity::damage = damage;
+    TowerEntity::cooldown = cooldown;
     m_cHealth = new KillablePart(health);
     m_cWeapon = new WeaponPart(damage, cooldown);
 }
@@ -135,19 +134,17 @@ void TowerEntity::save(QFile *file)
 
 }
 
-void TowerEntity::load(string line)
+void TowerEntity::load(string &line)
 {
     int pos;
-    BaseEntity* bEnt = new BaseEntity;
-    bEnt->load(line);
-    string health = line.substr(0, pos = line.find(","));
+    BaseEntity::load(line);
+    TowerEntity::health = stoi(line.substr(0, pos = line.find(",")));
     line.erase(0, pos + 1);
-    string damage = line.substr(0, pos = line.find(","));
+    TowerEntity::damage = stoi(line.substr(0, pos = line.find(",")));
     line.erase(0, pos + 1);
-    string cooldown = line.substr(0, pos = line.find(","));
+    TowerEntity::cooldown = stoi(line.substr(0, pos = line.find(",")));
     line.erase(0, pos + 1);
-    TowerEntity* ent = new TowerEntity(bEnt->getId(), bEnt->getX(), bEnt->getY(), bEnt->getImage(), stoi(health), stoi(damage), stoi(cooldown));
-    Model::instance()->addEntity(ent);
+    Model::instance()->addEntity(this);
     cout << "loaded COMPONENT-ENTITY" << endl;
 }
 
@@ -157,16 +154,11 @@ ComponentEntity::ComponentEntity()
 
 }
 
-void ComponentEntity::load(string line){
+void ComponentEntity::load(string &line){
     int pos;
-    BaseEntity* bEnt = new BaseEntity;
-    bEnt->load(line);
-    string type = line.substr(0, pos = line.find(","));
-    line.erase(0, pos + 1);
-    string damage = line.substr(0, pos = line.find(","));
-    line.erase(0, pos + 1);
-    ComponentEntity* ent = new ComponentEntity(bEnt->getId(), bEnt->getX(), bEnt->getY(), bEnt->getImage(), type);
-    Model::instance()->addEntity(ent);
+    ComponentEntity::load(line);
+    type = line.substr(0, pos = line.find(","));
+    Model::instance()->addEntity(this);
     cout << "loaded COMPONENT-ENTITY" << endl;
 }
 

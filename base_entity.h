@@ -48,7 +48,7 @@ public:
     //serialize and write the entity data to the file
     void save(QFile *file);
     //initilize the entity from a saved file
-    string load(string line);
+    void load(string &line);
 
     //runs primary action of the entity
     //TODO: When implementing multiplayer we should add owner the this prototype
