@@ -8,6 +8,7 @@
 
 Model Model::sInstance;
 int Model::id = 0;
+Settings Model::settings;
 
 //loads highscores and prepairs to hold a game state
 Model::Model() {
@@ -129,7 +130,7 @@ void Model::singleGameStart(){
     //current_score = new Score("", 0);
 
     //create the players factory
-    FactoryEntity *entity = new FactoryEntity(newId(), "player", 0, 0, "factory", 100, 0);
+    FactoryEntity *entity = new FactoryEntity(newId(), Model::settings.player_owner, 0, 0, "factory", 100, 0);
     addEntity(entity);
 
     newShipTimer = rand() % 30 + 40;
@@ -212,7 +213,8 @@ void Model::generateAttacker()
     int x = rand() % 40 + 2000;
     int y = rand() % 40 + 2000;
 
-    ShipEntity *ship = new ShipEntity(newId(), "AI", x,y, "ship", 10, 2, 50);
+    ShipEntity *ship = new ShipEntity(newId(), Model::settings.enemy_owner, x,y, Model::settings.ship_image,
+                                      Model::settings.ship_health, Model::settings.ship_damage, Model::settings.ship_cooldown);
     addEntity(ship);
 }
 
@@ -220,7 +222,8 @@ void Model::generateAttacker()
 bool Model::createTower(int x, int y){
 
    if ( isAreaEmpty(x,y, 35) ){ //TODO: Tower radius. another hardcoded value that needs centralising/removal.
-       TowerEntity *tower = new TowerEntity(newId(), "player", x,y, "tower", 100, 10, 50);
+       TowerEntity *tower = new TowerEntity(newId(), Model::settings.player_owner, x,y, Model::settings.tower_image,
+                                            Model::settings.tower_health, Model::settings.tower_damage, Model::settings.tower_cooldown);
        addEntity(tower);
        return true;
    } else{
@@ -232,7 +235,7 @@ bool Model::createTower(int x, int y){
 
 //creates a component entity
 void Model::createComponent(string image, string type, int x, int y){
-    BaseEntity *e = new ComponentEntity(newId(), "player", x,y,image,type);
+    BaseEntity *e = new ComponentEntity(newId(), Model::settings.player_owner, x,y,image,type);
     addEntity(e);
 }
 

@@ -20,8 +20,8 @@ ShipEntity::ShipEntity(int id, string owner, int x, int y, string image, int hea
     ShipEntity::damage = damage;
     ShipEntity::cooldown = cooldown;
     m_cHealth = new KillablePart(id, health);
-    m_cWeapon = new WeaponPart(damage, 40, cooldown);
-    m_cMoveable = new MovablePart(10, 0, 0);
+    m_cWeapon = new WeaponPart(damage, Model::settings.ship_range, cooldown);
+    m_cMoveable = new MovablePart(Model::settings.ship_speed, 0, 0);
 }
 
 ShipEntity::ShipEntity()
@@ -74,7 +74,7 @@ FactoryEntity::FactoryEntity(int id, string owner, int x, int y, string image, i
     FactoryEntity::health = health;
     FactoryEntity::damage = damage;
     m_cHealth = new KillablePart(id, health);
-    m_cBulder = new BuilderPart("tower");
+    m_cBulder = new BuilderPart(Model::settings.factory_target, Model::settings.factory_counter);
 
 }
 
@@ -116,7 +116,7 @@ void FactoryEntity::load(string line)
 TowerEntity::TowerEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,owner,x,y,image)
 {
     m_cHealth = new KillablePart(id, health);
-    m_cWeapon = new WeaponPart(damage, 40, cooldown);
+    m_cWeapon = new WeaponPart(damage, Model::settings.tower_range, cooldown);
 }
 
 TowerEntity::TowerEntity()

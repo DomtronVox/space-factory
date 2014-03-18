@@ -6,24 +6,23 @@ using namespace std;
 
 class BuilderPart{
 
-    //holds the value curCooldown is set to after it reaches zero.
-    //TODO: couldn't think of a better name and the hard coded value needs moving to a central location.
-    const static int maxCooldown = 50;
     //what the factory is building now
-    char* target;
+    string target;
+    //holds the value curCooldown is set to after it reaches zero.
+    int maxCooldown;
     //holds the weapons current cooldown count before it can fire again.
     int curCooldown;
 
 
   public:
     //new builder part
-    BuilderPart(char* initTarget)
-        : target(initTarget), curCooldown(maxCooldown)
+    BuilderPart(string initTarget, int maxCooldown)
+        : target(initTarget), maxCooldown(maxCooldown), curCooldown(maxCooldown)
     {}
 
     //reinisilised builder part
-    BuilderPart(char* initTarget, int initCurCooldown)
-        : target(initTarget), curCooldown(initCurCooldown)
+    BuilderPart(string initTarget, int maxCooldown, int initCurCooldown)
+        : target(initTarget), maxCooldown(maxCooldown), curCooldown(initCurCooldown)
     {}
 
     ~BuilderPart(){ }

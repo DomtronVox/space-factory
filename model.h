@@ -13,6 +13,33 @@
 
 using namespace std;
 
+//these are hard coded values used for various variables in the model. These should eventually be moved into a settings or configuration file.
+//For now we will keep them centralized here. Try to keep a list of which functions use the constant.
+struct Settings{
+public:
+    string enemy_owner = "AI";       //used in model::generateAttacker
+    string player_owner = "player";  //used in model::createTower and model::createComponent
+
+    int factory_counter = 50;        //used in FactoryEntity::FactoryEntity
+    string factory_target = "tower"; //used in FactoryEntity::FactoryEntity
+
+    int ship_health = 10;        //used in model::generateAttacker
+    int ship_range = 40;         //used in model::generateAttacker
+    int ship_damage = 5;         //used in model::generateAttacker
+    int ship_cooldown = 50;      //used in model::generateAttacker
+    int ship_speed = 10;         //used in ShipEntity::ShipEnity
+    string ship_image = "ship";  //used in model::generateAttacker
+
+
+    int tower_health = 15;         //used in model::createTower
+    int tower_range = 40;             //used in model::createTower
+    int tower_damage = 10;          //used in model::createTower
+    int tower_cooldown = 50;        //used in model::createTower
+    string tower_image = "tower";   //used in model::createTower
+
+};
+
+
 //holds the various high level model related classes
 class Model {
     Model();
@@ -44,6 +71,8 @@ protected:
     static Model sInstance;
 
 public:
+    static Settings settings;
+
     //returns a new id to be used by an entity
     static int newId(){
         return Model::id++;
