@@ -34,7 +34,7 @@ protected:
 
     void updateData();
 
-    void mouseReleaseEvent(QMouseEvent *ev) {};
+    void mouseReleaseEvent(QMouseEvent */*ev*/) {};
 
 };
 

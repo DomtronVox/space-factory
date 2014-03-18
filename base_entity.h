@@ -12,8 +12,9 @@ using namespace std;
 class BaseEntity{
 
 protected:
+    int id;
     string owner;
-    int id, x, y;
+    int x, y;
     string image;
 
 public:
@@ -54,11 +55,11 @@ public:
 
     //runs primary action of the entity
     //TODO: When implementing multiplayer we should add owner the this prototype
-    virtual void primaryAction(int x, int y) {}
+    virtual void primaryAction(int /*x*/, int /*y*/) { }
 
     //damage the entity
     //TODO: This is a workaround so weapon part can hit entities.
-    virtual void hit(int damage) {}
+    virtual void hit(int /*damage*/) {}
 };
 
 

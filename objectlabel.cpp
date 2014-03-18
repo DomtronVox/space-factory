@@ -3,7 +3,7 @@
 #include "model.h"
 
 ObjectLabel::ObjectLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image)
-    : QLabel(parent), win(window), data(data), data_id(data->getId())
+    : QLabel(parent), win(window), data_id(data->getId()), data(data)
 {
     //set the ObjectLabels graphic
     setScaledContents(true);

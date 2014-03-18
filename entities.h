@@ -84,7 +84,7 @@ public:
 
     //runs primary action of the entity
     //TODO: implement this to change component build target
-    void primaryAction(int x, int y) {}
+    void primaryAction(int /*x*/, int /*y*/) {}
 };
 
 

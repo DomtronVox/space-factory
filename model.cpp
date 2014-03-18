@@ -110,7 +110,7 @@ bool Model::save()
 {
     file->resize(0);
     if(file->open(QIODevice::ReadWrite | QIODevice::Text)){
-        for(int i = 0; i < all_entities.size(); ++i){
+        for(unsigned int i = 0; i < all_entities.size(); ++i){
             BaseEntity* ent = all_entities.at(i);
             ent->save(file);
             cout << "entity " << ent->getId() << " saved" << endl;

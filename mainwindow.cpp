@@ -63,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //populate highscores list
     HighScore scores;
     scores.load();
-    for(int i = 0; i < scores.getScores().size(); ++i )
+    for(unsigned int i = 0; i < scores.getScores().size(); ++i )
     {
         Score *score = scores.getScores().at(i);
         QString QName = QString::fromStdString(score->getName());

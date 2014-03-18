@@ -10,14 +10,14 @@ using namespace std;
 
 class WeaponPart {
 
-    //holds the value curCooldown is set to after fire() is called.
-    int maxCooldown; //TODO: couldn't think of a better name.
-    //holds the weapons current cooldown count before it can fire again.
-    int curCooldown;
     //amount of damage returned by fire()
     int damage;
     //distance the weapon can reach with it's fire
     int range;
+    //holds the value curCooldown is set to after fire() is called.
+    int maxCooldown; //TODO: couldn't think of a better name.
+    //holds the weapons current cooldown count before it can fire again.
+    int curCooldown;
 
     BaseEntity *target = NULL;
 

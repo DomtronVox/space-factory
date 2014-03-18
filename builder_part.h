@@ -7,11 +7,13 @@ using namespace std;
 class BuilderPart{
 
     //holds the value curCooldown is set to after it reaches zero.
-    const static int maxCooldown = 50; //TODO: couldn't think of a better name.
-    //holds the weapons current cooldown count before it can fire again.
-    int curCooldown;
+    //TODO: couldn't think of a better name and the hard coded value needs moving to a central location.
+    const static int maxCooldown = 50;
     //what the factory is building now
     char* target;
+    //holds the weapons current cooldown count before it can fire again.
+    int curCooldown;
+
 
   public:
     //new builder part

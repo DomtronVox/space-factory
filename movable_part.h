@@ -6,7 +6,6 @@
 #define MOVABLE_PART_H
 
 class MovablePart {
-    int id;
     int speed;
     int x_target;
     int y_target;
@@ -17,9 +16,9 @@ class MovablePart {
         : speed(initSpeed), moving(true)
     {}
 
-    MovablePart(int initSpeed, int initx_target, int inity_target, int initid)
+    MovablePart(int initSpeed, int initx_target, int inity_target)
         : speed(initSpeed), x_target(initx_target), y_target(inity_target),
-          moving(true), id(initid)
+          moving(true)
     {}
 
     //returns weather the part is moving
