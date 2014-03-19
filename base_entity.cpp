@@ -8,25 +8,25 @@ void BaseEntity::save(QFile *file){
     return;
 }
 
-string BaseEntity::load(string line)
+void BaseEntity::load(string &line)
 {
-    int pos;
-    string Eid = line.substr(0, pos = line.find(","));
-    this->id = stoi(Eid);
+    int pos = line.find(",");
+    string Eid = line.substr(0, pos);
+    BaseEntity::id = stoi(Eid);
     line.erase(0,pos + 1);
     string owner = line.substr(0, pos = line.find(","));
     this->owner = owner;
     line.erase(0,pos + 1);
-    string x = line.substr(0, pos = line.find(","));
-    this->x = stoi(x);
+    string sx = line.substr(0, pos = line.find(","));
+    x = stoi(sx);
     line.erase(0,pos + 1);
-    string y = line.substr(0, pos = line.find(","));
-    this->y = stoi(y);
+    string sy = line.substr(0, pos = line.find(","));
+    y = stoi(sy);
     line.erase(0,pos + 1);
-    string image = line.substr(0, pos = line.find(","));
-    this->image = image;
+    string sImage = line.substr(0, pos = line.find(","));
+    image = sImage;
     line.erase(0,pos + 1);
-    return line;
+    return;
 
 }
 

@@ -47,7 +47,7 @@ public:
     //serialize and write the entity data to the file
     void save(QFile *file);
     //initilize the entity from a saved file
-    void load(string line);
+    void load(string &line);
 };
 
 class FactoryEntity : public BaseEntity {
@@ -80,7 +80,7 @@ public:
     //serialize and write the entity data to the file
     void save(QFile *file);
     //initilize the entity from a saved file
-    void load(string line);
+    void load(string &line);
 
     //runs primary action of the entity
     //TODO: implement this to change component build target
@@ -123,7 +123,7 @@ public:
     //serialize and write the entity data to the file
     void save(QFile *file);
     //initilize the entity from a saved file
-    void load(string line);
+    void load(string &line);
 };
 
 //class for tower contructor components
@@ -151,7 +151,7 @@ public:
     //serialize and write the entity data to the file
     void save(QFile *file) {}
     //initilize the entity from a saved file
-    void load(string line);
+    void load(string &line);
 
     //runs primary action of the entity
     void primaryAction(int x, int y);

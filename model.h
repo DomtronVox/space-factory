@@ -28,7 +28,7 @@ public:
     int ship_damage = 5;         //used in model::generateAttacker
     int ship_cooldown = 50;      //used in model::generateAttacker
     int ship_speed = 10;         //used in ShipEntity::ShipEnity
-    string ship_image = "ship";  //used in model::generateAttacker
+    string ship_image = "blackship1";  //used in model::generateAttacker
 
 
     int tower_health = 15;         //used in model::createTower
