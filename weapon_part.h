@@ -19,18 +19,18 @@ class WeaponPart {
     //holds the weapons current cooldown count before it can fire again.
     int curCooldown;
 
-    BaseEntity *target = NULL;
+    BaseEntity *target;
 
 
   public:
     //new weapon part
     WeaponPart(int damage, int range, int cooldown)
-        :damage(damage), range(range), maxCooldown(cooldown), curCooldown(cooldown)
+        :damage(damage), range(range), maxCooldown(cooldown), curCooldown(cooldown), target(NULL)
     {}
 
     //reinisilizes weapon part
     WeaponPart(int damage, int range, int maxCooldown, int curCooldown)
-        :damage(damage), range(range), maxCooldown(maxCooldown), curCooldown(curCooldown)
+        :damage(damage), range(range), maxCooldown(maxCooldown), curCooldown(curCooldown), target(NULL)
     {}
 
     bool hasTarget();

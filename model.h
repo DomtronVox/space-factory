@@ -16,26 +16,28 @@ using namespace std;
 //these are hard coded values used for various variables in the model. These should eventually be moved into a settings or configuration file.
 //For now we will keep them centralized here. Try to keep a list of which functions use the constant.
 struct Settings{
-public:
-    string enemy_owner = "AI";       //used in model::generateAttacker
-    string player_owner = "player";  //used in model::createTower and model::createComponent
+    Settings(): enemy_owner("AI"), player_owner("player"), factory_target("tower"), ship_image("blackship1"), tower_image("tower")
+    {}
 
-    int factory_counter = 50;        //used in FactoryEntity::FactoryEntity
-    string factory_target = "tower"; //used in FactoryEntity::FactoryEntity
+    string enemy_owner;       //used in model::generateAttacker
+    string player_owner;  //used in model::createTower and model::createComponent
 
-    int ship_health = 10;        //used in model::generateAttacker
-    int ship_range = 40;         //used in model::generateAttacker
-    int ship_damage = 5;         //used in model::generateAttacker
-    int ship_cooldown = 50;      //used in model::generateAttacker
-    int ship_speed = 10;         //used in ShipEntity::ShipEnity
-    string ship_image = "blackship1";  //used in model::generateAttacker
+    static const int factory_counter = 50;        //used in FactoryEntity::FactoryEntity
+    string factory_target; //used in FactoryEntity::FactoryEntity
+
+    static const int ship_health = 10;        //used in model::generateAttacker
+    static const int ship_range = 40;         //used in model::generateAttacker
+    static const int ship_damage = 5;         //used in model::generateAttacker
+    static const int ship_cooldown = 50;      //used in model::generateAttacker
+    static const int ship_speed = 10;         //used in ShipEntity::ShipEnity
+    string ship_image;  //used in model::generateAttacker
 
 
-    int tower_health = 15;         //used in model::createTower
-    int tower_range = 40;             //used in model::createTower
-    int tower_damage = 10;          //used in model::createTower
-    int tower_cooldown = 50;        //used in model::createTower
-    string tower_image = "tower";   //used in model::createTower
+    static const int tower_health = 15;         //used in model::createTower
+    static const int tower_range = 40;             //used in model::createTower
+    static const int tower_damage = 10;          //used in model::createTower
+    static const int tower_cooldown = 50;        //used in model::createTower
+    string tower_image;   //used in model::createTower
 
 };
 
