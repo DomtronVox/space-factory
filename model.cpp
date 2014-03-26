@@ -77,7 +77,7 @@ bool Model::load()
 
             if(name == "FACTORY-ENTITY") {
                 cout << "Reading Factory Entity " << endl;
-                FactoryEntity * fEnt;
+                FactoryEntity * fEnt = new FactoryEntity;
                 fEnt->load(line);
             }
             else if(name == "COMPONENT-ENTITY"){
@@ -244,8 +244,6 @@ void Model::killEntity(int id){
     vector<BaseEntity*>::iterator i;
     for (i = all_entities.begin(); i < all_entities.end(); i++){
         if (id == (*i)->getId()) {
-            ShipEntity *sE;
-            TowerEntity *tE;
             BaseEntity *bE;
             bE= *i;
             // if killed entity is a ShipEntity
@@ -253,7 +251,7 @@ void Model::killEntity(int id){
                 score->add(5);
             else if(dynamic_cast<TowerEntity*>(bE))
                 score->add(-10);
-            else if(dynamic_cast<ShipEntity*>(bE))
+            else if(dynamic_cast<FactoryEntity*>(bE))
                 {}//QApplication::quit();
 
             delete *i;

@@ -61,6 +61,9 @@ void ShipEntity::load(string &line)
      line.erase(0, pos + 1);
      ShipEntity::cooldown = stoi(line.substr(0, pos = line.find(",")));
      line.erase(0, pos + 1);
+     m_cHealth = new KillablePart(id, health);
+     m_cWeapon = new WeaponPart(damage, Model::settings.ship_range, cooldown);
+     m_cMoveable = new MovablePart(Model::settings.ship_speed, 0, 0);
      Model::instance()->addEntity(this);
      cout << "loaded SHIP-ENTITY" << endl;
 
@@ -78,7 +81,8 @@ FactoryEntity::FactoryEntity(int id, string owner, int x, int y, string image, i
 
 FactoryEntity::FactoryEntity()
 {
-
+    m_cHealth = new KillablePart(id, health);
+    m_cBulder = new BuilderPart(Model::settings.factory_target, Model::settings.factory_counter);
 }
 
 FactoryEntity::~FactoryEntity()
@@ -150,6 +154,8 @@ void TowerEntity::load(string &line)
     line.erase(0, pos + 1);
     TowerEntity::cooldown = stoi(line.substr(0, pos = line.find(",")));
     line.erase(0, pos + 1);
+    m_cHealth = new KillablePart(id, health);
+    m_cWeapon = new WeaponPart(damage, Model::settings.tower_range, cooldown);
     Model::instance()->addEntity(this);
     cout << "loaded COMPONENT-ENTITY" << endl;
 }
@@ -162,7 +168,7 @@ ComponentEntity::ComponentEntity()
 
 void ComponentEntity::load(string &line){
     int pos;
-    ComponentEntity::load(line);
+    BaseEntity::load(line);
     type = line.substr(0, pos = line.find(","));
     Model::instance()->addEntity(this);
     cout << "loaded COMPONENT-ENTITY" << endl;
