@@ -91,3 +91,8 @@ string Score::toString()
     result.append(to_string(score));
     return result;
 }
+
+void Score::add(int scr)
+{
+    score = score + scr;
+}

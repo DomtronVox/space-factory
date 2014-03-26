@@ -24,6 +24,9 @@ public:
     // getter methods
     string getName() { return name; }
     int getScore() { return score; }
+
+    // adds <scr> to score
+    void add(int scr);
 };
 
 //class that holds instance variable of names and scores
