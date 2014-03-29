@@ -12,7 +12,7 @@ void BaseEntity::load(string &line)
 {
     int pos = line.find(",");
     string Eid = line.substr(0, pos);
-    BaseEntity::id = stoi(Eid);
+    id = stoi(Eid);
     line.erase(0,pos + 1);
     string owner = line.substr(0, pos = line.find(","));
     this->owner = owner;

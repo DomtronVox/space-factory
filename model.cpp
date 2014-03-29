@@ -24,6 +24,7 @@ Settings::~Settings(){
 Model::Model() {
     HighScore highscores;
     highscores.load();
+    score = new Score("user", 0);
     file = new QFile("SavedGame.txt");
     cout << "file created" << endl;
 
@@ -86,7 +87,7 @@ bool Model::load()
 
             if(name == "FACTORY-ENTITY") {
                 cout << "Reading Factory Entity " << endl;
-                FactoryEntity * fEnt;
+                FactoryEntity * fEnt = new FactoryEntity;
                 fEnt->load(line);
             }
             else if(name == "COMPONENT-ENTITY"){
@@ -131,7 +132,6 @@ bool Model::save()
     }
     return false;
 }
-
 
 //Sets up model for a singleplayer game
 void Model::singleGameStart(string difficulty){
@@ -266,6 +266,16 @@ void Model::killEntity(int id){
     vector<BaseEntity*>::iterator i;
     for (i = all_entities.begin(); i < all_entities.end(); i++){
         if (id == (*i)->getId()) {
+            BaseEntity *bE;
+            bE= *i;
+            // if killed entity is a ShipEntity
+            if(dynamic_cast<ShipEntity*>(bE))
+                score->add(5);
+            else if(dynamic_cast<TowerEntity*>(bE))
+                score->add(-10);
+            else if(dynamic_cast<FactoryEntity*>(bE))
+                {}//QApplication::quit();
+
             delete *i;
             all_entities.erase(i);
         }

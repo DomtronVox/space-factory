@@ -50,6 +50,9 @@ class Model {
 
     //score tracking
     HighScore *highscores;
+
+    // current score
+    Score *score;
     //Score *current_score = new Score(" ", 0); //the players current score
 
     // file to save a load game from
