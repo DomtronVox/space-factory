@@ -42,6 +42,7 @@ struct Settings{
 };
 
 
+
 //holds the various high level model related classes
 class Model {
     Model();
@@ -60,7 +61,8 @@ class Model {
     vector<BaseEntity*> recently_created;
 
     //timer to create enemy ships
-    int newShipTimer;
+    int newWaveTimer;
+    int newWaveRange;
 
     //used by load to parse a savefile
     //TODO: decide what should be returned by this function.
@@ -96,7 +98,7 @@ public:
     bool save();
 
     //Sets up model for a singleplayer game
-    void singleGameStart();
+    void singleGameStart(string difficulty);
     //sets up model for a multyplayer game
     ////void multyGameStart();
     //resets whatever game state model has at the moment
@@ -118,7 +120,7 @@ public:
     void addEntity(BaseEntity * entity);
 
     //function to randomize the creation of an attacker entity
-    void generateAttacker();
+    void generateWave();
 
     //function to build a tower
     bool createTower(int x, int y);

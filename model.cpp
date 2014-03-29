@@ -10,6 +10,16 @@ Model Model::sInstance;
 int Model::id = 0;
 Settings Model::settings;
 
+/*
+Settings::~Settings(){
+    delete[] enemy_owner;
+    delete[] player_owner;
+    delete[] factory_target;
+    delete[] ship_image;
+    delete[] tower_image;
+}
+*/
+
 //loads highscores and prepairs to hold a game state
 Model::Model() {
     HighScore highscores;
@@ -52,10 +62,10 @@ void Model::update(){
     }
 
     //handle creating new ships
-    newShipTimer--;
-    if (newShipTimer <= 0) {
-        generateAttacker();
-        newShipTimer = rand() % 30 + 40;
+    newWaveTimer--;
+    if (newWaveTimer <= 0) {
+        generateWave();
+        newWaveTimer = rand() % 30 + newWaveRange;
     }
 }
 
@@ -124,16 +134,27 @@ bool Model::save()
 
 
 //Sets up model for a singleplayer game
-void Model::singleGameStart(){
+void Model::singleGameStart(string difficulty){
 
     //reset score
     //current_score = new Score("", 0);
 
     //create the players factory
-    FactoryEntity *entity = new FactoryEntity(newId(), Model::settings.player_owner, 0, 0, "factory", 100, 0);
-    addEntity(entity);
+    FactoryEntity *factory;
+    if (difficulty == "easy") {
+        factory = new FactoryEntity(newId(), Model::settings.player_owner, 0, 0, "factory", 200, 0);
+        newWaveRange = 40;
+    } else if (difficulty == "medium") {
+        factory = new FactoryEntity(newId(), Model::settings.player_owner, 0, 0, "factory", 100, 0);
+        newWaveRange = 30;
+    } else {
+        factory = new FactoryEntity(newId(), Model::settings.player_owner, 0, 0, "factory", 50, 0);
+        newWaveRange = 10;
+    }
 
-    newShipTimer = rand() % 30 + 40;
+    addEntity(factory);
+
+    newWaveTimer = rand() % 30 + newWaveRange;
 }
 
 //void Model::multiGameStart(){}
@@ -207,11 +228,12 @@ void Model::addEntity(BaseEntity * entity)
 }
 
 //function to randomize the creation of an attacker entity
-void Model::generateAttacker()
+void Model::generateWave()
 {
+    //TODO: generate multiple ships not just one; fix it so ships apeare anyware beyond the screen edge
     //generates a random position outside the game window
-    int x = rand() % 40 + 2000;
-    int y = rand() % 40 + 2000;
+    int x = rand() % 40 + 1500;
+    int y = rand() % 40 + 1500;
 
     ShipEntity *ship = new ShipEntity(newId(), Model::settings.enemy_owner, x,y, Model::settings.ship_image,
                                       Model::settings.ship_health, Model::settings.ship_damage, Model::settings.ship_cooldown);
