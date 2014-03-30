@@ -101,7 +101,7 @@ public:
     bool save();
 
     //Sets up model for a singleplayer game
-    void singleGameStart(string difficulty);
+    void singleGameStart(string difficulty, bool cheat);
     //sets up model for a multyplayer game
     ////void multyGameStart();
     //resets whatever game state model has at the moment

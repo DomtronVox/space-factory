@@ -17,7 +17,7 @@ class GameWindow : public QMainWindow
     Q_OBJECT
     
 public:
-    explicit GameWindow(QString difficulty, QWidget *parent = 0);
+    explicit GameWindow(QString difficulty, bool cheat, QWidget *parent = 0);
     ~GameWindow();
 
     

@@ -103,7 +103,7 @@ margin:-1px;
         <widget class="QGroupBox" name="boxDifficultySetting">
          <property name="maximumSize">
           <size>
-           <width>400</width>
+           <width>450</width>
            <height>40</height>
           </size>
          </property>
@@ -139,7 +139,7 @@ margin:-1px;
            <widget class="QRadioButton" name="rdoEasy">
             <property name="minimumSize">
              <size>
-              <width>100</width>
+              <width>70</width>
               <height>10</height>
              </size>
             </property>
@@ -163,7 +163,7 @@ margin:-1px;
            <widget class="QRadioButton" name="rdoMedium">
             <property name="minimumSize">
              <size>
-              <width>100</width>
+              <width>120</width>
               <height>10</height>
              </size>
             </property>
@@ -187,7 +187,7 @@ margin:-1px;
            <widget class="QRadioButton" name="rdoHard">
             <property name="minimumSize">
              <size>
-              <width>100</width>
+              <width>70</width>
               <height>10</height>
              </size>
             </property>
@@ -201,6 +201,30 @@ margin:-1px;
             </property>
             <property name="text">
              <string>Hard</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="chkCheat">
+            <property name="minimumSize">
+             <size>
+              <width>80</width>
+              <height>10</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(229, 229, 229);</string>
+            </property>
+            <property name="text">
+             <string>Cheat</string>
             </property>
             <property name="checked">
              <bool>false</bool>

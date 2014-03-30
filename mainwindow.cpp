@@ -33,7 +33,7 @@ void unitTests() {
     remove ("highscores.txt");
 
     //model test for starting a new game. TODO: rework this to use asserts
-    Model::instance()->singleGameStart("easy");
+    Model::instance()->singleGameStart("easy", false);
     assert(Model::instance()->getById(0) != NULL);
 
     assert(Model::instance()->load());
@@ -83,9 +83,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::openGameWindow(QString difficulty)
+void MainWindow::openGameWindow(QString difficulty, bool cheat)
 {
-    GmWdw = new GameWindow(difficulty);
+    GmWdw = new GameWindow(difficulty, cheat);
 
     GmWdw->show();
 }
@@ -169,13 +169,15 @@ void MainWindow::on_btnNewGame_clicked()
         difficulty = "hard";
     }
 
-    openGameWindow(difficulty);
+    bool cheat = ui->chkCheat->isChecked();
+
+    openGameWindow(difficulty, cheat);
     this->hide();
 }
 
 void MainWindow::on_btnLoadGame_clicked()
 {
-    openGameWindow("easy"); //TODO: We need to save the game's difficulty level use it on load.
+    openGameWindow("easy", false); //TODO: We need to save the game's difficulty level use it on load.
     this->hide();
     Model::instance()->load();
 }

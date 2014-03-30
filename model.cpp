@@ -137,7 +137,7 @@ bool Model::save()
 }
 
 //Sets up model for a singleplayer game
-void Model::singleGameStart(string difficulty){
+void Model::singleGameStart(string difficulty, bool cheat){
 
     //reset score
     //current_score = new Score("", 0);
@@ -145,15 +145,22 @@ void Model::singleGameStart(string difficulty){
     //create the players factory
     FactoryEntity *factory;
     if (difficulty == "easy") {
-        factory = new FactoryEntity(newId(), Model::settings.player_owner, 0, 0, "factory", 200, 0);
+        factory = new FactoryEntity(0, Model::settings.player_owner, 0, 0, "factory", 200, 0);
         newWaveRange = 40;
     } else if (difficulty == "medium") {
-        factory = new FactoryEntity(newId(), Model::settings.player_owner, 0, 0, "factory", 100, 0);
+        factory = new FactoryEntity(0, Model::settings.player_owner, 0, 0, "factory", 100, 0);
         newWaveRange = 30;
     } else {
-        factory = new FactoryEntity(newId(), Model::settings.player_owner, 0, 0, "factory", 50, 0);
+        factory = new FactoryEntity(0, Model::settings.player_owner, 0, 0, "factory", 50, 0);
         newWaveRange = 10;
     }
+
+    if (cheat) {
+        //0 health = infinate health
+        factory = new FactoryEntity(0, Model::settings.player_owner, 0, 0, "factory", 0, 0);
+    }
+
+    newId(); //since we manuely set the id run newId to advance the entity id
 
     addEntity(factory);
 

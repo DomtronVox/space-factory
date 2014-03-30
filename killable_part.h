@@ -11,14 +11,29 @@ class KillablePart {
     int maxHealth;
     int curHealth;
 
+    bool invincible;
+
+    void checkInvincible(){
+        if (maxHealth == 0) invincible = true;
+        else                invincible = false;
+    }
+
   public:
     //brand new killable part
-    KillablePart(int id, int initHealth)
-        : id(id), maxHealth(initHealth), curHealth(initHealth) {}
+    KillablePart(int id, int initMax)
+        : id(id), maxHealth(initMax), curHealth(initMax)
+    {
+        checkInvincible();
+    }
 
     //reinisilized killable part.
     KillablePart(int id, int initMax, int initCur)
-        : id(id), maxHealth(initMax), curHealth(initCur) {}
+        : id(id), maxHealth(initMax), curHealth(initCur)
+    {
+        checkInvincible();
+    }
+
+
 
     //call this function each time an entity is hit. returns true if the entity should die.
     void hit(int damage);

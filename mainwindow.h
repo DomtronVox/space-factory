@@ -19,7 +19,7 @@ public:
     ~MainWindow();
 
 public slots:
-    void openGameWindow(QString difficulty);
+    void openGameWindow(QString difficulty, bool cheat);
 
 private:
     GameWindow *GmWdw;

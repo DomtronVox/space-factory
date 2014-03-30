@@ -15,7 +15,7 @@
 
 class ObjectLabel;
 
-GameWindow::GameWindow(QString difficulty, QWidget *parent) :
+GameWindow::GameWindow(QString difficulty, bool cheat, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameWindow)
 {
@@ -37,7 +37,7 @@ GameWindow::GameWindow(QString difficulty, QWidget *parent) :
     image_dir = QDir(":/images/");
 
     //set up models initial state
-    Model::instance()->singleGameStart(difficulty.toStdString());
+    Model::instance()->singleGameStart(difficulty.toStdString(), cheat);
     for (BaseEntity *e : Model::instance()->getRecentlyCreated()){
         createObjectLabel(e);
     }
