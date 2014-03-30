@@ -92,7 +92,7 @@ public:
     void printState();
 
     // updates the game (Model) to reflect changes that occured
-    void update();
+    bool update();
 
     //initializes the game from the given file
     bool load();

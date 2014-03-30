@@ -26,6 +26,8 @@ GameWindow::GameWindow(QString difficulty, QWidget *parent) :
     ui->gameMenu->addItem("Pause Game");
     ui->gameMenu->addItem("Quit Game");
 
+    ui->lblGameOver->hide();
+
     //setup the game timer and connect it to the model update
     timer = new QTimer(this);
     timer->setInterval(100);
@@ -52,7 +54,7 @@ void GameWindow::timerHit()
     for (BaseEntity *e : Model::instance()->getRecentlyCreated()){
         createObjectLabel(e);
     }
-    Model::instance()->update();
+    bool ok = Model::instance()->update();
 
     //debug
     Model::instance()->printState();
@@ -84,6 +86,12 @@ void GameWindow::timerHit()
     {
         Model::instance()->save();
         QApplication::quit();
+    }
+
+    //if model returned false end the game
+    if (!ok) {
+        ui->lblGameOver->show();
+        timer->stop();
     }
 }
 

@@ -38,6 +38,27 @@
      <string notr="true">background-color: rgb(99, 99, 99);</string>
     </property>
    </widget>
+   <widget class="QLabel" name="lblGameOver">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>20</y>
+      <width>251</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>30</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>GAME OVER</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

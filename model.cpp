@@ -54,7 +54,7 @@ void Model::printState(){
 }
 
 //tells model a tick has passed and that it should update all entities
-void Model::update(){
+bool Model::update(){
 
     for (unsigned int i = 0; i < all_entities.size(); ++i)
     {
@@ -68,6 +68,9 @@ void Model::update(){
         generateWave();
         newWaveTimer = rand() % 30 + newWaveRange;
     }
+
+    if (getById(0) == NULL) return false;
+    else                    return true;
 }
 
 bool Model::load()
