@@ -16,11 +16,11 @@ using namespace std;
 
 class ShipEntity : public BaseEntity {
 
-    //AngularPart *m_cAngle;
     int health, damage, cooldown;
     KillablePart *m_cHealth;
     WeaponPart *m_cWeapon;
     MovablePart *m_cMoveable;
+    //AngularPart *m_cAngular;
 
 
 public:

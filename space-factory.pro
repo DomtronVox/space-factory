@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     movable_part.cpp \
     base_entity.cpp \
     weapon_part.cpp \
-    killable_part.cpp
+    killable_part.cpp \
+    angular_part.cpp
 
 
 HEADERS  += mainwindow.h \

@@ -15,13 +15,14 @@ protected:
     int id;
     string owner;
     int x, y;
+    int angle;
     string image;
 
 public:
 
 
     BaseEntity(int initId, string owner, int initX, int initY, string initImage)
-        : id(initId), owner(owner), x(initX), y(initY), image(initImage)
+        : id(initId), owner(owner), x(initX), y(initY), angle(0), image(initImage)
     {}
 
 
@@ -34,14 +35,17 @@ public:
 
     //returns a string that describes the entity
     virtual string stringify(){
-        return to_string(id)+","+owner+","+to_string(x)+","+to_string(y)+","+image;
+        return to_string(id)+","+owner+","+to_string(x)+","+to_string(y)+","+image+",,,"+to_string(angle);
     }
 
     int getX() { return x; }
     int getY() { return y; }
+    int getAngle() { return angle % 360; }
     int getId(){ return id; }
     string getImage() { return image; }
     string getOwner() { return owner; }
+
+    void setAngle(int angle) { this->angle = angle; }
 
     //moves the object to the given position
     void move(int newx, int newy) { x=newx; y=newy; }

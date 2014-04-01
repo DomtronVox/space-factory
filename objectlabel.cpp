@@ -7,7 +7,8 @@ ObjectLabel::ObjectLabel(QWidget *parent, GameWindow *window, BaseEntity *data, 
 {
     //set the ObjectLabels graphic
     setScaledContents(true);
-    setPixmap(image.pixmap(image.actualSize(win->size()/6)));
+    originalImage = image.pixmap(image.actualSize(win->size()/6));
+    setPixmap(originalImage);
     this->setGeometry(x(), y(), image.actualSize(win->size()).width()/4, image.actualSize(win->size()).height()/4);
 
     updateData();
@@ -39,11 +40,18 @@ void ObjectLabel::updateData(){
     if (Model::instance()->getById(data_id) == NULL) {
         deleteLater();
     } else {
+        //setup a rect describing the lables position
         QRect location = QRect(pos(), size());
-        //center label on models position
         location.moveCenter(convertToScreenCoords(QPoint(data->getX(), data->getY())));
+
         //set location
         setGeometry(location);
+
+        //setup a matric describing the images rotation
+        QPixmap image = QPixmap(originalImage);
+        QTransform rt;
+        rt.rotate(data->getAngle());
+        setPixmap(image.transformed(rt));
     }
 }
 

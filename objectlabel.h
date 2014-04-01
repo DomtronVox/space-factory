@@ -21,6 +21,7 @@ class ObjectLabel : public QLabel
 protected:
     int data_id;
     BaseEntity *data;
+    QPixmap originalImage;
 
     QPoint convertToScreenCoords(QPoint pos);
     QPoint convertToModelCoords(QPoint pos);
