@@ -50,6 +50,8 @@ GameWindow::~GameWindow()
 
 void GameWindow::timerHit()
 {
+    //ui->scr->setText(QString::number(Model::instance()->getScr));
+
     //loop through models new entity collection
     for (BaseEntity *e : Model::instance()->getRecentlyCreated()){
         createObjectLabel(e);

@@ -91,6 +91,8 @@ public:
     //utility function
     void printState();
 
+    int getScr() { return score->getScore(); }
+
     // updates the game (Model) to reflect changes that occured
     bool update();
 
