@@ -35,7 +35,7 @@ public:
 
     //returns a string that describes the entity
     virtual string stringify(){
-        return to_string(id)+","+owner+","+to_string(x)+","+to_string(y)+","+image+",,,"+to_string(angle);
+        return to_string(id)+","+owner+","+to_string(x)+","+to_string(y)+","+image;
     }
 
     int getX() { return x; }
