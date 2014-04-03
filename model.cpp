@@ -259,7 +259,7 @@ void Model::generateWave()
 //create a new tower at the given pos
 bool Model::createTower(int x, int y){
 
-   if ( isAreaEmpty(x,y, 35) ){ //TODO: Tower radius. another hardcoded value that needs centralising/removal.
+   if ( isAreaEmpty(x,y, Model::settings.tower_size) ){
        TowerEntity *tower = new TowerEntity(newId(), Model::settings.player_owner, x,y, Model::settings.tower_image,
                                             Model::settings.tower_health, Model::settings.tower_damage, Model::settings.tower_cooldown);
        addEntity(tower);

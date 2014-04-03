@@ -20,7 +20,7 @@ class ShipEntity : public BaseEntity {
     KillablePart *m_cHealth;
     WeaponPart *m_cWeapon;
     MovablePart *m_cMoveable;
-    //AngularPart *m_cAngular;
+    AngularPart *m_cAngular;
 
 
 public:
@@ -95,6 +95,7 @@ class TowerEntity : public BaseEntity {
     int health, damage, cooldown;
     KillablePart *m_cHealth;
     WeaponPart *m_cWeapon;
+    AngularPart *m_cAngular;
 
 public:
     //Creates a brand new tower

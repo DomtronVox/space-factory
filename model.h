@@ -26,15 +26,16 @@ struct Settings{
     string factory_target; //used in FactoryEntity::FactoryEntity
 
     static const int ship_health = 10;        //used in model::generateAttacker
-    static const int ship_range = 40;         //used in model::generateAttacker
+    static const int ship_range = 100;         //used in model::generateAttacker
     static const int ship_damage = 5;         //used in model::generateAttacker
     static const int ship_cooldown = 50;      //used in model::generateAttacker
     static const int ship_speed = 10;         //used in ShipEntity::ShipEnity
     string ship_image;  //used in model::generateAttacker
 
 
-    static const int tower_health = 15;         //used in model::createTower
-    static const int tower_range = 40;             //used in model::createTower
+    static const int tower_health = 15;          //used in model::createTower
+    static const int tower_range = 100;          //used in model::createTower
+    static const int tower_size = 55;            //used in model::createTower
     static const int tower_damage = 10;          //used in model::createTower
     static const int tower_cooldown = 50;        //used in model::createTower
     string tower_image;   //used in model::createTower

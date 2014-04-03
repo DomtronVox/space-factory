@@ -19,21 +19,23 @@ class WeaponPart {
     //holds the weapons current cooldown count before it can fire again.
     int curCooldown;
 
-    BaseEntity *target;
+    int target_id;
 
 
   public:
     //new weapon part
     WeaponPart(int damage, int range, int cooldown)
-        :damage(damage), range(range), maxCooldown(cooldown), curCooldown(cooldown), target(NULL)
+        :damage(damage), range(range), maxCooldown(cooldown), curCooldown(cooldown), target_id(-1)
     {}
 
     //reinisilizes weapon part
     WeaponPart(int damage, int range, int maxCooldown, int curCooldown)
-        :damage(damage), range(range), maxCooldown(maxCooldown), curCooldown(curCooldown), target(NULL)
+        :damage(damage), range(range), maxCooldown(maxCooldown), curCooldown(curCooldown), target_id(-1)
     {}
 
     bool hasTarget();
+    int getTargetX();
+    int getTargetY();
 
     //tells the part a tick has passed. Cools weapon down.
     void tick(string owner, int x, int y);
