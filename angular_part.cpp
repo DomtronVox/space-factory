@@ -5,10 +5,22 @@ void AngularPart::turnToPoint(BaseEntity* master, int x, int y){
 }
 
 
-void AngularPart::update(BaseEntity* master){
+void AngularPart::tick(BaseEntity* master){
+    if (weapon->hasTarget())
+        turnToPoint(master, weapon->getTargetX(), weapon->getTargetY());
+
     if (master->getAngle() > target_angle-2) {
-        master->setAngle(master->getAngle() + speed);
-    } else if (master->getAngle() < target_angle+2) {
         master->setAngle(master->getAngle() - speed);
+
+        //make sure we don't overshoot the target
+        if (master->getAngle() < target_angle+2)
+            master->setAngle(target_angle);
+
+    } else if (master->getAngle() < target_angle+2) {
+        master->setAngle(master->getAngle() + speed);
+
+        //make sure we don't overshoot the target
+        if (master->getAngle() > target_angle-2)
+            master->setAngle(target_angle);
     }
 }

@@ -22,8 +22,8 @@ ShipEntity::ShipEntity(int id, string owner, int x, int y, string image, int hea
     m_cHealth = new KillablePart(id, health);
     m_cWeapon = new WeaponPart(damage, Model::settings.ship_range, cooldown);
     m_cMoveable = new MovablePart(Model::settings.ship_speed, 0, 0);
-    //m_cAngular = new AngularPart(0, Model::settings.ship_speed);
-    //m_cAngular->turnToPoint(this, 0,0);
+    m_cAngular = new AngularPart(0, Model::settings.ship_speed, m_cWeapon);
+    m_cAngular->turnToPoint(this, 0,0);
 }
 
 ShipEntity::ShipEntity()
@@ -36,13 +36,14 @@ ShipEntity::~ShipEntity()
     delete m_cHealth;
     delete m_cWeapon;
     delete m_cMoveable;
-    //delete m_cAngular;
+    delete m_cAngular;
 }
 
 void ShipEntity::update()
 {
     m_cMoveable->tick(this);
     m_cWeapon->tick(getOwner(), getX(), getY());
+    m_cAngular->tick(this);
 
     //the moving bool should be oppisite the hasTarget bool so the entity is either moving or attacking.
     if( m_cMoveable->getMoving() == m_cWeapon->hasTarget() )
@@ -123,6 +124,7 @@ TowerEntity::TowerEntity(int id, string owner, int x, int y, string image, int h
     TowerEntity::cooldown = cooldown;
     m_cHealth = new KillablePart(id, health);
     m_cWeapon = new WeaponPart(damage, Model::settings.tower_range, cooldown);
+    m_cAngular = new AngularPart(0, Model::settings.ship_speed, m_cWeapon);
 }
 
 TowerEntity::TowerEntity()
@@ -134,12 +136,13 @@ TowerEntity::~TowerEntity()
 {
     delete m_cHealth;
     delete m_cWeapon;
+    delete m_cAngular;
 }
 
 void TowerEntity::update(){
 
     m_cWeapon->tick(getOwner(), getX(), getY());
-
+    m_cAngular->tick(this);
 }
 
 void TowerEntity::save(QFile *file)

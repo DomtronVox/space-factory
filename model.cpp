@@ -242,10 +242,16 @@ void Model::generateWave()
 {
     //TODO: generate multiple ships not just one; fix it so ships apeare anyware beyond the screen edge
     //generates a random position outside the game window
-    int x = rand() % 40 + 1500;
-    int y = rand() % 40 + 1500;
+    int x = rand() % 20 + 1500;
+    int y = rand() % 20 + 1500;
+    //randomize x and y's sign
+    int sx = rand() % 3 - 1;
+    int sy = rand() % 3 - 1;
 
-    ShipEntity *ship = new ShipEntity(newId(), Model::settings.enemy_owner, x,y, Model::settings.ship_image,
+    //problem where if both signs are 0 the ship apears at the factory
+    if (sx == 0 && sy == 0) sx = 1;
+
+    ShipEntity *ship = new ShipEntity(newId(), Model::settings.enemy_owner, sx*x, sy*y, Model::settings.ship_image,
                                       Model::settings.ship_health, Model::settings.ship_damage, Model::settings.ship_cooldown);
     addEntity(ship);
 }
@@ -253,7 +259,7 @@ void Model::generateWave()
 //create a new tower at the given pos
 bool Model::createTower(int x, int y){
 
-   if ( isAreaEmpty(x,y, 35) ){ //TODO: Tower radius. another hardcoded value that needs centralising/removal.
+   if ( isAreaEmpty(x,y, Model::settings.tower_size) ){
        TowerEntity *tower = new TowerEntity(newId(), Model::settings.player_owner, x,y, Model::settings.tower_image,
                                             Model::settings.tower_health, Model::settings.tower_damage, Model::settings.tower_cooldown);
        addEntity(tower);
