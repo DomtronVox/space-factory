@@ -8,11 +8,6 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-
-#CONFIG   += c++11
-#QMAKE_CXXFLAGS += -std=c++0x
-#Above lines were included as I attempted to get the program to compile on Mac
-
 TARGET = space-factory
 TEMPLATE = app
 
@@ -26,7 +21,6 @@ SOURCES += main.cpp\
     builder_part.cpp \
     objectlabel.cpp \
     game_window.cpp \
-    #movable_part.cpp
     movable_part.cpp \
     base_entity.cpp \
     weapon_part.cpp \

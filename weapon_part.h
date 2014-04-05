@@ -10,19 +10,14 @@ using namespace std;
 
 class WeaponPart {
 
-    //amount of damage returned by fire()
-    int damage;
-    //distance the weapon can reach with it's fire
-    int range;
-    //holds the value curCooldown is set to after fire() is called.
-    int maxCooldown; //TODO: couldn't think of a better name.
-    //holds the weapons current cooldown count before it can fire again.
-    int curCooldown;
-
-    int target_id;
+    int damage;      //amount of damage returned by fire()
+    int range;       //distance the weapon can reach with it's fire
+    int maxCooldown; //holds the value curCooldown is set to after fire() is called.
+    int curCooldown; //holds the weapons current cooldown count before it can fire again.
+    int target_id;   //
 
 
-  public:
+public:
     //new weapon part
     WeaponPart(int damage, int range, int cooldown)
         :damage(damage), range(range), maxCooldown(cooldown), curCooldown(cooldown), target_id(-1)

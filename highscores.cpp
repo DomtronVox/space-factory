@@ -1,4 +1,5 @@
 #include "highscores.h"
+
 #include <iostream>
 #include <QFile>
 #include <QTextStream>
@@ -7,19 +8,16 @@
 
 using namespace std;
 
-HighScore::HighScore()
-{
+HighScore::HighScore() {
     sFile = new QFile("highscores.txt");
 }
 
-bool HighScore::load()
-{
+bool HighScore::load() {
     if(sFile->open(QIODevice::ReadOnly))
     {
         string line;
         QTextStream in(sFile);
-        while(!in.atEnd())
-        {
+        while(!in.atEnd()) {
             line = in.readLine().toStdString();
             unsigned pos = line.find(":");
             string name = line.substr(0, pos);
@@ -32,21 +30,18 @@ bool HighScore::load()
         sFile->close();
         return true;
     }
-    else
-    {
+    else {
         cout << "Unable to open file cotaining highscores." << endl;
         sFile->close();
         return false;
     }
 }
 
-bool HighScore::save()
-{
+bool HighScore::save() {
     sFile->resize(0);
     if(sFile->open(QIODevice::ReadWrite | QIODevice::Text)) {
 
-        for(int i = 0; i < all_scores.size(); ++i)
-        {
+        for(int i = 0; i < all_scores.size(); ++i) {
             Score* score = all_scores.at(i);
             QString test(QString::fromStdString(score->toString()));
             QTextStream out(sFile);
@@ -61,21 +56,17 @@ bool HighScore::save()
     return false;
 }
 
-bool HighScore::addScore(string initName, int initScore)
-{
+bool HighScore::addScore(string initName, int initScore) {
     Score* newScore = new Score(initName, initScore);
 
-    if(all_scores.size() == 0)
-    {
+    if(all_scores.size() == 0) {
         all_scores.insert(all_scores.begin(), newScore);
         return true;
     }
 
-    for(int i = 0; i < all_scores.size(); i++)
-    {
+    for(int i = 0; i < all_scores.size(); i++) {
         Score* score = all_scores.at(i);
-        if(score->getScore() < initScore)
-        {
+        if(score->getScore() < initScore) {
             all_scores.insert(all_scores.begin() + i, newScore);
             return true;
         }
@@ -84,8 +75,8 @@ bool HighScore::addScore(string initName, int initScore)
     return true;
 }
 
-string Score::toString()
-{
+// returns name and score as one string
+string Score::toString() {
     string result;
     result.append(name);
     result.append(":");
@@ -93,7 +84,7 @@ string Score::toString()
     return result;
 }
 
-void Score::add(int scr)
-{
+// adds <scr> to total score
+void Score::add(int scr) {
     score = score + scr;
 }

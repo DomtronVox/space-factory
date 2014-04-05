@@ -1,11 +1,12 @@
 #ifndef ENTITIES_H
 #define ENTITIES_H
+
 #include <string>
 #include <fstream>
 #include <QFile>
-#include "base_entity.h"
 #include <iostream>
-//part includes
+
+#include "base_entity.h"
 #include "movable_part.h"
 #include "angular_part.h"
 #include "killable_part.h"
@@ -27,7 +28,7 @@ public:
     //creates a brand new ship
     ShipEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown);
 
-    ShipEntity();
+    ShipEntity() {}
     //reinisilizes a ship loaded from a save file
     ShipEntity(QFile *file); //{ load(file); }
 
@@ -87,7 +88,6 @@ public:
     void primaryAction(int /*x*/, int /*y*/) {}
 };
 
-
 class TowerEntity : public BaseEntity {
 
     //AngularPart *m_cAngle;
@@ -101,7 +101,7 @@ public:
     //Creates a brand new tower
     TowerEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown);
 
-    TowerEntity();
+    TowerEntity(){}
     //reinisilizes a tower loaded from a save file
     TowerEntity(QFile *file);
 
@@ -137,7 +137,7 @@ public:
     {}
 
 
-    ComponentEntity();
+    ComponentEntity(){}
 
     ~ComponentEntity() {  }
 
@@ -149,8 +149,6 @@ public:
     //tells the entity a tick has passed
     void update() {}
 
-    //serialize and write the entity data to the file
-    void save(QFile *file) {}
     //initilize the entity from a saved file
     void load(string &line);
 

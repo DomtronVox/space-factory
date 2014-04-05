@@ -51,7 +51,6 @@ public:
 
     //adds a Score struct to the score vector.
     bool addScore(string initName, int initScore);
-    bool addScore(Score *score);
 
     // returns the vector containing all the scores
     vector<Score*> getScores() { return all_scores; }

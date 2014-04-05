@@ -8,7 +8,6 @@ void MovablePart::toggleMoving(){
 
 
 void MovablePart::tick(BaseEntity *master){
-
     //if moving variable is false don't move
     if (!moving) return;
 

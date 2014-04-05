@@ -1,9 +1,9 @@
+#ifndef MOVABLE_PART_H
+#define MOVABLE_PART_H
+
 #include <string>
 
 #include "base_entity.h"
-
-#ifndef MOVABLE_PART_H
-#define MOVABLE_PART_H
 
 class MovablePart {
     int speed;

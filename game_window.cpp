@@ -8,7 +8,7 @@
 #include "ui_gamewindow.h"
 #include "game_window.h"
 #include "objectlabel.h"
-
+#include "mainwindow.h"
 #include "model.h"
 #include "base_entity.h"
 #include "entities.h"
@@ -16,9 +16,7 @@
 class ObjectLabel;
 
 GameWindow::GameWindow(QString difficulty, bool cheat, QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::GameWindow)
-{
+    QMainWindow(parent), ui(new Ui::GameWindow) {
     ui->setupUi(this);
 
     ui->gameMenu->addItem("Game Menu");
@@ -46,13 +44,11 @@ GameWindow::GameWindow(QString difficulty, bool cheat, QWidget *parent) :
     }
 }
 
-GameWindow::~GameWindow()
-{
+GameWindow::~GameWindow() {
     delete ui;
 }
 
-void GameWindow::timerHit()
-{
+void GameWindow::timerHit() {
     ui->scr->setText(QString::number(Model::instance()->getScr()));
 
     //loop through models new entity collection
@@ -62,7 +58,7 @@ void GameWindow::timerHit()
     bool ok = Model::instance()->update();
 
     //debug
-    Model::instance()->printState();
+    //Model::instance()->printState();
 
     for (QObject *obj: ui->centralwidget->children()){
         ObjectLabel *lbl = dynamic_cast<ObjectLabel*>(obj);
@@ -70,8 +66,7 @@ void GameWindow::timerHit()
     }
 
     // If Save Game is selected
-    if(ui->gameMenu->currentIndex() == 1)
-    {
+    if(ui->gameMenu->currentIndex() == 1) {
         if(Model::instance()->save()){
             QMessageBox::information(this, "Save Game", "Your game has been saved.");
         }
@@ -81,16 +76,16 @@ void GameWindow::timerHit()
         ui->gameMenu->setCurrentIndex(0);
 }
     // If Pause Game is selected
-    if(ui->gameMenu->currentIndex() == 2)
-    {
+    if(ui->gameMenu->currentIndex() == 2) {
         QMessageBox::information(this, "Pause Game", "Game is paused. Press ok to continue game.");
         ui->gameMenu->setCurrentIndex(0);
     }
     // Quit Game
-    if(ui->gameMenu->currentIndex() == 3)
-    {
+    if(ui->gameMenu->currentIndex() == 3) {
         Model::instance()->save();
-        QApplication::quit();
+        this->hide();
+        MainWindow* MnWdw = new MainWindow();
+        MnWdw->show();
     }
 
     //if model returned false end the game
@@ -98,7 +93,9 @@ void GameWindow::timerHit()
         ui->lblGameOver->show();
         timer->stop();
         QMessageBox::information(this, "Game Over", "Game is over. Press Ok to exit");
-        QApplication::quit();
+        MainWindow* MnWdw = new MainWindow();
+        this->hide();
+        MnWdw->show();
     }
 }
 
@@ -113,7 +110,6 @@ void GameWindow::createObjectLabel(BaseEntity *entity){
     } else {
         image = QIcon(":/images/image_missing.png");
     }
-
 
     //see if the entity is a component since they need a special form of the object label.
     ComponentEntity *draggable = dynamic_cast<ComponentEntity*>(entity);

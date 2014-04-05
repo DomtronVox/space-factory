@@ -3,7 +3,6 @@
 #include <QDebug>
 #include "entities.h"
 
-//part includes
 #include "movable_part.h"
 #include "angular_part.h"
 #include "killable_part.h"
@@ -14,8 +13,7 @@
 #include "model.h"
 
 //ship functions
-ShipEntity::ShipEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,owner,x,y,image)
-{
+ShipEntity::ShipEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,owner,x,y,image) {
     ShipEntity::health = health;
     ShipEntity::damage = damage;
     ShipEntity::cooldown = cooldown;
@@ -26,21 +24,16 @@ ShipEntity::ShipEntity(int id, string owner, int x, int y, string image, int hea
     m_cAngular->turnToPoint(this, 0,0);
 }
 
-ShipEntity::ShipEntity()
-{
 
-}
-
-ShipEntity::~ShipEntity()
-{
+ShipEntity::~ShipEntity() {
     delete m_cHealth;
     delete m_cWeapon;
     delete m_cMoveable;
     delete m_cAngular;
 }
 
-void ShipEntity::update()
-{
+
+void ShipEntity::update() {
     m_cMoveable->tick(this);
     m_cWeapon->tick(getOwner(), getX(), getY());
     m_cAngular->tick(this);
@@ -50,13 +43,7 @@ void ShipEntity::update()
         m_cMoveable->toggleMoving();
 }
 
-void ShipEntity::save(QFile *file)
-{
-
-}
-
-void ShipEntity::load(string &line)
-{
+void ShipEntity::load(string &line) {
      int pos;
      BaseEntity::load(line);
      ShipEntity::health = stoi(line.substr(0, pos = line.find(",")));
@@ -72,43 +59,31 @@ void ShipEntity::load(string &line)
 
      Model::instance()->addEntity(this);
      cout << "loaded SHIP-ENTITY" << endl;
-
 }
 
 //factory functions
-FactoryEntity::FactoryEntity(int id, string owner, int x, int y, string image, int health, int damage) : BaseEntity(id,owner,x,y,image)
-{
+FactoryEntity::FactoryEntity(int id, string owner, int x, int y, string image, int health, int damage) : BaseEntity(id,owner,x,y,image) {
     FactoryEntity::health = health;
     FactoryEntity::damage = damage;
     m_cHealth = new KillablePart(id, health);
     m_cBulder = new BuilderPart(Model::settings.factory_target, Model::settings.factory_counter);
-
 }
 
-FactoryEntity::FactoryEntity()
-{
+FactoryEntity::FactoryEntity() {
     m_cHealth = new KillablePart(id, health);
     m_cBulder = new BuilderPart(Model::settings.factory_target, Model::settings.factory_counter);
 }
 
-FactoryEntity::~FactoryEntity()
-{
+FactoryEntity::~FactoryEntity() {
     delete m_cBulder;
     delete m_cHealth;
 }
 
-void FactoryEntity::update()
-{
+void FactoryEntity::update() {
     m_cBulder->tick(x,y);
 }
 
-void FactoryEntity::save(QFile *file)
-{
-
-}
-
-void FactoryEntity::load(string &line)
-{
+void FactoryEntity::load(string &line) {
     int pos;
     BaseEntity::load(line);
     FactoryEntity::health = stoi(line.substr(0, pos = line.find(",")));
@@ -119,8 +94,7 @@ void FactoryEntity::load(string &line)
 }
 
 //tower functions
-TowerEntity::TowerEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,owner,x,y,image)
-{
+TowerEntity::TowerEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,owner,x,y,image) {
     TowerEntity::health = health;
     TowerEntity::damage = damage;
     TowerEntity::cooldown = cooldown;
@@ -129,31 +103,18 @@ TowerEntity::TowerEntity(int id, string owner, int x, int y, string image, int h
     m_cAngular = new AngularPart(0, Model::settings.ship_speed, m_cWeapon);
 }
 
-TowerEntity::TowerEntity()
-{
-
-}
-
-TowerEntity::~TowerEntity()
-{
+TowerEntity::~TowerEntity() {
     delete m_cHealth;
     delete m_cWeapon;
     delete m_cAngular;
 }
 
 void TowerEntity::update(){
-
     m_cWeapon->tick(getOwner(), getX(), getY());
     m_cAngular->tick(this);
 }
 
-void TowerEntity::save(QFile *file)
-{
-
-}
-
-void TowerEntity::load(string &line)
-{
+void TowerEntity::load(string &line) {
     int pos;
     BaseEntity::load(line);
     TowerEntity::health = stoi(line.substr(0, pos = line.find(",")));
@@ -169,12 +130,6 @@ void TowerEntity::load(string &line)
     cout << "loaded COMPONENT-ENTITY" << endl;
 }
 
-//runs primary action of the entity
-ComponentEntity::ComponentEntity()
-{
-
-}
-
 void ComponentEntity::load(string &line){
     int pos;
     BaseEntity::load(line);
@@ -184,7 +139,6 @@ void ComponentEntity::load(string &line){
 }
 
 void ComponentEntity::primaryAction(int x, int y) {
-
     if(Model::instance()->createTower(x,y))
         Model::instance()->killEntity(id);
 }

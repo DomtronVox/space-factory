@@ -6,7 +6,6 @@
 #include <QIcon>
 
 #include "game_window.h"
-
 #include "base_entity.h"
 #include "entities.h"
 
@@ -22,12 +21,10 @@ protected:
     int data_id;
     BaseEntity *data;
     QPixmap originalImage;
-
     QPoint convertToScreenCoords(QPoint pos);
     QPoint convertToModelCoords(QPoint pos);
 
-
-  public:
+public:
     ObjectLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image);
 
     // deletes the label associated with <id>
@@ -35,18 +32,17 @@ protected:
 
     void updateData();
 
-    void mouseReleaseEvent(QMouseEvent */*ev*/) {};
+    void mouseReleaseEvent(QMouseEvent *) { }
 
 };
 
 //this class is for components which can be dragged
 class DraggableLabel : public ObjectLabel
 {
-
     bool mouseDragging;
     QPoint offset;
 
-  public:
+public:
     DraggableLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image);
 
     //mouse events
