@@ -47,10 +47,16 @@ void ObjectLabel::updateData(){
         //set location
         setGeometry(location);
 
+        //TODO: this section is doing some strange stuff. Rotation is flipped across the x axis
+        //    so that to get the correct angle provided by data it's angle needs to be inverted
+        //    i.e. 270 becomes -270 or 90 but passing 90 rotates the image to the 270 position.
+        //    Also images get smaller the closer the angle is to 45,135, 225, or 315.
+
+
         //setup a matric describing the images rotation
         QPixmap image = QPixmap(originalImage);
         QTransform rt;
-        rt.rotate(data->getAngle());
+        rt.rotate(-data->getAngle());
         setPixmap(image.transformed(rt));
     }
 }

@@ -8,7 +8,7 @@ using namespace std;
 
 //allows the entity to rotateclass AngularPart {
 class AngularPart {
-    double target_angle;
+    int target_angle;
     int speed; //how many degrees the entity can turn in a tick
 
     WeaponPart * weapon; //TODO: This is hacky and should be handled a different way.
