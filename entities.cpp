@@ -68,6 +68,8 @@ void ShipEntity::load(string &line)
      m_cHealth = new KillablePart(id, health);
      m_cWeapon = new WeaponPart(damage, Model::settings.ship_range, cooldown);
      m_cMoveable = new MovablePart(Model::settings.ship_speed, 0, 0);
+     m_cAngular = new AngularPart(0, Model::settings.ship_speed, m_cWeapon);
+
      Model::instance()->addEntity(this);
      cout << "loaded SHIP-ENTITY" << endl;
 
@@ -162,6 +164,7 @@ void TowerEntity::load(string &line)
     line.erase(0, pos + 1);
     m_cHealth = new KillablePart(id, health);
     m_cWeapon = new WeaponPart(damage, Model::settings.tower_range, cooldown);
+    m_cAngular = new AngularPart(0, Model::settings.ship_speed, m_cWeapon);
     Model::instance()->addEntity(this);
     cout << "loaded COMPONENT-ENTITY" << endl;
 }

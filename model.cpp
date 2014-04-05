@@ -20,7 +20,7 @@ Settings::~Settings(){
 }
 */
 
-//loads highscores and prepairs to hold a game state
+//loads highscores and prepares to hold a game state
 Model::Model() {
     HighScore highscores;
     highscores.load();
@@ -53,6 +53,19 @@ void Model::printState(){
     }
 }
 
+void Model::setCheat(QString cht)
+{
+    if(cht == "true")
+        cheat = true;
+    else
+        cheat = false;
+}
+
+void Model::setScr(QString na, QString scr){
+    score = new Score(na.toStdString(), scr.toInt() );
+}
+
+
 //tells model a tick has passed and that it should update all entities
 bool Model::update(){
 
@@ -77,10 +90,15 @@ bool Model::load()
 {
     if(file->open(QIODevice::ReadOnly))
     {
-
         Model::instance()->reset();
         string line;
         QTextStream in(file);
+        line = in.readLine().toStdString();
+        unsigned nPos = line.find(" ");
+        Model::instance()->setDif(QString::fromStdString(line.substr(0, nPos)));
+        Model::instance()->setCheat(QString::fromStdString(line.substr(nPos+1)));
+        line = in.readLine().toStdString();
+        Model::instance()->setScr(QString::fromStdString(line.substr(0, nPos = line.find(" "))), QString::fromStdString(line.substr(nPos + 1)));
         while(!in.atEnd())
         {
             line = in.readLine().toStdString();
@@ -107,7 +125,8 @@ bool Model::load()
 
             }
         }
-        Model::id = all_entities.size();
+        BaseEntity *be = all_entities.back();
+        Model::id = be->getId() + 1;
         file->close();
         return true;
     }
@@ -125,6 +144,16 @@ bool Model::save()
 {
     file->resize(0);
     if(file->open(QIODevice::ReadWrite | QIODevice::Text)){
+        QString cheatStr;
+        if(cheat){
+            cheatStr = "true";
+        }
+        else { cheatStr = "false"; }
+        QString data = dif + " " + cheatStr;
+        QTextStream out(file);
+        out << data << endl;
+        data = QString::fromStdString(score->getName()) + " " + QString::number(score->getScore());
+        out << data << endl;
         for(unsigned int i = 0; i < all_entities.size(); ++i){
             BaseEntity* ent = all_entities.at(i);
             ent->save(file);

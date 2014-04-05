@@ -26,11 +26,11 @@ struct Settings{
     string factory_target; //used in FactoryEntity::FactoryEntity
 
     static const int ship_health = 10;        //used in model::generateAttacker
-    static const int ship_range = 100;         //used in model::generateAttacker
+    static const int ship_range = 100;        //used in model::generateAttacker
     static const int ship_damage = 5;         //used in model::generateAttacker
     static const int ship_cooldown = 50;      //used in model::generateAttacker
     static const int ship_speed = 10;         //used in ShipEntity::ShipEnity
-    string ship_image;  //used in model::generateAttacker
+    string ship_image;                        //used in model::generateAttacker
 
 
     static const int tower_health = 15;          //used in model::createTower
@@ -38,7 +38,7 @@ struct Settings{
     static const int tower_size = 55;            //used in model::createTower
     static const int tower_damage = 10;          //used in model::createTower
     static const int tower_cooldown = 50;        //used in model::createTower
-    string tower_image;   //used in model::createTower
+    string tower_image;                          //used in model::createTower
 
 };
 
@@ -51,13 +51,15 @@ class Model {
 
     //score tracking
     HighScore *highscores;
-
     // current score
     Score *score;
-    //Score *current_score = new Score(" ", 0); //the players current score
 
     // file to save a load game from
     QFile *file;
+
+    // difficulty and cheat settings
+    QString dif;
+    bool cheat;
 
     // keep track of entities on the game field
     static int id;
@@ -93,6 +95,11 @@ public:
     void printState();
 
     int getScr() { return score->getScore(); }
+
+    void setDif(QString difficulty) { dif = difficulty; }
+    void setCheat(bool cht) { cheat = cht; }
+    void setCheat(QString cht);
+    void setScr(QString na, QString scr);
 
     // updates the game (Model) to reflect changes that occured
     bool update();

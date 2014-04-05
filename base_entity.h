@@ -25,10 +25,6 @@ public:
         : id(initId), owner(owner), x(initX), y(initY), angle(0), image(initImage)
     {}
 
-
-
-
-
     BaseEntity(QFile *file);
     BaseEntity() {}
     virtual ~BaseEntity() {  }
