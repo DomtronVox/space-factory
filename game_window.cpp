@@ -36,6 +36,9 @@ GameWindow::GameWindow(QString difficulty, bool cheat, QWidget *parent) :
 
     image_dir = QDir(":/images/");
 
+    Model::instance()->setDif(difficulty);
+    Model::instance()->setCheat(cheat);
+
     //set up models initial state
     Model::instance()->singleGameStart(difficulty.toStdString(), cheat);
     for (BaseEntity *e : Model::instance()->getRecentlyCreated()){
@@ -50,7 +53,7 @@ GameWindow::~GameWindow()
 
 void GameWindow::timerHit()
 {
-    //ui->scr->setText(QString::number(Model::instance()->getScr));
+    ui->scr->setText(QString::number(Model::instance()->getScr()));
 
     //loop through models new entity collection
     for (BaseEntity *e : Model::instance()->getRecentlyCreated()){
