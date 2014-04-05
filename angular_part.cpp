@@ -13,7 +13,7 @@ void AngularPart::turnToPoint(BaseEntity* master, int x, int y){
 void AngularPart::tick(BaseEntity* master){
     if (weapon->hasTarget())
         turnToPoint(master, weapon->getTargetX(), weapon->getTargetY());
-    std::cout << (master->getAngle() > target_angle) << endl;
+
     if (master->getAngle() > target_angle) {
         master->setAngle(master->getAngle() - speed);
 
