@@ -49,13 +49,12 @@ class Model {
     Model();
     ~Model();
 
-    //score tracking
-    HighScore *highscores;
     // current score
     Score *score;
 
     // file to save a load game from
     QFile *file;
+    QFile *sFile;       //scores file
 
     // difficulty and cheat settings
     QString dif;

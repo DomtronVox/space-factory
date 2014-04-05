@@ -97,6 +97,8 @@ void GameWindow::timerHit()
     if (!ok) {
         ui->lblGameOver->show();
         timer->stop();
+        QMessageBox::information(this, "Game Over", "Game is over. Press Ok to exit");
+        QApplication::quit();
     }
 }
 

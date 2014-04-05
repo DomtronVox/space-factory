@@ -22,14 +22,14 @@ void unitTests() {
     assert(s->getName() == "Rebecca");
     scores.save();
 
-    HighScore loadScores;
-    loadScores.load();
-    loadScores.addScore("Rhonda", 65);
-    s = loadScores.getScores().at(0);
+    HighScore testScores;
+    testScores.load();
+    testScores.addScore("Rhonda", 65);
+    s = testScores.getScores().at(0);
 
     assert(s->getName() == "Rhonda");
     assert(s->getScore() == 65);
-    loadScores.save();
+    testScores.save();
     remove ("highscores.txt");
 
     //model test for starting a new game. TODO: rework this to use asserts
@@ -61,16 +61,19 @@ MainWindow::MainWindow(QWidget *parent) :
     //unitTests();
 
     //populate highscores list
-    HighScore scores;
-    scores.load();
-    for(unsigned int i = 0; i < scores.getScores().size(); ++i )
-    {
-        Score *score = scores.getScores().at(i);
-        QString QName = QString::fromStdString(score->getName());
-        QString QScore = QString::number(score->getScore());
-        ui->lstScores->addItem(QName + " -- " + QScore);
+    HighScore* scores = new HighScore();
+    if(scores->load()){
+        for(unsigned int i = 0; i < scores->getScores().size(); ++i )
+        {
+            Score *score = scores->getScores().at(i);
+            QString QName = QString::fromStdString(score->getName());
+            QString QScore = QString::number(score->getScore());
+            ui->lstScores->addItem(QName + " -- " + QScore);
 
+        }
     }
+    else                //no file exists
+        scores->save(); //creates new highscores file file
 
     //connect(ui->btnNewGame, SIGNAL(click()), this, SLOT(openGameWindow()));
     //set the help and score screens to be invisible

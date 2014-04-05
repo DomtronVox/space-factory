@@ -8,6 +8,7 @@
 #include <vector>
 #include <fstream>
 #include <QString>
+#include <QFile>
 #include <sstream>
 
 using namespace std;
@@ -34,10 +35,11 @@ class HighScore {
 
 private:
     vector<Score*> all_scores;
+    QFile* sFile;                // scores file
 
 public:
     // Constructor
-    HighScore() {}
+    HighScore();
 
     ~HighScore() {}
 
@@ -49,6 +51,7 @@ public:
 
     //adds a Score struct to the score vector.
     bool addScore(string initName, int initScore);
+    bool addScore(Score *score);
 
     // returns the vector containing all the scores
     vector<Score*> getScores() { return all_scores; }

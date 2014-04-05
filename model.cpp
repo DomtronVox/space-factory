@@ -22,12 +22,8 @@ Settings::~Settings(){
 
 //loads highscores and prepares to hold a game state
 Model::Model() {
-    HighScore highscores;
-    highscores.load();
     score = new Score("user", 0);
     file = new QFile("SavedGame.txt");
-    cout << "file created" << endl;
-
 }
 
 //make sure entity list is empty
@@ -82,8 +78,18 @@ bool Model::update(){
         newWaveTimer = rand() % 30 + newWaveRange;
     }
 
-    if (getById(0) == NULL) return false;
-    else                    return true;
+    if (getById(0) == NULL){
+
+        HighScore *highscores = new HighScore();
+        highscores->load();
+        highscores->addScore(score->getName(), score->getScore());
+        if(highscores->save()){
+            cout << "saved highscores" << endl;
+        }
+        return false;
+    }
+    else
+        return true;
 }
 
 bool Model::load()

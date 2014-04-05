@@ -7,13 +7,17 @@
 
 using namespace std;
 
+HighScore::HighScore()
+{
+    sFile = new QFile("highscores.txt");
+}
+
 bool HighScore::load()
 {
-    QFile sscores ("highscores.txt");
-    if(sscores.open(QIODevice::ReadOnly))
+    if(sFile->open(QIODevice::ReadOnly))
     {
         string line;
-        QTextStream in(&sscores);
+        QTextStream in(sFile);
         while(!in.atEnd())
         {
             line = in.readLine().toStdString();
@@ -24,31 +28,32 @@ bool HighScore::load()
             all_scores.push_back(aScore);
             cout << "read " << aScore->toString() << " from file." << endl;
         }
-        sscores.close();
+        cout << "loaded highscores.txt" << endl;
+        sFile->close();
         return true;
     }
     else
     {
-        cout << "Unable to open file cotaining highscores, i.e. ://highscores.txt" << endl;
-        sscores.close();
+        cout << "Unable to open file cotaining highscores." << endl;
+        sFile->close();
         return false;
     }
 }
 
 bool HighScore::save()
 {
-    QFile sFile ("highscores.txt");
-
-    if(sFile.open(QIODevice::ReadWrite | QIODevice::Text)) {
+    sFile->resize(0);
+    if(sFile->open(QIODevice::ReadWrite | QIODevice::Text)) {
 
         for(int i = 0; i < all_scores.size(); ++i)
         {
             Score* score = all_scores.at(i);
             QString test(QString::fromStdString(score->toString()));
-            QTextStream out(&sFile);
+            QTextStream out(sFile);
             out<<test<<endl;
         }
-        sFile.close();
+        sFile->close();
+        cout << "saved highscores" << endl;
         return true;
 
     }
@@ -78,10 +83,6 @@ bool HighScore::addScore(string initName, int initScore)
     all_scores.push_back(newScore);
     return true;
 }
-
-
-
-
 
 string Score::toString()
 {
