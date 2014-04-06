@@ -38,6 +38,7 @@ struct Settings{
     static const int tower_size = 55;            //used in model::createTower
     static const int tower_damage = 10;          //used in model::createTower
     static const int tower_cooldown = 50;        //used in model::createTower
+    static const int tower_speed = 30;
     string tower_image;                          //used in model::createTower
 
 };

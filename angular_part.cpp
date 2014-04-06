@@ -6,7 +6,6 @@ void AngularPart::turnToPoint(BaseEntity* master, int x, int y){
 
     if (target_angle < 0) target_angle = (target_angle % 360) + 360;
     else                  target_angle = target_angle % 360;
-    std::cout << master->getId()<< ',' << target_angle << std::endl;
 }
 
 
