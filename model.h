@@ -15,7 +15,7 @@ using namespace std;
 //these are hard coded values used for various variables in the model. These should eventually be moved into a settings or configuration file.
 //For now we will keep them centralized here. Try to keep a list of which functions use the constant.
 struct Settings{
-    Settings(): enemy_owner("AI"), player_owner("player"), factory_target("tower"), ship_image("blackship1"), tower_image("tower")
+    Settings(): player_owner("player"), factory_target("tower"), ship_image("blackship1"), enemy_owner("AI"), tower_image("tower")
     {}
 
 //used in model::createTowerand model::createComponent
