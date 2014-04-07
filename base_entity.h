@@ -33,12 +33,12 @@ public:
 
     int getX() { return x; }
     int getY() { return y; }
-    int getAngle() { return angle % 360; }
+    int getAngle() { return angle; }
     int getId(){ return id; }
     string getImage() { return image; }
     string getOwner() { return owner; }
 
-    void setAngle(int angle) { this->angle = angle; }
+    void setAngle(int angle);
 
     //moves the object to the given position
     void move(int newx, int newy) { x=newx; y=newy; }

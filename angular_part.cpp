@@ -26,20 +26,39 @@ void AngularPart::tick(BaseEntity* master){
         turnToPoint(master, weapon->getTargetX(), weapon->getTargetY());
     }
 
+    int my_angle = master->getAngle();
 
-    if (master->getAngle() > target_angle) {
-        master->setAngle(master->getAngle() - speed);
-
-        //make sure we don't overshoot the target
-        if (master->getAngle() < target_angle)
-            master->setAngle(target_angle);
+    //find the distance that must be traveled both clock- and counter clock- wise
+    int clockwise_dist, counterwise_dist;
+    if (target_angle > my_angle) {
+        clockwise_dist = target_angle - my_angle;
+        counterwise_dist = 360 - clockwise_dist;
+    } else {
+        counterwise_dist = my_angle - target_angle;
+        clockwise_dist = 360 - counterwise_dist;
     }
 
-    else if (master->getAngle() < target_angle) {
-        master->setAngle(master->getAngle() + speed);
+    //alter the entity's angle
+    //If either is zero we don't need to move
+    if (clockwise_dist == 0 || counterwise_dist == 0){
+        return;
 
+    //move in the clockwise direction
+    } else if (clockwise_dist < counterwise_dist) {
         //make sure we don't overshoot the target
-        if (master->getAngle() > target_angle)
+        if (clockwise_dist < speed) {
             master->setAngle(target_angle);
+        } else {
+            master->setAngle(my_angle + speed);
+        }
+
+    //move in the counter clockwise direction
+    } else {
+        //make sure we don't overshoot the target
+        if (counterwise_dist < speed) {
+            master->setAngle(target_angle);
+        } else {
+            master->setAngle(my_angle - speed);
+        }
     }
 }

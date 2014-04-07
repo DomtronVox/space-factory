@@ -9,6 +9,11 @@ void BaseEntity::save(QFile *file){
     return;
 }
 
+void BaseEntity::setAngle(int angle) {
+    if (angle < 0) this->angle = (angle % 360) + 360;
+    else           this->angle = angle % 360;
+}
+
 void BaseEntity::load(string &line) {
     int pos = line.find(",");
     string Eid = line.substr(0, pos);
