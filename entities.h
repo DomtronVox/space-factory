@@ -16,7 +16,6 @@ using namespace std;
 
 class ShipEntity : public BaseEntity {
 
-    int health, damage, cooldown;
     KillablePart *m_cHealth;
     WeaponPart *m_cWeapon;
     MovablePart *m_cMoveable;
@@ -27,15 +26,14 @@ public:
     //creates a brand new ship
     ShipEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown);
 
-    ShipEntity();
-    //reinisilizes a ship loaded from a save file
-    ShipEntity(QFile *file); //{ load(file); }
+    //reinisilizes a ship loaded from a save file line string
+    ShipEntity(string &line);
 
     ~ShipEntity();
 
     //returns a string that describes the entity
     string stringify(){
-        return "SHIP-ENTITY:" + BaseEntity::stringify() + "," + to_string(health) + "," + to_string(damage) + "," + to_string(cooldown);
+        return "SHIP-ENTITY:" + BaseEntity::stringify() + "," + m_cHealth->stringify() + "," + m_cWeapon->stringify() + "," + m_cMoveable->stringify() + "," + m_cAngular->stringify() + ",";
     }
 
     //tells the entity a tick has passed
@@ -43,32 +41,25 @@ public:
 
     //killable linker functions
     void hit(int damage) { m_cHealth->hit(damage); }
-
-    //serialize and write the entity data to the file
-    void save(QFile *file);
-    //initilize the entity from a saved file
-    void load(string &line);
 };
 
 class FactoryEntity : public BaseEntity {
 
-    int health, damage;
     KillablePart *m_cHealth;
     BuilderPart *m_cBulder;
 
 public:
     //creates a brand new factory
-    FactoryEntity(int id, string owner, int x, int y, string image, int health, int damage);
+    FactoryEntity(int id, string owner, int x, int y, string image, int health);
 
-    FactoryEntity();
-    //reinisilizes a factory loaded from a save file
-    FactoryEntity(QFile *file);// { load(file); }
+    //reinisilizes a factory loaded from a save file line string
+    FactoryEntity(string &line);
 
     ~FactoryEntity();
 
     //returns a string that describes the entity
     string stringify(){
-        return "FACTORY-ENTITY:" + BaseEntity::stringify() + "," + to_string(health) + "," + to_string(damage);
+        return "FACTORY-ENTITY:" + BaseEntity::stringify() + "," + m_cHealth->stringify() + "," + m_cBulder->stringify() + ",";
     }
 
     //tells the entity a tick has passed
@@ -76,11 +67,6 @@ public:
 
     //killable linker functions
     void hit(int damage) { m_cHealth->hit(damage); }
-
-    //serialize and write the entity data to the file
-    void save(QFile *file);
-    //initilize the entity from a saved file
-    void load(string &line);
 
     //runs primary action of the entity
     //TODO: implement this to change component build target
@@ -90,9 +76,6 @@ public:
 
 class TowerEntity : public BaseEntity {
 
-    //AngularPart *m_cAngle;
-
-    int health, damage, cooldown;
     KillablePart *m_cHealth;
     WeaponPart *m_cWeapon;
     AngularPart *m_cAngular;
@@ -101,15 +84,14 @@ public:
     //Creates a brand new tower
     TowerEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown);
 
-    TowerEntity();
-    //reinisilizes a tower loaded from a save file
-    TowerEntity(QFile *file);
+    //reinisilizes a tower loaded from a save file line string
+    TowerEntity(string &line);
 
     ~TowerEntity();
 
     //returns a string that describes the entity
     string stringify(){
-        return "TOWER-ENTITY:" + BaseEntity::stringify() + "," + to_string(health) + "," + to_string(damage) + "," + to_string(cooldown);
+        return "TOWER-ENTITY:" + BaseEntity::stringify() + "," + m_cHealth->stringify() + "," + m_cWeapon->stringify() + "," + m_cAngular->stringify() + ",";
     }
 
     //tells the entity a tick has passed
@@ -120,11 +102,6 @@ public:
 
     //weapon linker functions
     void fire();
-
-    //serialize and write the entity data to the file
-    void save(QFile *file);
-    //initilize the entity from a saved file
-    void load(string &line);
 };
 
 //class for tower contructor components
@@ -133,26 +110,22 @@ class ComponentEntity : public BaseEntity {
     string type;
 
 public:
+    //Creates a brand new component
     ComponentEntity(int id, string owner, int x, int y, string image, string initType) : BaseEntity(id,owner,x,y,image), type(initType)
     {}
 
-
-    ComponentEntity();
+    //reinisilizes a component loaded from a save file line string
+    ComponentEntity(string &line);
 
     ~ComponentEntity() {  }
 
     //returns a string that describes the entity
     string stringify(){
-        return "COMPONENT-ENTITY:" + BaseEntity::stringify() + "," + type;
+        return "COMPONENT-ENTITY:" + BaseEntity::stringify() + "," + type + ",";
     }
 
     //tells the entity a tick has passed
     void update() {}
-
-    //serialize and write the entity data to the file
-    void save(QFile *file) {}
-    //initilize the entity from a saved file
-    void load(string &line);
 
     //runs primary action of the entity
     void primaryAction(int x, int y);

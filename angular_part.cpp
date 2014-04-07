@@ -1,6 +1,15 @@
 #include "angular_part.h"
 #include <iostream>
 
+AngularPart::AngularPart(WeaponPart *weapon, string &line) : weapon(weapon) {
+    int pos;
+
+    target_angle = stoi(line.substr(0, pos = line.find(",")));
+    line.erase(0, pos + 1);
+    speed = stoi(line.substr(0, pos = line.find(",")));
+    line.erase(0, pos + 1);
+}
+
 void AngularPart::turnToPoint(BaseEntity* master, int x, int y){
     target_angle = (atan2(y-master->getY(), x-master->getX()) * 180) / 3.141592653589793;
 

@@ -23,6 +23,9 @@ void BaseEntity::load(string &line)
     string sy = line.substr(0, pos = line.find(","));
     y = stoi(sy);
     line.erase(0,pos + 1);
+    string sangle = line.substr(0, pos = line.find(","));
+    angle = stoi(sangle);
+    line.erase(0,pos + 1);
     string sImage = line.substr(0, pos = line.find(","));
     image = sImage;
     line.erase(0,pos + 1);

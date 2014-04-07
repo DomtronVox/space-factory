@@ -5,6 +5,17 @@
 #include "model.h"
 
 
+BuilderPart::BuilderPart(string &line){
+    int pos;
+
+    target = line.substr(0, pos = line.find(","));
+    line.erase(0, pos + 1);
+    maxCooldown = stoi(line.substr(0, pos = line.find(",")));
+    line.erase(0, pos + 1);
+    curCooldown = stoi(line.substr(0, pos = line.find(",")));
+    line.erase(0, pos + 1);
+}
+
 //tells the part a tick has passed. if countdown is zero this returns true otherwise it returns false.
 void BuilderPart::tick(int x, int y){
     curCooldown--;

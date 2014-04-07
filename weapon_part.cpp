@@ -4,6 +4,22 @@
 
 #include "model.h"
 
+WeaponPart::WeaponPart(string &line) {
+    int pos;
+
+    damage = stoi(line.substr(0, pos = line.find(",")));
+    line.erase(0, pos + 1);
+    range = stoi(line.substr(0, pos = line.find(",")));
+    line.erase(0, pos + 1);
+    maxCooldown = stoi(line.substr(0, pos = line.find(",")));
+    line.erase(0, pos + 1);
+    curCooldown = stoi(line.substr(0, pos = line.find(",")));
+    line.erase(0, pos + 1);
+    target_id = stoi(line.substr(0, pos = line.find(",")));
+    line.erase(0, pos + 1);
+}
+
+
 int WeaponPart::getTargetX() { return Model::instance()->getById(target_id)->getX(); }
 
 int WeaponPart::getTargetY() { return Model::instance()->getById(target_id)->getY(); }

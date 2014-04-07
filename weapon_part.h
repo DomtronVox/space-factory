@@ -29,9 +29,12 @@ class WeaponPart {
     {}
 
     //reinisilizes weapon part
-    WeaponPart(int damage, int range, int maxCooldown, int curCooldown)
-        :damage(damage), range(range), maxCooldown(maxCooldown), curCooldown(curCooldown), target_id(-1)
-    {}
+    WeaponPart(string &line);
+
+    //convert the entity to a string so it can be saved
+    string stringify() {
+        return to_string(damage) + "," + to_string(range) + "," + to_string(maxCooldown) + "," + to_string(curCooldown) + "," + to_string(target_id);
+    }
 
     bool hasTarget();
     int getTargetX();
@@ -39,9 +42,6 @@ class WeaponPart {
 
     //tells the part a tick has passed. Cools weapon down.
     void tick(string owner, int x, int y);
-
-    //convert the entity to a string so it can be saved
-    string serialise();
 
 };
 

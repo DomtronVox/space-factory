@@ -21,18 +21,17 @@ class BuilderPart{
     {}
 
     //reinisilised builder part
-    BuilderPart(string initTarget, int maxCooldown, int initCurCooldown)
-        : target(initTarget), maxCooldown(maxCooldown), curCooldown(initCurCooldown)
-    {}
+    BuilderPart(string &line);
 
-    ~BuilderPart(){ }
+    //convert the entity to a string so it can be saved
+    string stringify(){
+        return target + "," + to_string(maxCooldown) + "," + to_string(curCooldown);
+    }
+
 
     //tells the part a tick has passed. if countdown is zero this returns true otherwise it returns false.
     //  takes the base entities position
     void tick(int x, int y);
-
-    //convert the entity to a string so it can be saved
-    string serialise();
 
     //creates a new component entity
     void build_component(int x,int y);

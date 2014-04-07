@@ -48,7 +48,9 @@ void Model::killAllEntities(){
 
 //runs through all the entities and prints them as a string.
 void Model::printState(){
-    for (BaseEntity *e : all_entities){
+    for (unsigned int i = 0; i < all_entities.size(); ++i)
+    {
+        BaseEntity *e = all_entities.at(i);
         cout << e->stringify() << endl;
     }
 }
@@ -108,21 +110,27 @@ bool Model::load()
 
             if(name == "FACTORY-ENTITY") {
                 cout << "Reading Factory Entity " << endl;
-                FactoryEntity * fEnt = new FactoryEntity;
-                fEnt->load(line);
+                BaseEntity * fact = new FactoryEntity(line);
+                addEntity( fact );
+                cout << "FactEnt added" << endl;
             }
             else if(name == "COMPONENT-ENTITY"){
-                ComponentEntity *cEnt = new ComponentEntity;
-                cEnt->load(line);
+                cout << "Reading Component Entity " << endl;
+                BaseEntity *comp = new ComponentEntity(line);
+                addEntity( comp );
+                cout << "loaded COMPONENT-ENTITY" << endl;
             }
             else if(name == "SHIP-ENTITY"){
-                ShipEntity *sEnt  = new ShipEntity;
-                sEnt->load(line);
+                cout << "Reading Ship Entity " << endl;
+                BaseEntity *ship = new ShipEntity(line);
+                addEntity( ship );
+                cout << "loaded SHIP-ENTITY" << endl;
             }
             else if(name == "TOWER-ENTITY"){
-                TowerEntity *tEnt  = new TowerEntity;
-                tEnt->load(line);
-
+                cout << "Reading Tower Entity " << endl;
+                BaseEntity *tower = new TowerEntity(line);
+                addEntity( tower );
+                cout << "loaded COMPONENT-ENTITY" << endl;
             }
         }
         BaseEntity *be = all_entities.back();
@@ -174,19 +182,19 @@ void Model::singleGameStart(string difficulty, bool cheat){
     //create the players factory
     FactoryEntity *factory;
     if (difficulty == "easy") {
-        factory = new FactoryEntity(0, Model::settings.player_owner, 0, 0, "factory", 200, 0);
+        factory = new FactoryEntity(0, Model::settings.player_owner, 0, 0, "factory", 200);
         newWaveRange = 40;
     } else if (difficulty == "medium") {
-        factory = new FactoryEntity(0, Model::settings.player_owner, 0, 0, "factory", 100, 0);
+        factory = new FactoryEntity(0, Model::settings.player_owner, 0, 0, "factory", 100);
         newWaveRange = 30;
     } else {
-        factory = new FactoryEntity(0, Model::settings.player_owner, 0, 0, "factory", 50, 0);
+        factory = new FactoryEntity(0, Model::settings.player_owner, 0, 0, "factory", 50);
         newWaveRange = 10;
     }
 
     if (cheat) {
         //0 health = infinate health
-        factory = new FactoryEntity(0, Model::settings.player_owner, 0, 0, "factory", 0, 0);
+        factory = new FactoryEntity(0, Model::settings.player_owner, 0, 0, "factory", 0);
     }
 
     newId(); //since we manuely set the id run newId to advance the entity id

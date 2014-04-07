@@ -1,6 +1,20 @@
 #include "base_entity.h"
 #include "movable_part.h"
 
+MovablePart::MovablePart(string &line) {
+    int pos;
+
+    speed = stoi(line.substr(0, pos = line.find(",")));
+    line.erase(0, pos + 1);
+    x_target = stoi(line.substr(0, pos = line.find(",")));
+    line.erase(0, pos + 1);
+    y_target = stoi(line.substr(0, pos = line.find(",")));
+    line.erase(0, pos + 1);
+    moving = stoi(line.substr(0, pos = line.find(",")));
+    line.erase(0, pos + 1);
+}
+
+
 void MovablePart::toggleMoving(){
     if (moving) moving = false;
     else        moving = true;

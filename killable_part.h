@@ -27,19 +27,16 @@ class KillablePart {
     }
 
     //reinisilized killable part.
-    KillablePart(int id, int initMax, int initCur)
-        : id(id), maxHealth(initMax), curHealth(initCur)
-    {
-        checkInvincible();
-    }
+    KillablePart(int id, string &line);
 
+    //convert the entity to a string so it can be saved
+    string stringify() {
+        return to_string(maxHealth) + "," + to_string(curHealth);
+    }
 
 
     //call this function each time an entity is hit. returns true if the entity should die.
     void hit(int damage);
-
-    //convert the entity to a string so it can be saved
-    string serialise();
 };
 
 #endif // KILLABLE_PART_H

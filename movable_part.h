@@ -12,14 +12,16 @@ class MovablePart {
     bool moving;
 
   public:
-    MovablePart(int initSpeed)
-        : speed(initSpeed), moving(true)
+    MovablePart(int initSpeed, int x_target, int y_target)
+        : speed(initSpeed), x_target(x_target), y_target(y_target), moving(true)
     {}
 
-    MovablePart(int initSpeed, int initx_target, int inity_target)
-        : speed(initSpeed), x_target(initx_target), y_target(inity_target),
-          moving(true)
-    {}
+    MovablePart(string &line);
+
+    //convert the entity to a string so it can be saved
+    string stringify() {
+        return to_string(speed) + "," + to_string(x_target) + "," + to_string(y_target) + "," + to_string(moving);
+    }
 
     //returns weather the part is moving
     bool getMoving(){ return moving; }
@@ -32,9 +34,6 @@ class MovablePart {
 
     //tells the part a tick has passed.
     void tick(BaseEntity *master);
-
-    //convert the entity to a string so it can be saved
-    string serialise();
 };
 
 #endif // MOVABLE_PART_H

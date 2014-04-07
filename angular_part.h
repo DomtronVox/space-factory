@@ -16,14 +16,20 @@ class AngularPart {
   public:
     AngularPart(int targetAngle, int speed, WeaponPart *weapon) : target_angle(targetAngle), speed(speed), weapon(weapon) {}
 
+    //reinisilised angular part
+    AngularPart(WeaponPart *weapon, string &line);
+
+    //convert the entity to a string so it can be saved
+    string stringify() {
+        return to_string(target_angle) + "," + to_string(speed);
+    }
+
     //changes the angle to point to a point.
     void turnToPoint(BaseEntity* master, int x, int y);
 
 
     //tells the part a tick has passed.
     void tick(BaseEntity* master);
-
-
 };
 
 
