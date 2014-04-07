@@ -58,10 +58,6 @@ void Model::setCheat(QString cht)
         cheat = false;
 }
 
-void Model::setScr(QString na, QString scr){
-    score = new Score(na.toStdString(), scr.toInt() );
-}
-
 //tells model a tick has passed and that it should update all entities
 bool Model::update(){
 
@@ -101,7 +97,7 @@ bool Model::load()
         Model::instance()->setDif(QString::fromStdString(line.substr(0, nPos)));
         Model::instance()->setCheat(QString::fromStdString(line.substr(nPos+1)));
         line = in.readLine().toStdString();
-        Model::instance()->setScr(QString::fromStdString(line.substr(0, nPos = line.find(" "))), QString::fromStdString(line.substr(nPos + 1)));
+        Model::instance()->setScr(line.substr(0, nPos = line.find(" ")), stoi(line.substr(nPos + 1)));
         while(!in.atEnd()) {
             line = in.readLine().toStdString();
             unsigned pos = line.find(":");
@@ -202,8 +198,9 @@ void Model::singleGameStart(string difficulty, bool cheat){
 
 //resets whatever game state model has at the moment
 void Model::reset() {
-    killAllEntities();                       //kill everything
-    Model::id = 0;                           //reset id counter
+    killAllEntities();   //kill everything
+    Model::id = 0;       //reset id counter
+    Model::setScr(Model::settings.player_owner, 0); //reset player score
 }
 
 //returns an entity with the given id

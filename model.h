@@ -97,7 +97,7 @@ public:
     void setDif(QString difficulty) { dif = difficulty; }
     void setCheat(bool cht) { cheat = cht; }
     void setCheat(QString cht);
-    void setScr(QString na, QString scr);
+    void setScr(string na, int scr) { score = new Score(na, scr); }
 
     // updates the game (Model) to reflect changes that occured
     bool update();
