@@ -74,7 +74,6 @@ MainWindow::~MainWindow() {
 void MainWindow::openGameWindow(QString difficulty, bool cheat)
 {
     GmWdw = new GameWindow(difficulty, cheat);
-
     GmWdw->show();
 }
 

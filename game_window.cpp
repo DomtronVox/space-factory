@@ -83,7 +83,8 @@ void GameWindow::timerHit() {
     // Quit Game
     if(ui->gameMenu->currentIndex() == 3) {
         Model::instance()->save();
-        this->hide();
+        this->deleteLater();
+
         MainWindow* MnWdw = new MainWindow();
         MnWdw->show();
     }
