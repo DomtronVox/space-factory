@@ -7,7 +7,6 @@
 #include "base_entity.h"
 #include "objectlabel.h"
 
-
 namespace Ui {
 class GameWindow;
 }
@@ -20,15 +19,13 @@ public:
     explicit GameWindow(QString difficulty, bool cheat, QWidget *parent = 0);
     ~GameWindow();
 
-    
 private:
     Ui::GameWindow *ui;
-
     QTimer *timer;
     QDir image_dir;
 
-
     void timerHit();
+
 
     void createObjectLabel(BaseEntity *entity);
 

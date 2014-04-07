@@ -27,7 +27,6 @@ class AngularPart {
     //changes the angle to point to a point.
     void turnToPoint(BaseEntity* master, int x, int y);
 
-
     //tells the part a tick has passed.
     void tick(BaseEntity* master);
 };

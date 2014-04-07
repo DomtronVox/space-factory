@@ -1,4 +1,5 @@
 #include "highscores.h"
+
 #include <iostream>
 #include <QFile>
 #include <QTextStream>
@@ -7,15 +8,16 @@
 
 using namespace std;
 
-bool HighScore::load()
-{
-    QFile sscores ("highscores.txt");
-    if(sscores.open(QIODevice::ReadOnly))
+HighScore::HighScore() {
+    sFile = new QFile("highscores.txt");
+}
+
+bool HighScore::load() {
+    if(sFile->open(QIODevice::ReadOnly))
     {
         string line;
-        QTextStream in(&sscores);
-        while(!in.atEnd())
-        {
+        QTextStream in(sFile);
+        while(!in.atEnd()) {
             line = in.readLine().toStdString();
             unsigned pos = line.find(":");
             string name = line.substr(0, pos);
@@ -24,31 +26,29 @@ bool HighScore::load()
             all_scores.push_back(aScore);
             cout << "read " << aScore->toString() << " from file." << endl;
         }
-        sscores.close();
+        cout << "loaded highscores.txt" << endl;
+        sFile->close();
         return true;
     }
-    else
-    {
-        cout << "Unable to open file cotaining highscores, i.e. ://highscores.txt" << endl;
-        sscores.close();
+    else {
+        cout << "Unable to open file cotaining highscores." << endl;
+        sFile->close();
         return false;
     }
 }
 
-bool HighScore::save()
-{
-    QFile sFile ("highscores.txt");
+bool HighScore::save() {
+    sFile->resize(0);
+    if(sFile->open(QIODevice::ReadWrite | QIODevice::Text)) {
 
-    if(sFile.open(QIODevice::ReadWrite | QIODevice::Text)) {
-
-        for(int i = 0; i < all_scores.size(); ++i)
-        {
+        for(int i = 0; i < all_scores.size(); ++i) {
             Score* score = all_scores.at(i);
             QString test(QString::fromStdString(score->toString()));
-            QTextStream out(&sFile);
+            QTextStream out(sFile);
             out<<test<<endl;
         }
-        sFile.close();
+        sFile->close();
+        cout << "saved highscores" << endl;
         return true;
 
     }
@@ -56,21 +56,17 @@ bool HighScore::save()
     return false;
 }
 
-bool HighScore::addScore(string initName, int initScore)
-{
+bool HighScore::addScore(string initName, int initScore) {
     Score* newScore = new Score(initName, initScore);
 
-    if(all_scores.size() == 0)
-    {
+    if(all_scores.size() == 0) {
         all_scores.insert(all_scores.begin(), newScore);
         return true;
     }
 
-    for(int i = 0; i < all_scores.size(); i++)
-    {
+    for(int i = 0; i < all_scores.size(); i++) {
         Score* score = all_scores.at(i);
-        if(score->getScore() < initScore)
-        {
+        if(score->getScore() < initScore) {
             all_scores.insert(all_scores.begin() + i, newScore);
             return true;
         }
@@ -79,12 +75,8 @@ bool HighScore::addScore(string initName, int initScore)
     return true;
 }
 
-
-
-
-
-string Score::toString()
-{
+// returns name and score as one string
+string Score::toString() {
     string result;
     result.append(name);
     result.append(":");
@@ -92,7 +84,7 @@ string Score::toString()
     return result;
 }
 
-void Score::add(int scr)
-{
+// adds <scr> to total score
+void Score::add(int scr) {
     score = score + scr;
 }

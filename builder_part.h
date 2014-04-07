@@ -1,6 +1,7 @@
-#include <string>
 #ifndef BUILD_PART_H
 #define BUILD_PART_H
+
+#include <string>
 
 using namespace std;
 
@@ -12,7 +13,6 @@ class BuilderPart{
     int maxCooldown;
     //holds the weapons current cooldown count before it can fire again.
     int curCooldown;
-
 
   public:
     //new builder part

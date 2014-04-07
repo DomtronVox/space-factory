@@ -1,6 +1,11 @@
 #include "killable_part.h"
-
 #include "model.h"
+
+void KillablePart::checkInvincible() {
+    if (maxHealth == 0) invincible = true;
+    else                invincible = false;
+}
+
 
 KillablePart::KillablePart(int id, string &line) : id(id) {
     int pos;
@@ -14,9 +19,7 @@ KillablePart::KillablePart(int id, string &line) : id(id) {
 }
 
 void KillablePart::hit(int damage) {
-
     curHealth = curHealth - damage;
-
     if (curHealth <= 0 && !invincible)
          Model::instance()->killEntity(id);
 }

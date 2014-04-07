@@ -10,7 +10,6 @@
 #include "base_entity.h"
 #include "entities.h"
 
-
 using namespace std;
 
 //these are hard coded values used for various variables in the model. These should eventually be moved into a settings or configuration file.
@@ -19,44 +18,46 @@ struct Settings{
     Settings(): enemy_owner("AI"), player_owner("player"), factory_target("tower"), ship_image("blackship1"), tower_image("tower")
     {}
 
-    string enemy_owner;       //used in model::generateAttacker
-    string player_owner;  //used in model::createTower and model::createComponent
+//used in model::createTowerand model::createComponent
+    string player_owner;
 
-    static const int factory_counter = 50;        //used in FactoryEntity::FactoryEntity
-    string factory_target; //used in FactoryEntity::FactoryEntity
+//used in FactoryEntity::FactoryEntity
+    static const int factory_counter = 50;
+    string factory_target;
 
-    static const int ship_health = 10;        //used in model::generateAttacker
-    static const int ship_range = 100;        //used in model::generateAttacker
-    static const int ship_damage = 5;         //used in model::generateAttacker
-    static const int ship_cooldown = 50;      //used in model::generateAttacker
-    static const int ship_speed = 10;         //used in ShipEntity::ShipEnity
-    string ship_image;                        //used in model::generateAttacker
+//used in model::generateAttacker
+    static const int ship_health = 10;
+    static const int ship_range = 100;
+    static const int ship_damage = 5;
+    static const int ship_cooldown = 50;
+    string ship_image;
+    string enemy_owner;
 
+//used in ShipEntity::ShipEnity
+    static const int ship_speed = 10;
 
-    static const int tower_health = 15;          //used in model::createTower
-    static const int tower_range = 100;          //used in model::createTower
-    static const int tower_size = 55;            //used in model::createTower
-    static const int tower_damage = 10;          //used in model::createTower
-    static const int tower_cooldown = 50;        //used in model::createTower
+//used in model::createTower
+    static const int tower_health = 15;
+    static const int tower_range = 100;
+    static const int tower_size = 55;
+    static const int tower_damage = 10;
+    static const int tower_cooldown = 50;
     static const int tower_speed = 30;
-    string tower_image;                          //used in model::createTower
+    string tower_image;
+
 
 };
-
-
 
 //holds the various high level model related classes
 class Model {
     Model();
-    ~Model();
 
-    //score tracking
-    HighScore *highscores;
     // current score
     Score *score;
 
     // file to save a load game from
     QFile *file;
+    QFile *sFile;       //scores file
 
     // difficulty and cheat settings
     QString dif;
@@ -71,10 +72,6 @@ class Model {
     int newWaveTimer;
     int newWaveRange;
 
-    //used by load to parse a savefile
-    //TODO: decide what should be returned by this function.
-    void parse();
-
     //empty entity list
     void killAllEntities();
 
@@ -85,9 +82,7 @@ public:
     static Settings settings;
 
     //returns a new id to be used by an entity
-    static int newId(){
-        return Model::id++;
-    }
+    static int newId() { return Model::id++; }
 
     //returns the only instance of world
     static Model* instance() { return &Model::sInstance; }
@@ -95,8 +90,10 @@ public:
     //utility function
     void printState();
 
+    //getter methods
     int getScr() { return score->getScore(); }
 
+    //setter methods
     void setDif(QString difficulty) { dif = difficulty; }
     void setCheat(bool cht) { cheat = cht; }
     void setCheat(QString cht);
@@ -113,8 +110,7 @@ public:
 
     //Sets up model for a singleplayer game
     void singleGameStart(string difficulty, bool cheat);
-    //sets up model for a multyplayer game
-    ////void multyGameStart();
+
     //resets whatever game state model has at the moment
     void reset();
 
@@ -145,7 +141,7 @@ public:
     //function to kill entities
     void killEntity(int id);
 
-
+    ~Model();
 };
 
 class Multiuser

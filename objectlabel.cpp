@@ -1,5 +1,4 @@
 #include "objectlabel.h"
-
 #include "model.h"
 
 ObjectLabel::ObjectLabel(QWidget *parent, GameWindow *window, BaseEntity *data, QIcon image)
@@ -39,7 +38,8 @@ QPoint ObjectLabel::convertToModelCoords(QPoint pos){
 void ObjectLabel::updateData(){
     if (Model::instance()->getById(data_id) == NULL) {
         deleteLater();
-    } else {
+    }
+    else {
         //setup a rect describing the lables position
         QRect location = QRect(pos(), size());
         location.moveCenter(convertToScreenCoords(QPoint(data->getX(), data->getY())));

@@ -1,11 +1,12 @@
 #ifndef ENTITIES_H
 #define ENTITIES_H
+
 #include <string>
 #include <fstream>
 #include <QFile>
-#include "base_entity.h"
 #include <iostream>
-//part includes
+
+#include "base_entity.h"
 #include "movable_part.h"
 #include "angular_part.h"
 #include "killable_part.h"
@@ -72,7 +73,6 @@ public:
     //TODO: implement this to change component build target
     void primaryAction(int /*x*/, int /*y*/) {}
 };
-
 
 class TowerEntity : public BaseEntity {
 

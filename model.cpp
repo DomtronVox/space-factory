@@ -1,6 +1,7 @@
 #include <iostream>
 #include <QFile>
 #include <QTextStream>
+
 #include "model.h"
 #include "base_entity.h"
 #include "entities.h"
@@ -22,23 +23,17 @@ Settings::~Settings(){
 
 //loads highscores and prepares to hold a game state
 Model::Model() {
-    HighScore highscores;
-    highscores.load();
     score = new Score("user", 0);
     file = new QFile("SavedGame.txt");
-    cout << "file created" << endl;
-
 }
 
 //make sure entity list is empty
-Model::~Model()
-{
+Model::~Model() {
     killAllEntities();
-    //delete current_score;
 }
 
 //empty entity list
-void Model::killAllEntities(){
+void Model::killAllEntities() {
     for (unsigned int i=0; i < all_entities.size(); i++){
         delete all_entities.at(i);
     }
@@ -67,12 +62,10 @@ void Model::setScr(QString na, QString scr){
     score = new Score(na.toStdString(), scr.toInt() );
 }
 
-
 //tells model a tick has passed and that it should update all entities
 bool Model::update(){
 
-    for (unsigned int i = 0; i < all_entities.size(); ++i)
-    {
+    for (unsigned int i = 0; i < all_entities.size(); ++i) {
         BaseEntity *e = all_entities.at(i);
         e->update();
     }
@@ -84,14 +77,22 @@ bool Model::update(){
         newWaveTimer = rand() % 30 + newWaveRange;
     }
 
-    if (getById(0) == NULL) return false;
-    else                    return true;
+    if (getById(0) == NULL){
+        HighScore *highscores = new HighScore();
+        highscores->load();
+        highscores->addScore(score->getName(), score->getScore());
+        if(highscores->save()){
+            cout << "saved highscores" << endl;
+        }
+        return false;
+    }
+    else
+        return true;
 }
 
 bool Model::load()
 {
-    if(file->open(QIODevice::ReadOnly))
-    {
+    if(file->open(QIODevice::ReadOnly)) {
         Model::instance()->reset();
         string line;
         QTextStream in(file);
@@ -101,8 +102,7 @@ bool Model::load()
         Model::instance()->setCheat(QString::fromStdString(line.substr(nPos+1)));
         line = in.readLine().toStdString();
         Model::instance()->setScr(QString::fromStdString(line.substr(0, nPos = line.find(" "))), QString::fromStdString(line.substr(nPos + 1)));
-        while(!in.atEnd())
-        {
+        while(!in.atEnd()) {
             line = in.readLine().toStdString();
             unsigned pos = line.find(":");
             string name = line.substr(0, pos);
@@ -138,8 +138,7 @@ bool Model::load()
         file->close();
         return true;
     }
-    else
-    {
+    else {
         //TO-DO: make program create a QMessageBox if no saved game file exists
         //informing the user of that fact and that he is starting a new game.
         cout << "Unable to open file cotaining saved game, i.e. savedGame.txt" << endl;
@@ -148,8 +147,7 @@ bool Model::load()
     }
 }
 
-bool Model::save()
-{
+bool Model::save() {
     file->resize(0);
     if(file->open(QIODevice::ReadWrite | QIODevice::Text)){
         QString cheatStr;
@@ -175,19 +173,17 @@ bool Model::save()
 
 //Sets up model for a singleplayer game
 void Model::singleGameStart(string difficulty, bool cheat){
-
-    //reset score
-    //current_score = new Score("", 0);
-
     //create the players factory
     FactoryEntity *factory;
     if (difficulty == "easy") {
         factory = new FactoryEntity(0, Model::settings.player_owner, 0, 0, "factory", 200);
         newWaveRange = 40;
-    } else if (difficulty == "medium") {
+    }
+    else if (difficulty == "medium") {
         factory = new FactoryEntity(0, Model::settings.player_owner, 0, 0, "factory", 100);
         newWaveRange = 30;
-    } else {
+    }
+    else {
         factory = new FactoryEntity(0, Model::settings.player_owner, 0, 0, "factory", 50);
         newWaveRange = 10;
     }
@@ -204,22 +200,15 @@ void Model::singleGameStart(string difficulty, bool cheat){
     newWaveTimer = rand() % 30 + newWaveRange;
 }
 
-//void Model::multiGameStart(){}
-
 //resets whatever game state model has at the moment
-void Model::reset()
-{
-    cout << "all entities cleared" << endl;
-    killAllEntities(); //kill everything
-    Model::id = 0; //reset id counter
-    //current_score = new Score("", 0);
+void Model::reset() {
+    killAllEntities();                       //kill everything
+    Model::id = 0;                           //reset id counter
 }
 
 //returns an entity with the given id
-BaseEntity * Model::getById(int id)
-{
+BaseEntity * Model::getById(int id) {
     BaseEntity *found_entity = NULL;
-
     for (BaseEntity *e : all_entities){
         if (id == e->getId()){
             found_entity = e;
@@ -254,30 +243,29 @@ vector<BaseEntity*> Model::getInArea(int x, int y, int r){
 
 //returns true if the given area is free of any entities. This ignores component entities.
 bool Model::isAreaEmpty(int x, int y, int r){
-    if (getInArea(x, y, r).size() == 0)  return true;
-    else                                 return false;
+    if (getInArea(x, y, r).size() == 0)
+        return true;
+    else
+        return false;
 }
 
 
 //returns a vector of BaseEntities that have been created recently
-vector<BaseEntity*> Model::getRecentlyCreated()
-{
+vector<BaseEntity*> Model::getRecentlyCreated() {
     vector<BaseEntity*> tmp = recently_created;
     recently_created.clear();
     return tmp;
 }
 
 //finilizes entity creation by adding it to the all_entities vector and doing other important things
-void Model::addEntity(BaseEntity * entity)
-{
+void Model::addEntity(BaseEntity * entity) {
     all_entities.push_back(entity);
     recently_created.push_back(entity);
 }
 
 //function to randomize the creation of an attacker entity
-void Model::generateWave()
-{
-    //TODO: generate multiple ships not just one; fix it so ships apeare anyware beyond the screen edge
+void Model::generateWave() {
+    //TODO: generate multiple ships not just one; fix it so ships appear anyware beyond the screen edge
     //generates a random position outside the game window
     int x = rand() % 20 + 1500;
     int y = rand() % 20 + 1500;
@@ -296,12 +284,13 @@ void Model::generateWave()
 //create a new tower at the given pos
 bool Model::createTower(int x, int y){
 
-   if ( isAreaEmpty(x,y, Model::settings.tower_size) ){
+   if (isAreaEmpty(x,y, Model::settings.tower_size)) {
        TowerEntity *tower = new TowerEntity(newId(), Model::settings.player_owner, x,y, Model::settings.tower_image,
                                             Model::settings.tower_health, Model::settings.tower_damage, Model::settings.tower_cooldown);
        addEntity(tower);
        return true;
-   } else{
+   }
+   else {
        return false;
    }
 

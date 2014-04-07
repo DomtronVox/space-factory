@@ -1,4 +1,5 @@
 #include "base_entity.h"
+
 #include <QTextStream>
 
 void BaseEntity::save(QFile *file){
@@ -8,8 +9,7 @@ void BaseEntity::save(QFile *file){
     return;
 }
 
-void BaseEntity::load(string &line)
-{
+void BaseEntity::load(string &line) {
     int pos = line.find(",");
     string Eid = line.substr(0, pos);
     id = stoi(Eid);
@@ -30,6 +30,4 @@ void BaseEntity::load(string &line)
     image = sImage;
     line.erase(0,pos + 1);
     return;
-
 }
-

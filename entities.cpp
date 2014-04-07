@@ -3,7 +3,6 @@
 #include <QDebug>
 #include "entities.h"
 
-//part includes
 #include "movable_part.h"
 #include "angular_part.h"
 #include "killable_part.h"
@@ -18,8 +17,7 @@
 //#########################
 //#### Ship Functions #####
 //#########################
-ShipEntity::ShipEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,owner,x,y,image)
-{
+ShipEntity::ShipEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,owner,x,y,image) {
     m_cHealth = new KillablePart(id, health);
     m_cWeapon = new WeaponPart(damage, Model::settings.ship_range, cooldown);
     m_cMoveable = new MovablePart(Model::settings.ship_speed, 0, 0);
@@ -27,8 +25,8 @@ ShipEntity::ShipEntity(int id, string owner, int x, int y, string image, int hea
     m_cAngular->turnToPoint(this, 0,0);
 }
 
-ShipEntity::ShipEntity(string &line)
-{
+
+ShipEntity::ShipEntity(string &line) {
      BaseEntity::load(line);
 
      m_cHealth = new KillablePart(this->id, line);
@@ -37,16 +35,15 @@ ShipEntity::ShipEntity(string &line)
      m_cAngular = new AngularPart(m_cWeapon, line);
 }
 
-ShipEntity::~ShipEntity()
-{
+ShipEntity::~ShipEntity() {
     delete m_cHealth;
     delete m_cWeapon;
     delete m_cMoveable;
     delete m_cAngular;
 }
 
-void ShipEntity::update()
-{
+
+void ShipEntity::update() {
     m_cMoveable->tick(this);
     m_cWeapon->tick(getOwner(), getX(), getY());
     m_cAngular->tick(this);
@@ -65,33 +62,29 @@ void ShipEntity::update()
 //#### Factory Functions ####
 //###########################
 
-FactoryEntity::FactoryEntity(int id, string owner, int x, int y, string image, int health) : BaseEntity(id,owner,x,y,image)
-{
 
+//factory functions
+FactoryEntity::FactoryEntity(int id, string owner, int x, int y, string image, int health) : BaseEntity(id,owner,x,y,image) {
     m_cHealth = new KillablePart(id, health);
     m_cBulder = new BuilderPart(Model::settings.factory_target, Model::settings.factory_counter);
-
 }
 
-FactoryEntity::FactoryEntity(string &line)
-{
+
+FactoryEntity::FactoryEntity(string &line) {
     BaseEntity::load(line);
 
     m_cHealth = new KillablePart(this->id, line);
     m_cBulder = new BuilderPart(line);
 }
 
-FactoryEntity::~FactoryEntity()
-{
+FactoryEntity::~FactoryEntity() {
     delete m_cHealth;
     delete m_cBulder;
 }
 
-void FactoryEntity::update()
-{
+void FactoryEntity::update() {
     m_cBulder->tick(x,y);
 }
-
 
 
 
@@ -101,15 +94,14 @@ void FactoryEntity::update()
 //#### Tower Functions ####
 //#########################
 
-TowerEntity::TowerEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,owner,x,y,image)
-{
+TowerEntity::TowerEntity(int id, string owner, int x, int y, string image, int health, int damage, int cooldown) : BaseEntity(id,owner,x,y,image) {
     m_cHealth = new KillablePart(id, health);
     m_cWeapon = new WeaponPart(damage, Model::settings.tower_range, cooldown);
     m_cAngular = new AngularPart(0, Model::settings.ship_speed, m_cWeapon);
 }
 
-TowerEntity::TowerEntity(string &line)
-{
+
+TowerEntity::TowerEntity(string &line) {
     BaseEntity::load(line);
 
     m_cHealth = new KillablePart(id, line);
@@ -117,15 +109,13 @@ TowerEntity::TowerEntity(string &line)
     m_cAngular = new AngularPart(m_cWeapon, line);
 }
 
-TowerEntity::~TowerEntity()
-{
+TowerEntity::~TowerEntity() {
     delete m_cHealth;
     delete m_cWeapon;
     delete m_cAngular;
 }
 
 void TowerEntity::update(){
-
     m_cWeapon->tick(getOwner(), getX(), getY());
     m_cAngular->tick(this);
 }
@@ -138,8 +128,7 @@ void TowerEntity::update(){
 //#### Component Functions ####
 //#############################
 
-ComponentEntity::ComponentEntity(string &line)
-{
+ComponentEntity::ComponentEntity(string &line) {
     BaseEntity::load(line);
 
     int pos;
@@ -148,7 +137,6 @@ ComponentEntity::ComponentEntity(string &line)
 
 //runs primary action of the entity
 void ComponentEntity::primaryAction(int x, int y) {
-
     if(Model::instance()->createTower(x,y))
         Model::instance()->killEntity(id);
 }

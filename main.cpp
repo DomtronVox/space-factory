@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "game_window.h"
+
 #include <QApplication>
 #include <iostream>
 
@@ -10,8 +11,7 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-    if(argv[1] == "-tests")
-    {
+    if(argv[1] == "-tests") {
         unitTests();
     }
 

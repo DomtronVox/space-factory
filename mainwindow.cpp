@@ -3,6 +3,7 @@
 #include "game_window.h"
 #include "highscores.h"
 #include "model.h"
+
 #include <cassert>
 #include <iostream>
 
@@ -22,33 +23,21 @@ void unitTests() {
     assert(s->getName() == "Rebecca");
     scores.save();
 
-    HighScore loadScores;
-    loadScores.load();
-    loadScores.addScore("Rhonda", 65);
-    s = loadScores.getScores().at(0);
+    HighScore testScores;
+    testScores.load();
+    testScores.addScore("Rhonda", 65);
+    s = testScores.getScores().at(0);
 
     assert(s->getName() == "Rhonda");
     assert(s->getScore() == 65);
-    loadScores.save();
+    testScores.save();
     remove ("highscores.txt");
 
-    //model test for starting a new game. TODO: rework this to use asserts
+    //model test for starting a new game.
     Model::instance()->singleGameStart("easy", false);
     assert(Model::instance()->getById(0) != NULL);
 
     assert(Model::instance()->load());
-
-    /*
-    //update 5 times so the factory has finished building it's first component
-    for(int i = 0; i < 4; i++) {
-        Model::instance()->update();
-    }
-    assert(Model::instance()->getById(1)==NULL);
-    Model::instance()->update();
-    assert(Model::instance()->getById(1)!=NULL);
-
-    Model::instance()->reset();
-    */
 }
 
 
@@ -58,19 +47,19 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //unitTests();
-
     //populate highscores list
-    HighScore scores;
-    scores.load();
-    for(unsigned int i = 0; i < scores.getScores().size(); ++i )
-    {
-        Score *score = scores.getScores().at(i);
-        QString QName = QString::fromStdString(score->getName());
-        QString QScore = QString::number(score->getScore());
-        ui->lstScores->addItem(QName + " -- " + QScore);
+    HighScore* scores = new HighScore();
+    if(scores->load()){
+        for(unsigned int i = 0; i < scores->getScores().size(); ++i ) {
+            Score *score = scores->getScores().at(i);
+            QString QName = QString::fromStdString(score->getName());
+            QString QScore = QString::number(score->getScore());
+            ui->lstScores->addItem(QName + " -- " + QScore);
 
+        }
     }
+    else                //no file exists
+        scores->save(); //creates new highscores file file
 
     //connect(ui->btnNewGame, SIGNAL(click()), this, SLOT(openGameWindow()));
     //set the help and score screens to be invisible
@@ -78,8 +67,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->boxHighScores->hide();
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
 
@@ -92,8 +80,7 @@ void MainWindow::openGameWindow(QString difficulty, bool cheat)
 
 
 //toggle between showing the help window and not showing it
-void MainWindow::on_btnHelp_toggled(bool checked)
-{
+void MainWindow::on_btnHelp_toggled(bool checked) {
     if (checked) {
         //show browser
         ui->brwHelp->show();
@@ -107,7 +94,8 @@ void MainWindow::on_btnHelp_toggled(bool checked)
         //Change the buttons text to close
         ui->btnHelp->setText("Close");
 
-    } else {
+    }
+    else {
         //show browser
         ui->brwHelp->hide();
 
@@ -122,8 +110,7 @@ void MainWindow::on_btnHelp_toggled(bool checked)
     }
 }
 
-void MainWindow::on_btnScores_toggled(bool checked)
-{
+void MainWindow::on_btnScores_toggled(bool checked) {
     if (checked) {
         //show score list
         ui->boxHighScores->show();
@@ -136,8 +123,8 @@ void MainWindow::on_btnScores_toggled(bool checked)
 
         //Change the buttons text to close
         ui->btnScores->setText("Close");
-
-    } else {
+    }
+    else {
         //hide score list
         ui->boxHighScores->hide();
 
@@ -149,17 +136,14 @@ void MainWindow::on_btnScores_toggled(bool checked)
 
         //Change the buttons text to close
         ui->btnScores->setText("High Scores");
-
     }
 }
 
-void MainWindow::on_btnExit_clicked()
-{
+void MainWindow::on_btnExit_clicked() {
     QApplication::quit();
 }
 
-void MainWindow::on_btnNewGame_clicked()
-{
+void MainWindow::on_btnNewGame_clicked() {
     QString difficulty;
     if (ui->rdoEasy->isChecked()) {
         difficulty = "easy";
@@ -175,9 +159,8 @@ void MainWindow::on_btnNewGame_clicked()
     this->hide();
 }
 
-void MainWindow::on_btnLoadGame_clicked()
-{
-    openGameWindow("easy", false); //TODO: We need to save the game's difficulty level use it on load.
+void MainWindow::on_btnLoadGame_clicked() {
+    openGameWindow("easy", false);
     this->hide();
     Model::instance()->load();
 }

@@ -1,11 +1,10 @@
-#include <string>
-#include <QFile>
-
-
 #ifndef BASE_ENITY_H
 #define BASE_ENITY_H
 
+#include <string>
+#include <QFile>
 #include <QString>
+
 using namespace std;
 
 //Basic game entity holds position and entity image
@@ -19,8 +18,6 @@ protected:
     string image;
 
 public:
-
-
     BaseEntity(int initId, string owner, int initX, int initY, string initImage)
         : id(initId), owner(owner), x(initX), y(initY), angle(0), image(initImage)
     {}
@@ -54,7 +51,6 @@ public:
     void load(string &line);
 
     //runs primary action of the entity
-    //TODO: When implementing multiplayer we should add owner the this prototype
     virtual void primaryAction(int /*x*/, int /*y*/) { }
 
     //damage the entity
